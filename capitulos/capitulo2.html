@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conceptos básicos cocos2d-x v3.x</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/capitulosCSS/capitulo1.css" rel="stylesheet">
+
+
+    <body>
+        <!--Nav bar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top device-fixed-height">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse device-fixed-width">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../index.html">Home</a>
+                        </li>
+                        <li class="active"><a href="../tutoriales.html">Tutoriales</a>
+                        </li>
+                        <li><a href="../contact.html">Contact</a>
+                        </li>
+                        <li><a href="../faq.html">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <!--Nav bar end-->
+
+
+        <div class="container afternav">
+            <h1>Capítulo 2 - Introducción</h1>
+            <p>
+                En esta sección veremos las estructura básica de una aplicación en cocos2d-x además de algunos elementos esenciales como el tratamiento de los ejes de coordenadas y los elementos pricipales como Sprite, Layer y Scene. El resto de componentes los dejamos para capítulos posteriores.
+            </p>
+
+            <h2>2.1 Estructura</h2>
+            <p>
+                Creamos el proyecto que usaremos en capítulos siguientes <strong>cocos new SkyHunter -p skyHunter.net.sytes.seryux -l cpp</strong> como ya sabemos SkyHunter será el nombre del proyecto, skyHunter.net.sytes.seryux el nombre de paquete para Android y cpp indica que usaremos el lenguaje de programación C++.
+            </p>
+
+           
+            <p>
+                Una vez creamos el proyecto abrimos la solucion de visual studio, para ello abrimos el archivo <strong> SkyHunter/proj.win32/SkyHunter.sln </strong>.
+                <br/><br/>
+
+                <img class="img-rounded mobile" src="../img/capitulo2/solucionVS.PNG" alt="solucion visual studio" style="width:400px;"/>
+                
+                <br/><br/>
+                Como vemos, en la solución encontramos libcocos2d que es la librería de cocos, tambien encontramos libbox2d para física y libSpine para skeletal animations en 2d. A lo largo de estos tutoriales usaremos sobre todo libcocos2d.
+                <br/>Ahora echaremos un vistazo a src que en realidad se corresponde con la carpeta Classes de nuestro proyecto general de cocos. <strong>(Para crear clases nuevas, las crearemos directamente en la carpeta Classes y posteriormente las vincularemos a esta carpeta de la solución de visual studio para no tener problemas durante la compilación)</strong>. Aquí vemos AppDelegate y HelloWorldSene. 
+                <br/>
+            </p>
+            <p>
+                <h3>AppDelegate.cpp</h3>
+                <iframe  src="../img/capitulo2/AppDelegate.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+                Esta clase <strong>class  AppDelegate : private cocos2d::Application</strong> hereda de Application y es la clase que hará que nuestro juego y escenas sean inicializadas y puestas en ejecución. Aquí vemos que se llama al singleton Director para cargar la escena HelloWorld <strong>director->runWithScene(scene)</strong>.
+                <br/> Por el momento no indagaremos mucho más sobre esta clase.
+            </p>
+            <p>
+                <h3>HelloWorldScene.h</h3>
+                <iframe  src="../img/capitulo2/HelloWorldScene.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+                Con ver el header de esta clase es suficiente pues la implementación de la plantilla la borraremos y la haremos nosotros mismos. Esta clase hereda de <strong>public cocos2d::Layer</strong> al igual que todas nuestras escenas. Más adelante veremos como implementar una escena.
+            </p>
+
+
+            <h2>2.2 Conceptos básicos</h2>
+            <h3>Cocos2d-x y C++</h3>
+             <p>Si tienes experiencia en lenguajes de programación como java y nunca usaste C++, Cocos te lo pone fácil. Todos los objetos como Sprite o Layer heredan de Node, esto quiere decir que Cocos hace la gestión de memoría por ti. Sin miedos a memory leaks siempre y cuando tus objetos hereden de cocos2d::Node.</p>
+            <h3>Macros</h3>
+            <p>Cocos cuenta con una gran cantidad de macros para el preprocesador, algunas de ellas son simples como <strong>USING_NS_CC</strong> que equivale a<strong>using namespace cocos2d</strong>, pero también tenemos algunas un poco más complejas como <strong>CC_SYNTHESIZE</strong> para generar automaticamente getters y setters. Iremos viendo algunas de ellas durante los próximos capítulos</p>
+            <h3>Eje de coordenadas</h3>
+            <p>
+                Cocos tiene un eje de coordenadas como el siguiente:
+                <br/>
+                <center>
+                    <img class="img-rounded" src="../img/capitulo2/portrait.png" alt="eje de coordenadas portrait" style="width:200px;height:300px;"/>
+                
+                    <img class="img-rounded" src="../img/capitulo2/landscape.png" alt="eje de coordenadas landscape" style="width:320px;height:200px;margin-top:3%;"/>
+                </center>
+                <br/>
+                Está abstraido de tal forma que independientemente de la orientación de nuestro juego, ya sea portrait o landscape, el  {0,0} siempre estará en la parte inferior izquierda de la pantalla.El eje Z se usa para saber que imagen debe ser dibujada más adelante o más atras, de tal forma que se verá siempre la imagen cuyo valor para Z sea mayor.
+            </p>
+            <h3>Anchor point</h3>
+            <p>El anchor point de un Spite indica desde donde se realizaran las operaciones como mover ó rotar, es decir puedo mover un Sprite o rotarlo desde su centro, desde una esquina o desde donde se le indique a cocos.Basta con cambiarlo, el valor por defecto es el centro <strong>mySprite->setAnchorPoint(0.5, 0.5)</strong>  mejor veamoslo graficamente</p>
+            <br/>
+             <center><img class="img-rounded " src="../img/capitulo2/anchor.png" alt="eje de coordenadas landscape" style="width:280px;height:280px;"/>
+             </center>
+             <p> Aquí vemos algunas de las posibles combinaciones. El resto de componentes los veremos sobre la marcha en capítulos siguientes.</p>
+
+
+
+            <!-- end container -->
+        </div>
+
+        <!-- next chapter link -->
+        <div>
+            <br/>
+            <center>
+                <a  href="capitulo1windows.html" >
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Capítulo anterior
+                </a>
+                |
+                <a  href="capitulo3.html" >
+                    Capítulo siguiente <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> 
+                </a>
+            </center>
+            <br/>
+        </div>
+
+
+        <!-- BOOTSTRAP CORE JS -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-1.11.1.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script>
+            // from https://signalvnoise.com/posts/2407-device-scale-user-interface-elements-in-ios-mobile-safari
+            function getDeviceScale() {
+                var deviceWidth, landscape = Math.abs(window.orientation) == 90;
+                if (landscape) {
+                  // iPhone OS < 3.2 reports a screen height of 396px
+                  deviceWidth = Math.max(480, screen.height);
+                } else {
+                  deviceWidth = screen.width;
+                }
+                return window.innerWidth / deviceWidth;
+            }
+
+            // mobile only - keep the position:fixed header at constant size when page is zoomed
+            if (navigator.userAgent.match(/Mobi/)) {
+                $(window).on('load scroll', function() {
+                    var ds = getDeviceScale();
+                    $('.device-fixed-height').css('transform','scale(1,' + ds + ')')
+                        .css('transform-origin', '0 0');
+                    $('.device-fixed-width').css('transform', 'scale(' + ds + ',1)')
+                        .css('transform-origin', '0 0');
+                    })
+            }
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#ifndef __LEVEL1_SCENE_H__
+#define __LEVEL1_SCENE_H__
+
+#include "BaseGameLayer.h"
+#include "BasicEnemy.h"
+
+
+class Level1 : public BaseGameLayer
+{
+
+private:
+	int _numEnemies;
+	int _enemyIndex;
+	cocos2d::Vector<BasicEnemy*> _enemyPool;
+	void awakeEnemy();
+	void checkCollisions();
+	void awakeEnemyScheduler();
+	void initActors();
+
+protected:
+	virtual void respawnButtonAction();
+	virtual void pauseButtonAction();
+	virtual void playButtonAction();
+
+public:
+    static cocos2d::Scene* createScene();
+    virtual bool init();
+	void update(float dt);
+
+	CREATE_FUNC(Level1);
+};
+
+#endif // __LEVEL1_SCENE_H__
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>

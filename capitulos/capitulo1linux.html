@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Set up cocos2d-x v3.x</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/capitulosCSS/capitulo1.css" rel="stylesheet">
+
+
+    <body>
+        <!--Nav bar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Tutoriales cocos2d-x v3.X</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="../index.html">Home</a>
+                        </li>
+                        <li><a href="../tutoriales.html">Tutoriales</a>
+                        </li>
+                        <li><a href="../contact.html">Contact</a>
+                        </li>
+                        <li><a href="../faq.html">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <!--Nav bar end-->
+
+
+        <div class="container afternav">
+            <h2>Introducción</h2>
+            <p>
+                En este capitulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d yo utilizare un ubuntu 14.04 y los IDEs: Qt creator y eclipse. Para mayor comodida todos los tutoriales se realizaran utilizando Qt creator en la plataforama linux y finalmente se mostrará como compilar y lanzar la aplicación resultante en android desde eclipse además de una pequeña introduccion a llamadas de metodos java desde c++ vía JNDI para poder hacer uso de servicios especificos de la plataforma android.
+            </p>
+
+            <h2>Manos a la obra</h2>
+            <p>
+                Comenzaremos descargando todo lo neceserao para empezar a utilizar cocos2d.
+            </p>
+
+            <ul>
+                <li>
+                    Cocos2d-x v3.x <a href="http://www.cocos2d-x.org/download">(descarga)</a>.
+                </li>
+                <li>
+                    Ant <strong>(sudo apt-get install ant)</strong>.
+                </li>
+                <li>
+                    Java JDK <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">(descarga)</a>.
+                </li>
+                <li>
+                    Android SDK <a href="http://developer.android.com/sdk/index.html">(descarga)</a>.
+                </li>
+                <li>
+                    Android NDK Android SDK <a href="https://developer.android.com/tools/sdk/ndk/index.html">(descarga)</a>.
+                </li>
+
+                <li>
+                    Python 2.x <strong>(viene con la distribución de Ubuntu)</strong>.
+                </li>
+            </ul>
+
+            <p>
+                Al instalar ant se nos intalará automaticamente el open jdk así que asegurate que despues de instalar el jdk de oracle, tienes este por defecto.
+                <br/>
+                <img class="img-rounded" src="../img/capitulo1/linux/javaVersion" alt="java -version output" />
+
+            </p>
+
+
+            <p>
+                Una vez tenemos descargado cocos2d-x, instalado ant y el jdk. Nos descargamos el sdk y el ndk de android, lo descomprimimos siguiendo las instrucciones que google da en su pagina web. Finalmente metemos todo a un directorio para tener todas las herramientas organizadas.
+                <br/>
+                <img class="img-rounded" src="../img/capitulo1/linux/devDirectory.png" alt="" />
+            </p>
+
+            <p>
+                A contuniación iniciamos el sdk manager que se encuentra en <strong>android-sdk-linuz > tools > android.sh </strong>e instalamos lo que vemos en las imagenes a continuación.
+                <br/><img class="img-rounded" src="../img/capitulo1/linux/sdkPlatformTools.png" alt="platform tools" />
+                <br/> Además de los platform tools, necesitamos la api 10 de android. Pues cocos es compatible con android 2.3 al usar la version 2 de openglES, de forma optativa se pueden descargar los google play services.
+                <br/>
+                <img class="img-rounded" src="../img/capitulo1/linux/api10.png" alt="API 10" />
+            </p>
+
+            <p>
+                Ahora que ya tenemos todos los componentes, descargaremos las dependencias de cocos. Asegurate de tener las herramientas de desarrollador esenciales <strong>sudo apt-get install build-essential -y </strong> y tras instalarlas, instala las dependencias. Posteriormente configuraremos cocos.<br/> Para descargar las dependencias necesarias y que cocos funciones basta con ejecutar el script que encontraremos en <strong>cocos2d-x-3.3 > build > install-deps-linux.sh</strong>. Una vez finalizado el proceso, comenzamos la configuración de cocos.
+                <br/>
+                <img class="img-rounded" src="../img/capitulo1/linux/installDeps.png" alt="instalar dependencias" />
+
+            </p>
+
+            <p>
+                Para finalizar vamos a la carpeta cocos2d-x-3.3 y ejecutapos el script setup.py que nos pedirá la dirección donde se encuentra tanto el sdk como el ndk.
+                <br/>
+                <img class="img-rounded" src="../img/capitulo1/linux/setupPy.png" alt="configrar cocos" />
+                <br/> Tras decirle donde se encuetran dichos cirectorios ejecutamos el comando que nos indica al final de la ejecución del script, este comando recarga las variables de entorno así que tambien sirve si reinicias tu equipo. Ahora vamos a probar ue todo funciona correctamente. Crearemos un proyecto en cocos2d y lo lnzaemos para androed y linux.
+                <br/>Escrbe en tu terminal: <strong>cd</strong> y ve a tu carpeta home, a continuación crearemos el proyecto. Escibe: <strong>cocos new -p  	&lt;tu nombre de paquete para android&gt; -l cpp</strong>. Con el flag -p indicas el package y con -l el lenguaje del proyecto usaremos cpp para indicar que será en C++
+                <br/>
+                <img class="img-rounded" src="../img/capitulo1/linux/newProject.png" alt="primer proyecto" />
+            </p>
+
+
+            <!-- end container -->
+        </div>
+
+
+
+
+        <!-- BOOTSTRAP CORE JS -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-1.11.1.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script>
+            // from https://signalvnoise.com/posts/2407-device-scale-user-interface-elements-in-ios-mobile-safari
+            function getDeviceScale() {
+                var deviceWidth, landscape = Math.abs(window.orientation) == 90;
+                if (landscape) {
+                  // iPhone OS < 3.2 reports a screen height of 396px
+                  deviceWidth = Math.max(480, screen.height);
+                } else {
+                  deviceWidth = screen.width;
+                }
+                return window.innerWidth / deviceWidth;
+            }
+
+            // mobile only - keep the position:fixed header at constant size when page is zoomed
+            if (navigator.userAgent.match(/Mobi/)) {
+                $(window).on('load scroll', function() {
+                    var ds = getDeviceScale();
+                    $('.device-fixed-height').css('transform','scale(1,' + ds + ')')
+                        .css('transform-origin', '0 0');
+                    $('.device-fixed-width').css('transform', 'scale(' + ds + ',1)')
+                        .css('transform-origin', '0 0');
+                    })
+            }
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
+
+#include "cocos2d.h"
+#include "TouchController.h"
+
+class Player : public cocos2d::Sprite
+{
+private:
+	Player();
+
+	TouchController* _controller;
+	cocos2d::Action* _idleAnimation;
+	cocos2d::Action* _explosionAnimation;
+
+	void createIdleAnimation();
+	void createExplosionAnimation();
+
+public:
+	enum Animations
+	{
+		IDLE = 0, EXPLOSION = 1
+	};
+
+	CC_SYNTHESIZE(Animations, _currentAnimation, CurrentAnimation);
+	CC_SYNTHESIZE(float, _speed, Speed);
+	CREATE_FUNC(Player);
+	virtual bool init();
+	virtual ~Player();
+	void update(float dt);
+};
+
+#endif //__PLAYER_H__
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
+

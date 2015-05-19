@@ -1,0 +1,11 @@
+
+.afternav {
+    margin-top: 70px;
+}
+
+
+@media (max-width: 620px) {
+    .mobile {
+        width: 100% !important;
+    }
+}

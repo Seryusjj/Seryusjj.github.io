@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#ifndef  _APP_DELEGATE_H_
+#define  _APP_DELEGATE_H_
+#define DESING_WIDTH 320
+#define DESING_HEIGHT 480 
+
+#include "cocos2d.h"
+
+/**
+@brief    The cocos2d Application.
+
+The reason for implement as private inheritance is to hide some interface call by Director.
+*/
+class  AppDelegate : private cocos2d::Application
+{
+public:
+    AppDelegate();
+    virtual ~AppDelegate();
+
+    virtual void initGLContextAttrs();
+
+    /**
+    @brief    Implement Director and Scene init code here.
+    @return true    Initialize success, app continue.
+    @return false   Initialize failed, app terminate.
+    */
+    virtual bool applicationDidFinishLaunching();
+
+    /**
+    @brief  The function be called when the application enter background
+    @param  the pointer of the application
+    */
+    virtual void applicationDidEnterBackground();
+
+    /**
+    @brief  The function be called when the application enter foreground
+    @param  the pointer of the application
+    */
+    virtual void applicationWillEnterForeground();
+};
+
+#endif // _APP_DELEGATE_H_
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
