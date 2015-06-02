@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+void Player::setParent(Node* parent){
+	Sprite::setParent(parent);
+	//impide que las balas se incorporen mas de una vez a la escena
+	if (!_initialiced){
+		for (int i = 0; i < _numBullets; i++){
+			//incopra las balas al la escena
+			getParent()->addChild(_bulletPool.at(i));
+		}
+		_initialiced = true;
+	}
+}
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
+
+
+

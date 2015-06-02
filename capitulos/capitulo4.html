@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Creando Sky Hunter</title>
+    <title>Usando Animacionesr</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,13 +27,11 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse device-fixed-width">
                     <ul class="nav navbar-nav">
-                        <li><a href="../index.html">Home</a>
+                        <li><a href="../index.html">Inicio</a>
                         </li>
                         <li class="active"><a href="../tutoriales.html">Tutoriales</a>
                         </li>
-                        <li><a href="../contact.html">Contact</a>
-                        </li>
-                        <li><a href="../faq.html">FAQ</a>
+                        <li><a href="../contact.html">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -46,159 +44,41 @@
         <div class="container afternav">
             <h1>Capítulo 4 - Introducción</h1>
             <p>
-                En este capítulo trataremas el input del usuario, hay varios tipos de input como acelerometro teclado game cotroller ... sin embargo nosotros solo veremos el touch input el mas comun en los juegos móviles.
+                En este capítulo comenzaremos a usar animaciones, aprenderemos que son Aciones en cocos y veremos como crearlas y usarlas juntos con otras acciones.
             </p>
+            <h2>4.1 Usando Animaciones</h2>
             <p>
-                Además de tratar el input, haremos que se generen enemigos y que las naves disparen.
+                Ahora vamos a crear las clases Player y BasicEnemy ambas harán uso de animaciones, en este punto ambas clases serán identicas, tan sólo varía el recurso que utilizan así que solo veremos una de ellas, en lugar de emplear herencia, se harán en clases separadas porque en el futuro será necesario. Veamos entonces como usar animaciones.
             </p>
-
-            <h2>Capítulo 4.1 - Controlador</h2>
-            <p>
-                Para comenzar este capítulo haremos que nuestra nave se mueva allá donde el jugador ponga el dedo. Para ello debemos escuchar los touchEvent que se producen y decir a cocos que hacer en cada uno de ellos.
-            </p>
-            <p>
-                Crearemos una clase Touchcontroller que añadiremos como nodo hijo a la clase player para que este controller diga al player hacia donde debe moverse.
-            </p>
-            <h3>TouchController.h</h3>
-            <iframe  src="../img/capitulo4/TouchController.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <br/>
-            <p>
-                Analicemos paso por paso lo que en esta clase sucede. Para comenzar vemos en TouchController.h que declaramos una estructura llamada Controller, esta estructura será la encargada de almacenar la dirección que el usuario indica a la nave. Los macros usados ya nos son familiares de capítulos anteriores sin embargo aparecen 3 metodos <strong>onTouchBegan</strong>, <strong>onTouchMoved</strong> y <strong>onTouchEnded</strong> que son los que diran a cocos qué hacer cuando un TouchEvent se producca. En TouchController.cpp veremos como hacer esto.
-            </p>
-            <h3>TouchController.cpp</h3>
-            <iframe  src="../img/capitulo4/TouchController.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            
-            <p>
-               En el metodo <strong>init()</strong> como los propios comentarios del código indican, creamos el listener mediante <strong>EventListenerTouchOneByOne::create()</strong> aquí creamos un listener para un touch event, si nuestro juego fuese multi touch usariamos <strong>EventListenerTouchAllAtOnce::create()</strong> y los call back usados serian diferentes. Como no es el caso y solo necesitamos que el juego reconocca 1 toque a la vez, creamos este listener, le indicamos los call back usando el macro <strong>CC_CALLBACK_2</strong> que es el macro usado para crear un std::bind a partir de la función indicada. con el fin de mostrar qué es lo que hace este macro, para asignar <strong>onTouchBegan</strong> Lo hago a mano sin usar el macro <strong>CC_CALLBACK_2</strong> que crea este std::bind a partir de una función que recibe 2 parametros. Lo que se traduce en un puntero a función. Existen más macros de este tipo de forma que <strong>CC_CALLBACK_3</strong> genera un std::bind a partir de una función de 3 parametors, existe <strong>CC_CALLBACK_0</strong>... etc.
-            </p>
-            <p>
-                Una vez creado el listener, le decimos a cocos que lo use <strong>_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this)</strong>. Normalmente todo el proceso de crear y añadir el listener se hace en lo que sería nuestro GameLayer, sin embargo para este caso tan solo nos interesa que sea el controlador quién gestione el input.
-            </p>
-            <p>
-                Hay que tener en cuenta que este objeto será hijo de nuestro objeto <strong>Player</strong> por lo que tendriamos dos opciones, una sería llamar al metodo update del TouchController en el update del <strong>Player</strong>, sin embargo esa opcion ya la conocemos pues es lo que usamos en GameLayer. En este caso añadiremos el update del TouchController de la misma forma que el update del GameLayer, con <strong>schedule(schedule_selector(TouchController::update))</strong>
-            </p>
-            <p>
-                Perfeto ya tenemos todo listo para implementar lo que el Touch Controller debe hacer. en cada uno de los metodos del touchListener tan solo guardarmos un puntero a las coordenadas que usuario tocó, y te preguntarás ¿por qué un puntero y no el objeto <strong>Point</strong> sin más?, pues para poder asignarle <strong>nullptr</strong> cuando el usuario levante el dedo de la pantalla en <strong>onTouchEnded</strong> <strong>(En versiones futuras esto ha dado problemas, para solventarlos, _tap ya no será un puntero y en lugar de asignarle nullptr, se le asignara _tap = Point(-1,-1))</strong>
-            </p>
-            <p>
-                Ya casi hemos termiando con el controlador, echemos un ojo a su metodo <strong>update</strong>.
-            </p>
-             <iframe  src="../img/capitulo4/TouchController.Update.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe> 
-             <p>
-                Bien, lo primero que hacemos antes de comenzar es limpiar todos los falgs anteriores llamando al reset, luego comprobamos si el usuario está tocando la pantalla, de ser así, obtenemos la posición y el tamaño del <strong>Player</strong> llamando a <strong>getParent()</strong> pues este TouchController será un nodo hijo de <strong>Player</strong> como el anchor point está por defecto, al pedir la posicion del Player nos dará su centro, en este caso nos interesa la esquina inferior izquierda, podemos cambiar el anchor point a Vec2(0,0) ó restar a la posición que nos devuelve getPosition(), la mitad del alto y el ancho del sprite. Me decantaré por esta ultima opción para mantener el anchor point por defecto.
-             </p>           
-             <p>
-                Una vez que ya tenemos la posición y el tamaño del Player tan solo miramos donde está poniendo el usuario el dedo con respecto a la posición de la nave y ponemos a true el flag correspondiente de la estructura Controller.
-             </p>
-             <p>Nuestra clase TouchController ya está terminada, solo falta añadirla al Player y decirle a este como moverse</p>
             <h3>Player.h</h3>
             <iframe  src="../img/capitulo4/Player.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Player.cpp</h3>
             <iframe  src="../img/capitulo4/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <br/><br/>
             <p>
-                Esta clase Player es identica a la del capítulo anterior, tan solo añadimos un nuevo campo <strong>TouchController* _controller</strong> y lo incializamos en el método <strong>init()</strong> usando su crete() <strong>_controller = TouchController::create();</strong> posteriormente, lo añadimos como hijo de Player <strong>
-                addChild(_controller);</strong>
+                Como vemos hacemos que Player herede de Sprite y colocamos en  su método init aquello que queremos que haga al crearse. En nuetro caso crearemos dos animaciones, Una para el esatado normal del jugador y otra para cuando este es destruido.
             </p>
             <p>
-                En el <strong>update</strong> de esta clase, obtenemos el Controller de TouchController y en función de los flags que estén en dicho controlador, movemos la nave en una dirección u otra.(No te olvides de llamar este metodo update en el update del GameLayer)
+                En el metodo <strong>createIdleAnimation()</strong> creamos la animación por defecto, para ello creamos un vector en el que añadir los difrentes SpriteFrames que compondrán la animación.
+                Para crear estos Sprite frames cogemos cada una de las secciones de nuestro sprite sheet.
             </p>
             <p>
-                Ya está, si ejecutas ahora el juego y haces click sobre la pantalla, veras que la nave se dirigirá al puntero, de la misma forma en que irá hacia el lugar donde tocamos la pantalla cuando lancemos el juego en un smartphone. (Puedes descargar el proyecto configurado hasta este punto buscando el <strong>tag Ch-4.1</strong> en el repositorio de <a href="https://github.com/Seryusjj/Sky-Hunter/tree/Ch-4.1">GitHub</a>)
-            </p>
-            <h2>Capítulo 4.2 - Disparando</h2>
+                Nuestro sprite sheet contiene 4 imagenes (4 frames) y mide 200x63 por lo que para obtener cada uno de ellos debemos decirle a cocos desde donde hasta donde mide cada frame y eso lo indicamos así: <strong>SpriteFrame::create("animacion_nave.png", Rect(acc, 0, 50, 63))</strong>. Como vemos acc es donde comienza el frame en cuestión, 0 la altura a la que comienza, 50 el ancho de cada frame y 63 la altura. Una vez obteneidos todos los frames de nuestro sprite sheet, creamos la animación <strong>auto animation = Animation::createWithSpriteFrames(animFrames, 0.25f)</strong> aquí decimos que nuestra animación se compone de este vector de frames y que entre cada frame deben pasar 0.25s. Cuando tenemos la animación, procedemos a crear la acción de animarla <strong>auto animate = Animate::create(animation)</strong> con esto ya tendriamos una animación que se ejecutaría una vez, sin emabargo nos interesa que se repita todo el tiempo hasta que la destruyamos por ello creamos una ación derivada <strong>_idleAnimation = RepeatForever::create(animate)</strong>.
+            </p> 
+                       
             <p>
-                Nuestro player ya puede mover la nave, ahora haremos que tanto el player como los enemigos disparen. Para comenzar crearemos una clase bullet que nos servirá tanto para las balas de los enemigos como para las balas del player por el momento.
-            </p>
-            <h3>Bullet.h</h3>
-            <iframe  src="../img/capitulo4/Bullet.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <h3>Bullet.cpp</h3>
-            <iframe  src="../img/capitulo4/Bullet.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            
-            <p>
-                No hay mucho que analizar de esta clase, ya sabemos para que sirven todos los macros usados, en su metodo update simplemente movemos la bala hasta el final de la pantalla, si es una bala del player, se moverá hasta el final superior de la pantalla, si es una bala de un enemigo, se movera hasta el final inferior de la pantalla. en ambos casos al llegar al final se llama a <strong>setVisisble(flase)</strong> por defecto ninguna bala será visible, veremos el por qué en la clase Player.
-            </p>
-            <h3>Player.h</h3>
-            <iframe  src="../img/capitulo4/Player2.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <h3>Player.cpp</h3>
-            <iframe  src="../img/capitulo4/Player2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Así queda la clase Player tras incorporar la funcionalidad de disparar, analicemos poco a poco que es lo nuevo que se a añadido y como funciona.
-                Para comenzar, vemos en el metodo <strong>init()</strong> que hemos añadido un loop que crea y añade a un vector todas las balas del Player, es un pool de objetos. En nuesstro caso con 30 es suficiente. Creamos esas 30 balas y posteriormete las haremos hijas de la escena principa, no del Player, esto es muy importante, ahora veremos como y porque hacemos esto.
-            </p>
-            <h4>setParent(Node* parent)</h4>
-            <iframe  src="../img/capitulo4/setParent.cpp.html" width="100%" height="250px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Como vemos sobreescribos el metodo setParent, la razón es la siguiente, los objetos que se añaden como hijos de un padre, sufren las mismas transformaciones que los padres esto es, si añadimos un objeto Bullet al Player y movemos el Player, además de moverse la bala por su propio metodo update, su posición se actualizará con respecto a la posicion de su padre, el objeto Player. Por esto simplemene sobreescribos <strong>setParent</strong> para que en el momento en que el objeto Player sea añadido al <strong>GameLayer</strong>, podamos añadir las balas al <strong>GameLayer</strong> y así mantener la referencia en la calse Player gracias al <strong>_bulletPool</strong>. Veamos ahora como hacer que la nave dispare cada cierto tiempo.
-            </p>
-             <h4>scheduleShoot()</h4>
-             <iframe  src="../img/capitulo4/scheduleShoot.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-             <p>
-                <strong>scheduleShoot()</strong> usa lo que se denomina una secuencia en cocos2d-x, una secuencia nos permite lanzar varias acciones con un orden determinado, en este caso construimos una secuencia que espera medio segudo y depues llama al metodo <strong>shoot()</strong>, para crear una acción a partir de una función suamos el macro <strong>CC_CALLBACK</strong> que ya nos es familiar pues lo usamos en nuestro controlador.
-             </p>
-             <p>
-                El metodo <strong>shoot()</strong> lo único que hace es iterar sobre el pool de balas y activa aqella a la que le llegue el turno. Si la bala llega al final de la pantalla o como veremos más adelante si intercepta un enemigo, la bala se desactiva. Para activar o desactivar la bala usamos <strong>setVisible(true|false)</strong>.
-             </p>
-             <p>Recuerda que puedes descargar el proyecto configurado hasta este punto buscando el <strong>tag Ch-4.2</strong> en el repositorio de <a href="https://github.com/Seryusjj/Sky-Hunter/tree/Ch-4.2">GitHub</a></p>
-
-
-
-            <h2>Capítulo 4.3 - Enemigos &amp; Colisiones</h2>
-            <p>
-                En este punto tanto los enemigos como el jugador disparan pero que más da que disparen si no explota nada. A continuación veremos cómo tratar colisiones simples entre sprites en cocos2d-x.
+                Ya tenemos nuestras animaciones, ahora lanzaremos la animacion por defecto que sera la IDLE. <strong>runAction(_idleAnimation)</strong>. El proceso de creación es identico para la animacion de la explosión y para las animaciones de los enemigos solo que pueden variar los tamaños, segun el Sprite sheet que se usa.
             </p>
             <p>
-                Para comenzar crearemos un pool de enemigos y añadiremos un par de enemigos a la escena pues un solo enemigo no es suficiente. Lo haremos de la misma forma que hacemos el pool de balas.
+                Prueba a posicionar un objeto BasicEnemy y un Player en tu GameLayer y verás que están animados sin necesidad de llamar a su metodo update que actualmente no hace nada, ya añadiremos funcionalidad mas tarde.
             </p>
             <p>
-                Ahora vamos a extender nuestra clase Bullet, de forma que cada bala sepa acerca de su objetivo, es decir cada bala almacena una referencia a su objetivo para ver si colisiona con este.
-            </p>
-             <h3>Bullet.h</h3>
-            <iframe  src="../img/capitulo4/Bullet2.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <h3>Bullet.cpp</h3>
-            <iframe  src="../img/capitulo4/Bullet2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+                En estas clases (Player y BasicEnemy) hay errores relacionados con la forma en que cocos gestiona la memoria introducidos de forma deliverada para ver como solucionarlos más adelante. Por ahora basta con dejarlo así.
+            </p>    
+            <center><img class="img-rounded " src="../img/capitulo4/enemy_player_positionated.png" alt="enenmigo y jugador posicionados en el GameLayer" style="width:300px;"/><br/></center><br/>
             <p>
-                Si la bala es del jugador almacenará un pool de enemigos (todos los posibles en la escena) y en cada frame, verificará si está colisionando con un enemigo. En caso de ser así lo destruirá y la bala pasara a estar deshabilitada.
+                Descarga las carpetas Classes y resources del proyecto hasta el momento <a href="../img/capitulo4/SkyHunter4.1.zip">aquí</a>.
             </p>
-            <p>
-                Echemos también un ojo al metodo <strong>setCurrentAnimation</strong> de la clase Player por ejemplo. El resto de los cambios los veremos mas a delante.
-            </p>
-
-            <iframe  src="../img/capitulo4/setCurrentAnimation.cpp.html" width="100%" height="200px">Your Browser doesn't support Frames.</iframe>
-
-            <p>
-                Cuando se ejecute este metodo, al colisionar un bala con el jugador se producirá un error pues el objeto <strong>_explosionAnimation</strong> ya no existirá. Esto es debido a que como dicho objeto no se utilizó nunca, cocos lo eliminó gracias a que es un release object. Para mantener ese objeto en memoria hasta que destruyamos el objeto Player, debemos llamar al metodo <strong>retain()</strong> y posteriormente eliminarlo en el destructor del objeto Player.
-            </p>
-            <p>
-                Veamos como queda nuestra clase Player.
-            </p>
-            <h3>Player.h</h3>
-            <iframe  src="../img/capitulo4/Player3.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <h3>Player.cpp</h3>
-            <iframe  src="../img/capitulo4/Player3.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Como vemos ahora llamamos al mentodo <strong>retain()</strong> al crear las animaciones y liberamos ese objeto en el destructor de la clase Player. También hemos añadido unas lineas al metodo update justo al inicio del mismo donde miramos que sí la nave está explotando, no se pueda controlar y que una vez termine de explotar, deje de ser visible.
-            </p>
-            <p>
-                Otro metodo importante es  <strong>setTargets</strong> donde actualizamos con el listado de enemigos todas las balas del jugador. 
-            </p>
-            <p>
-                Ya tenemos la clase Player lista, la clase <strong>BasicEnemy</strong> es muy similar solo que obviamente con un comportamiento distiton en el update, veamos ahora <strong>GameLayer</strong> para analizar su comportamiento.
-            </p>
-            <p>
-                En nuestra escena pricipal generaremos enemigos que aparecerán en posiciones aleatorias y gestionaemos colisiones entre los enemigos y el jugador.
-            </p>
-            <h3>GameLayer.h</h3>
-            <iframe  src="../img/capitulo4/GameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <h3>GameLayer.cpp</h3>
-            <iframe  src="../img/capitulo4/GameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Como vemos usamos una tecnica para generar enemigos muy similar a como gestionamos los disparos del jugador y los enemigos, usando la clase sequence. Solo qu ahora se generan desde la parte superior de la pantalla y se deshabilitan al ser destruidos o llegar al final de la pantalla para poder ser rehabilitados de nuevo.
-            </p>
-            <p>
-                En el metodo update tan solo miramos si el jugador esta chocando con algun enemigo, en cullo caso destruimos a ambos. En caso de que el jugador sea destruido, es decir <strong>_player->isVisible()==false</strong> hacemos que el fondo deje de moverse pues el jugador ya no está avanzando. En Capítulos siguientes añadiremos mecanismo para volver a comenzar el juego y mostrar alguna información en pantalla.
-            </p>
-            <p>Recuerda que puedes descargar el proyecto configurado hasta este punto buscando el <strong>tag Ch-4.3</strong> en el repositorio de <a href="https://github.com/Seryusjj/Sky-Hunter/tree/Ch-4.3">GitHub</a></p>
-
             <!-- end container -->
         </div>
 

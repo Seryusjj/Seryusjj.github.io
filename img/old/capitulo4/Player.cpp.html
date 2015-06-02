@@ -25,6 +25,10 @@ bool Player::init(){
 	}
 
 	_currentAnimation = IDLE;
+
+	_controller = TouchController::create();
+	addChild(_controller);
+
 	createIdleAnimation();
 
 	createExplosionAnimation();
@@ -68,12 +72,12 @@ void Player::createExplosionAnimation(){
 		animFrames.pushBack(frame);
 	}
 
-	//create the animation with a deley of 0.15 ms between images
+	//create the animation with a deley of 0.15 s between images
 	auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f);
 
 	//create the action of animate with the previous animation,
 	//the default perodicity for an animate object is 1
-	_explosionAnimation = Animate::create(animation);;
+	_explosionAnimation = Animate::create(animation);
 
 	//put a tag on the animation in oreder to identify and stop it in the future
 	_explosionAnimation->setTag(Player::Animations::EXPLOSION);
@@ -82,11 +86,37 @@ void Player::createExplosionAnimation(){
 
 Player::~Player()
 {
+
 }
 
 
 void Player::update(float dt){
-
+	float speed = _speed*dt;
+	auto controller = _controller->getController();
+	if (controller.upRight){
+		setPosition(getPositionX() + speed, getPositionY() + speed);
+	}
+	else if (controller.upLeft){
+		setPosition(getPositionX() - speed, getPositionY() + speed);
+	}
+	else if (controller.downRight){
+		setPosition(getPositionX() + speed, getPositionY() - speed);
+	}
+	else if (controller.downLeft){
+		setPosition(getPositionX() - speed, getPositionY() - speed);
+	}
+	else if (controller.left){
+		setPositionX(getPositionX() - speed);
+	}
+	else if (controller.right){
+		setPositionX(getPositionX() + speed);
+	}
+	else if (controller.down){
+		setPositionY(getPositionY() - speed);
+	}
+	else if (controller.up){
+		setPositionY(getPositionY() + speed);
+	}
 }
 	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
 		</pre>

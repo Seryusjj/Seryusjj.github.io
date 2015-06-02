@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>tratando touch input</title>
+    <title>Creando Sky Hunter</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -60,13 +60,13 @@
                 Crearemos una clase Touchcontroller que añadiremos como nodo hijo a la clase player para que este controller diga al player hacia donde debe moverse.
             </p>
             <h3>TouchController.h</h3>
-            <iframe  src="../img/capitulo5/TouchController.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/TouchController.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <br/>
             <p>
                 Analicemos paso por paso lo que en esta clase sucede. Para comenzar vemos en TouchController.h que declaramos una estructura llamada Controller, esta estructura será la encargada de almacenar la dirección que el usuario indica a la nave. Los macros usados ya nos son familiares de capítulos anteriores sin embargo aparecen 3 metodos <strong>onTouchBegan</strong>, <strong>onTouchMoved</strong> y <strong>onTouchEnded</strong> que son los que diran a cocos qué hacer cuando un TouchEvent se producca. En TouchController.cpp veremos como hacer esto.
             </p>
             <h3>TouchController.cpp</h3>
-            <iframe  src="../img/capitulo5/TouchController.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/TouchController.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             
             <p>
                En el metodo <strong>init()</strong> como los propios comentarios del código indican, creamos el listener mediante <strong>EventListenerTouchOneByOne::create()</strong> aquí creamos un listener para un touch event, si nuestro juego fuese multi touch usariamos <strong>EventListenerTouchAllAtOnce::create()</strong> y los call back usados serian diferentes. Como no es el caso y solo necesitamos que el juego reconocca 1 toque a la vez, creamos este listener, le indicamos los call back usando el macro <strong>CC_CALLBACK_2</strong> que es el macro usado para crear un std::bind a partir de la función indicada. con el fin de mostrar qué es lo que hace este macro, para asignar <strong>onTouchBegan</strong> Lo hago a mano sin usar el macro <strong>CC_CALLBACK_2</strong> que crea este std::bind a partir de una función que recibe 2 parametros. Lo que se traduce en un puntero a función. Existen más macros de este tipo de forma que <strong>CC_CALLBACK_3</strong> genera un std::bind a partir de una función de 3 parametors, existe <strong>CC_CALLBACK_0</strong>... etc.
@@ -83,7 +83,7 @@
             <p>
                 Ya casi hemos termiando con el controlador, echemos un ojo a su metodo <strong>update</strong>.
             </p>
-             <iframe  src="../img/capitulo5/TouchController.Update.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe> 
+             <iframe  src="../img/capitulo4/TouchController.Update.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe> 
              <p>
                 Bien, lo primero que hacemos antes de comenzar es limpiar todos los falgs anteriores llamando al reset, luego comprobamos si el usuario está tocando la pantalla, de ser así, obtenemos la posición y el tamaño del <strong>Player</strong> llamando a <strong>getParent()</strong> pues este TouchController será un nodo hijo de <strong>Player</strong> como el anchor point está por defecto, al pedir la posicion del Player nos dará su centro, en este caso nos interesa la esquina inferior izquierda, podemos cambiar el anchor point a Vec2(0,0) ó restar a la posición que nos devuelve getPosition(), la mitad del alto y el ancho del sprite. Me decantaré por esta ultima opción para mantener el anchor point por defecto.
              </p>           
@@ -92,9 +92,9 @@
              </p>
              <p>Nuestra clase TouchController ya está terminada, solo falta añadirla al Player y decirle a este como moverse</p>
             <h3>Player.h</h3>
-            <iframe  src="../img/capitulo5/Player.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Player.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Player.cpp</h3>
-            <iframe  src="../img/capitulo5/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Esta clase Player es identica a la del capítulo anterior, tan solo añadimos un nuevo campo <strong>TouchController* _controller</strong> y lo incializamos en el método <strong>init()</strong> usando su crete() <strong>_controller = TouchController::create();</strong> posteriormente, lo añadimos como hijo de Player <strong>
                 addChild(_controller);</strong>
@@ -110,28 +110,28 @@
                 Nuestro player ya puede mover la nave, ahora haremos que tanto el player como los enemigos disparen. Para comenzar crearemos una clase bullet que nos servirá tanto para las balas de los enemigos como para las balas del player por el momento.
             </p>
             <h3>Bullet.h</h3>
-            <iframe  src="../img/capitulo5/Bullet.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Bullet.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Bullet.cpp</h3>
-            <iframe  src="../img/capitulo5/Bullet.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Bullet.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             
             <p>
                 No hay mucho que analizar de esta clase, ya sabemos para que sirven todos los macros usados, en su metodo update simplemente movemos la bala hasta el final de la pantalla, si es una bala del player, se moverá hasta el final superior de la pantalla, si es una bala de un enemigo, se movera hasta el final inferior de la pantalla. en ambos casos al llegar al final se llama a <strong>setVisisble(flase)</strong> por defecto ninguna bala será visible, veremos el por qué en la clase Player.
             </p>
             <h3>Player.h</h3>
-            <iframe  src="../img/capitulo5/Player2.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Player2.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Player.cpp</h3>
-            <iframe  src="../img/capitulo5/Player2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Player2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Así queda la clase Player tras incorporar la funcionalidad de disparar, analicemos poco a poco que es lo nuevo que se a añadido y como funciona.
                 Para comenzar, vemos en el metodo <strong>init()</strong> que hemos añadido un loop que crea y añade a un vector todas las balas del Player, es un pool de objetos. En nuesstro caso con 30 es suficiente. Creamos esas 30 balas y posteriormete las haremos hijas de la escena principa, no del Player, esto es muy importante, ahora veremos como y porque hacemos esto.
             </p>
             <h4>setParent(Node* parent)</h4>
-            <iframe  src="../img/capitulo5/setParent.cpp.html" width="100%" height="250px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/setParent.cpp.html" width="100%" height="250px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Como vemos sobreescribos el metodo setParent, la razón es la siguiente, los objetos que se añaden como hijos de un padre, sufren las mismas transformaciones que los padres esto es, si añadimos un objeto Bullet al Player y movemos el Player, además de moverse la bala por su propio metodo update, su posición se actualizará con respecto a la posicion de su padre, el objeto Player. Por esto simplemene sobreescribos <strong>setParent</strong> para que en el momento en que el objeto Player sea añadido al <strong>GameLayer</strong>, podamos añadir las balas al <strong>GameLayer</strong> y así mantener la referencia en la calse Player gracias al <strong>_bulletPool</strong>. Veamos ahora como hacer que la nave dispare cada cierto tiempo.
             </p>
              <h4>scheduleShoot()</h4>
-             <iframe  src="../img/capitulo5/scheduleShoot.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+             <iframe  src="../img/capitulo4/scheduleShoot.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
              <p>
                 <strong>scheduleShoot()</strong> usa lo que se denomina una secuencia en cocos2d-x, una secuencia nos permite lanzar varias acciones con un orden determinado, en este caso construimos una secuencia que espera medio segudo y depues llama al metodo <strong>shoot()</strong>, para crear una acción a partir de una función suamos el macro <strong>CC_CALLBACK</strong> que ya nos es familiar pues lo usamos en nuestro controlador.
              </p>
@@ -153,9 +153,9 @@
                 Ahora vamos a extender nuestra clase Bullet, de forma que cada bala sepa acerca de su objetivo, es decir cada bala almacena una referencia a su objetivo para ver si colisiona con este.
             </p>
              <h3>Bullet.h</h3>
-            <iframe  src="../img/capitulo5/Bullet2.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Bullet2.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Bullet.cpp</h3>
-            <iframe  src="../img/capitulo5/Bullet2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Bullet2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Si la bala es del jugador almacenará un pool de enemigos (todos los posibles en la escena) y en cada frame, verificará si está colisionando con un enemigo. En caso de ser así lo destruirá y la bala pasara a estar deshabilitada.
             </p>
@@ -163,7 +163,7 @@
                 Echemos también un ojo al metodo <strong>setCurrentAnimation</strong> de la clase Player por ejemplo. El resto de los cambios los veremos mas a delante.
             </p>
 
-            <iframe  src="../img/capitulo5/setCurrentAnimation.cpp.html" width="100%" height="200px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/setCurrentAnimation.cpp.html" width="100%" height="200px">Your Browser doesn't support Frames.</iframe>
 
             <p>
                 Cuando se ejecute este metodo, al colisionar un bala con el jugador se producirá un error pues el objeto <strong>_explosionAnimation</strong> ya no existirá. Esto es debido a que como dicho objeto no se utilizó nunca, cocos lo eliminó gracias a que es un release object. Para mantener ese objeto en memoria hasta que destruyamos el objeto Player, debemos llamar al metodo <strong>retain()</strong> y posteriormente eliminarlo en el destructor del objeto Player.
@@ -172,9 +172,9 @@
                 Veamos como queda nuestra clase Player.
             </p>
             <h3>Player.h</h3>
-            <iframe  src="../img/capitulo5/Player3.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Player3.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Player.cpp</h3>
-            <iframe  src="../img/capitulo5/Player3.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/Player3.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Como vemos ahora llamamos al mentodo <strong>retain()</strong> al crear las animaciones y liberamos ese objeto en el destructor de la clase Player. También hemos añadido unas lineas al metodo update justo al inicio del mismo donde miramos que sí la nave está explotando, no se pueda controlar y que una vez termine de explotar, deje de ser visible.
             </p>
@@ -188,9 +188,9 @@
                 En nuestra escena pricipal generaremos enemigos que aparecerán en posiciones aleatorias y gestionaemos colisiones entre los enemigos y el jugador.
             </p>
             <h3>GameLayer.h</h3>
-            <iframe  src="../img/capitulo5/GameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/GameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>GameLayer.cpp</h3>
-            <iframe  src="../img/capitulo5/GameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo4/GameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Como vemos usamos una tecnica para generar enemigos muy similar a como gestionamos los disparos del jugador y los enemigos, usando la clase sequence. Solo qu ahora se generan desde la parte superior de la pantalla y se deshabilitan al ser destruidos o llegar al final de la pantalla para poder ser rehabilitados de nuevo.
             </p>

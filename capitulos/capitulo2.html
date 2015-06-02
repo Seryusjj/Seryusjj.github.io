@@ -27,13 +27,11 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse device-fixed-width">
                     <ul class="nav navbar-nav">
-                        <li><a href="../index.html">Home</a>
+                        <li><a href="../index.html">Inicio</a>
                         </li>
                         <li class="active"><a href="../tutoriales.html">Tutoriales</a>
                         </li>
-                        <li><a href="../contact.html">Contact</a>
-                        </li>
-                        <li><a href="../faq.html">FAQ</a>
+                        <li><a href="../contact.html">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -63,7 +61,7 @@
                 
                 <br/><br/>
                 Como vemos, en la solución encontramos libcocos2d que es la librería de cocos, tambien encontramos libbox2d para física y libSpine para skeletal animations en 2d. A lo largo de estos tutoriales usaremos sobre todo libcocos2d.
-                <br/>Ahora echaremos un vistazo a src que en realidad se corresponde con la carpeta Classes de nuestro proyecto general de cocos. <strong>(Para crear clases nuevas, las crearemos directamente en la carpeta Classes y posteriormente las vincularemos a esta carpeta de la solución de visual studio para no tener problemas durante la compilación)</strong>. Aquí vemos AppDelegate y HelloWorldSene. 
+                <br/>Ahora echaremos un vistazo a src que en realidad se corresponde con la carpeta Classes de nuestro proyecto general de cocos. <strong>(Para crear clases nuevas, las crearemos directamente en la carpeta Classes y posteriormente las vincularemos a esta carpeta de la solución de visual studio para no tener problemas durante la compilación)</strong>. Aquí vemos las clases de la plantilla del proyecto AppDelegate y HelloWorldSene. 
                 <br/>
             </p>
             <p>
@@ -81,9 +79,12 @@
 
             <h2>2.2 Conceptos básicos</h2>
             <h3>Cocos2d-x y C++</h3>
-             <p>Si tienes experiencia en lenguajes de programación como java y nunca usaste C++, Cocos te lo pone fácil. Todos los objetos como Sprite o Layer heredan de Node, esto quiere decir que Cocos hace la gestión de memoría por ti. Sin miedos a memory leaks siempre y cuando tus objetos hereden de cocos2d::Node.</p>
+            <p>
+                Si tienes experiencia en lenguajes de programación como Java y nunca usaste C++, Cocos te lo pone fácil. Todos los objetos como Sprite o Layer heredan de Node, esto quiere decir que Cocos hace la gestión de memoría por ti. Sin miedos a memory leaks siempre y cuando tus objetos hereden de cocos2d::Node.
+            </p>
             <h3>Macros</h3>
-            <p>Cocos cuenta con una gran cantidad de macros para el preprocesador, algunas de ellas son simples como <strong>USING_NS_CC</strong> que equivale a<strong>using namespace cocos2d</strong>, pero también tenemos algunas un poco más complejas como <strong>CC_SYNTHESIZE</strong> para generar automaticamente getters y setters. Iremos viendo algunas de ellas durante los próximos capítulos</p>
+            <p>
+                Cocos cuenta con una gran cantidad de macros para el preprocesador, algunas de ellas son simples como <strong>USING_NS_CC</strong> que equivale a<strong>using namespace cocos2d</strong>, pero también tenemos algunas un poco más complejas como <strong>CC_SYNTHESIZE</strong> para generar automaticamente getters y setters. Iremos viendo algunas de ellas durante los próximos capítulos</p>
             <h3>Eje de coordenadas</h3>
             <p>
                 Cocos tiene un eje de coordenadas como el siguiente:
@@ -95,13 +96,22 @@
                 </center>
                 <br/>
                 Está abstraido de tal forma que independientemente de la orientación de nuestro juego, ya sea portrait o landscape, el  {0,0} siempre estará en la parte inferior izquierda de la pantalla.El eje Z se usa para saber que imagen debe ser dibujada más adelante o más atras, de tal forma que se verá siempre la imagen cuyo valor para Z sea mayor.
+                Este valor de Z se puede cambiar dirtectamente en el nodo en en el momneto de añadirlo a un nodo padre.
             </p>
             <h3>Anchor point</h3>
-            <p>El anchor point de un Spite indica desde donde se realizaran las operaciones como mover ó rotar, es decir puedo mover un Sprite o rotarlo desde su centro, desde una esquina o desde donde se le indique a cocos.Basta con cambiarlo, el valor por defecto es el centro <strong>mySprite->setAnchorPoint(0.5, 0.5)</strong>  mejor veamoslo graficamente</p>
+            <p>
+                El anchor point de un Sprite indica desde donde se realizaran las operaciones como mover ó rotar, es decir puedo mover un Sprite o rotarlo desde su centro, desde una esquina o desde donde se le indique a cocos.Basta con cambiar su Anchor Point. El valor por defecto es el centro <strong>mySprite->setAnchorPoint(0.5, 0.5)</strong>  mejor veamoslo graficamente</p>
             <br/>
              <center><img class="img-rounded " src="../img/capitulo2/anchor.png" alt="eje de coordenadas landscape" style="width:280px;height:280px;"/>
              </center>
-             <p> Aquí vemos algunas de las posibles combinaciones. El resto de componentes los veremos sobre la marcha en capítulos siguientes.</p>
+             <br/>
+             <p>
+                Aquí vemos algunas de las posibles combinaciones. El resto de componentes los veremos sobre la marcha en capítulos siguientes.
+            </p>
+            <h2>2.3 Usando estos tutoriales</h2>
+            <p>
+                En cada capítulo se aporta un link de descarga del código relativo a cada capítulo. Tan solo crea un proyecto con cocos y reemplaza el contenido de las carpetas <strong>Classes</strong> y <strong>Resources</strong> del proyecto creado por ti con el contenido proveido en los capítulos.
+            </p>
 
 
 

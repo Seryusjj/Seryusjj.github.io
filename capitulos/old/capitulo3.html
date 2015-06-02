@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Usando Sprites</title>
+    <title>Creando Sky Hunter</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -44,10 +44,10 @@
         <div class="container afternav">
             <h1>Capítulo 3 - Introducción</h1>
             <p>
-                En este capítulo comenzaremos el desarrollo del juego SkyHunter, aprenderemos a confgurar la pantalla y a usar Sprites. En cada apartado se proveerá un link de descarga de las clases y recursos usados, se recomienda al final de cada capítulo descargar y colocar esas clases en la carpeta Classes de tu proyecto para compilar sin problemas.<strong> Recuerda arrastrar desde la carpeta clases al la carpeta src de la solución de visual studio para compilarlas. Si ya has compilado algo antes en modo debug, recuerda eliminar la carpeta *.tlog por ejemplo, si mi proyecto se llama Test, elimina la carpeta Test\proj.win32\Debug.win32\Test.tlog.</strong>
+                En este capítulo comenzaremos el desarrollo del juego SkyHunter, el contenido de las carpetas Classes y Resources como ya sabes se aportará en cada capítulo.
             </p>
             <h2>3.1 Configuración de pantalla </h2>
-            <p>Tras crear el proyecto, lo primero que haremos será borrar el contenido de nuestra clase HelloWorld.cpp y HelloWorld.h hasta dejarlos como veremos a continuación y posteriormente renombrarlos como GameLayer.cpp y GameLayer.h respectivamente.
+            <p>Lo primero que haremos será borrar el contenido de nuestra clase HelloWorld.cpp y HelloWorld.h hasta dejarlos como veremos a continuación y posteriormente renombrarlos como GameLayer.cpp y GameLayer.h respectivamente.
                 <h3>GameLayer.h</h3>
                 <iframe  src="../img/capitulo3/GameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
                 <br/>
@@ -72,7 +72,7 @@
                 <iframe  src="../img/capitulo3/AppDelegate.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
                 <h3>AppDelegate.cpp</h3>
                 <iframe  src="../img/capitulo3/AppDelegate.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-                <br/><br/>Si has llegado hasta aquí, ya tienes tu aplicación configurada para comenzar a desarrollar. A partir de aquí, trabajaremos con Sprites y otros componentes, principalmente en nuestra clase <strong>GameLayer.cpp</strong>. Puedes descargar el código de la aplicación hasta el momento <a href="../img/capitulo3/Classes3.1.zip">aquí</a> y los recursos para el siguiente apartado <a href="../img/capitulo3/recursos.zip">aquí</a>.
+                <br/><br/>Si has llegado hasta aquí, ya tienes tu aplicación configurada para comenzar a desarrollar. A partir de aquí, trabajaremos con Sprites y otros componentes, principalmente en nuestra clase <strong>GameLayer.cpp</strong>. (Puedes descargar las clases y recursos usados hasta el momento buscando el <strong>tag Ch-3.1</strong> en el repositorio de <a href="https://github.com/Seryusjj/Sky-Hunter/tree/Ch-3.1">GitHub</a>).
             </p>
             <h2>3.2 Usando Sprites</h2>
             <p>Lo primero que debemos hacer es copiar las imagenes cuyo link de descarga está arriba, a la carpeta <strong>Resources</strong> y borrar todo su contenido anterior a excepcion de la carpeta fonts.</p>
@@ -83,13 +83,12 @@
                 <img class="img-rounded mobile" src="../img/capitulo3/recursos.png" alt="solucion visual studio" style="width:600px;"/><br/>
             </p>
             <p>
-                Ahora que ya tenemos las imagenes incluidas en nuestro proyecto, las podemos utilizar. Para ello usaremos la clase <strong>cocos2d::Sprite</strong> y crearemos a modo de ejemplo el fondo de nuestro juego con <strong>Sprite::create("nombre-imagen")</strong>.
-                <br/>
+                Ahora que ya tenemos las imagenes incluidas en nuestro proyecto, las podemos utilizar. Para ello usaremos la clase <strong>cocos2d::Sprite</strong> y crearemos a modo de ejemplo el fondo de nuestro juego.
+                <br/><br/>
                 <img class="img-rounded mobile" src="../img/capitulo3/fondo.png" alt="Añadido fondo al juego" style="width:100%;"/><br/>
+                <br/>
+                Para posicionar el fondo de nuestro juego usamos <strong>fondo->setPosition(visibleSize.width / 2, visibleSize.height / 2)</strong> porque como vimos en el <a href="capitulo12.html">capítulo 2</a> por defeto los sprites tienen su anchor point en el centro entonces como queremos que ocupe toda la pantalla, lo colocamos en el centro de la misma. Cocos automaticamente escalará el sprite gracias a la configuración que pusimos en nuestro AppDelegate.cpp. 
             </p>
-            <p>
-                 Para posicionar el fondo de nuestro juego usamos <strong>fondo->setPosition(visibleSize.width / 2, visibleSize.height / 2)</strong> porque como vimos en el <a href="capitulo12.html">capítulo 2</a> por defeto los sprites tienen su anchor point en el centro entonces como queremos que ocupe toda la pantalla, lo colocamos en el centro de la misma. Cocos automaticamente escalará el sprite gracias a la configuración que pusimos en nuestro AppDelegate.cpp.
-            </p>    
             <p>
                 Ahora que ya sabemos como funciona la clase Sprite, crearemos las clases para nuestro juego que heredaran de <strong>cocos2d::Sprite</strong> y de <strong>cocos2d::Node</strong>.
                 Para comenzar, crearemos una clase Background que se mueva. Para tener sensación de desplazamiento en nuestro juego.
@@ -104,7 +103,7 @@
                     En su update se mueven ambos sprites hacia abajo para dar una sensación de movimiento. Una vez que el Sprite que en principio no era visible esta situado justo en el centro de la pantalla, se reposiciona a su posición original, de la misma forma el Sprite que al principio estaba situado en el centro de la pantalla es reseteado a su posición inicial cuando ya no es visible al salirse por debajo de la pantalla.<br/> Mejor veamoslo ilustrado.<br/><br/>
                     <center><img class="img-rounded " src="../img/capitulo3/backgroundExpliation.png" alt="expliacion del funcionamiento del background" style="width:300px;"/><br/></center>
                     <br/><br/>
-                    Tambien usamos dos macros <strong>CC_SYNTHESIZE</strong> ya nombrada en el capitulo anterior, que nos permite generar rapidamente getters y setters y el segundo macro <strong>CREATE_FUNC</strong> que genera automaticamente el método estatico <strong>create()</strong> para esta clase.
+                    Tambien usamos dos macros <strong>CC_SYNTHESIZE</strong> ya nombrada en el capitulo anterior, que nos permite generar rapidamente getters y setters y el segundo macro <strong>CREATE_FUNC</strong> que genera automaticamente el metodo estatico <strong>create()</strong> para esta clase.
                 </p>
                 <p>
                     Excelente, ahora solo falta decirle a nuestro juego que añada el nuevo background en lugar del que teniamos inicialmente y hacer que este background se mueva.
@@ -115,13 +114,39 @@
                 <iframe  src="../img/capitulo3/GameLayer2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
                 <br/><br/>
                 <p>
-                    Como podemos ver, hemos creado un método update y le decimos al framework que incluya en el ciclo del juego ese método update mendiante <strong>this->schedule(schedule_selector(GameLayer::update))</strong> (no es necesario que el método se llame update pero si que reciba un float como parametro y sea void), 
+                    Como podemos ver, hemos creado un metodo update y le decimos al framework que incluya en el ciclo del juego ese metodo update mendiante <strong>this->schedule(schedule_selector(GameLayer::update))</strong> (no es necesario que el metodo se llame update pero si que reciba un float como parametro), 
                     <strong>schedule_selector</strong> es uno de esos macros especiales que cocos2d-x incluye para facilitar el desarrollo de nuestro juego.
-                    En el <strong>update</strong> recibiremos como parametro la cantidad de tiempo que transcurrió desde la ultima vez que se ejecutó. Para garantizar que el juego trabaja siempre a la misma velocidad, multiplicaremos la velocidad a la que se mueven todos los elementos por <strong>dt</strong> tal y como hicimos en el método update de la clase <strong>Background</strong> que es llamado desde aquí al igual que todos los métodos update de los diferentes componetes que iremos creando.
+                    En el <strong>update</strong> recibiremos como parametro la cantidad de tiempo que transcurrió desde la ultima vez que se ejecutó. Para garantiar que el juego trabaja siempre a la misma velocidad, multiplicaremos la velocidad a la que se mueven todos lo selementos por <strong>dt</strong> tal y como hicimos en el metodo update de la clase <strong>Background</strong> que es llamado desde aquí al igual que todos los metodos update de los diferentes componetes que iremos creando.<br/>(Puedes descargar el proyecto configurado hasta este punto buscando el <strong>tag Ch-3.2</strong> en el repositorio de <a href="https://github.com/Seryusjj/Sky-Hunter/tree/Ch-3.2/SkyHunter">GitHub</a>). 
+                </p>
+                 <h2>3.3 Usando Animaciones</h2>
+                 <p>
+                    Ahora vamos a crear las clases Player y BasicEnemy ambas harán uso de animaciones, en este punto ambas clases seran identicas, tan solo varía el recurso que utilizan así que solo veremos una de ellas. Veamos entonces como usar animaciones.
+                 </p>
+                  <h3>Player.h</h3>
+                <iframe  src="../img/capitulo3/Player.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+                <h3>Player.cpp</h3>
+                <iframe  src="../img/capitulo3/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+                <br/><br/>
+                <p>
+                    Como vemos hacemos que Player herede de Sprite y colocamos en  su metodo init aquello que queremos que haga al crearse. En nuetro caso crearemos dos animaciones, Una para el esatado normal del jugador y otra para cuando este es destruido.
                 </p>
                 <p>
-                    Puedes descargar las carpetas Classes y Resources del proyecto hasta el momento <a href="../img/capitulo3/SkyHunter3.2.zip">aquí</a>. 
+                    En el metodo <strong>createIdleAnimation()</strong> creamos la animación por defecto, para ello creamos un vector en el que añadir los difrentes SpriteFrames que compondrán la animación.
+                    Para crear estos Sprite frames cogemos cada una de las secciones de nuestro sprite sheet.
                 </p>
+                <p>
+                    Nuestro sprite sheet contiene 4 imagenes (4 frames) y mide 200x63 por lo que para obtener cada uno de ellos debemos decirle a cocos desde donde hasta donde mide cada frame y eso lo indicamos así: <strong>SpriteFrame::create("animacion_nave.png", Rect(acc, 0, 50, 63))</strong>. Como vemos acc es donde comienza el frame en cuestión, 0 la altura a la que comienza, 50 el ancho de cada frame y 63 la altura. Una vez obteneidos todos los frames de nuestro sprite sheet, creamos la animación <strong>auto animation = Animation::createWithSpriteFrames(animFrames, 0.25f)</strong> aquí decimos que nuestra animación se compone de este vector de frames y que entre cada frame deben pasar 0.25s. Cuando tenemos la animación, procedemos a crear la acción de animarla <strong>auto animate = Animate::create(animation)</strong> con esto ya tendriamos una animación que se ejecutaría una vez, sin emabargo nos interesa que se repita todo el tiempo hasta que la destruyamos por ello creamos una ación derivada <strong>_idleAnimation = RepeatForever::create(animate)</strong>.
+                </p> 
+                       
+                <p>
+                    Ya tenemos nuestras animaciones, ahora lanzaremos la animacion por defecto que sera la IDLE. <strong>runAction(_idleAnimation);</strong>. El proceso de creación es identico para la animacion de la explosión y para las animaciones de los enemigos solo que pueden variar los tamaños, segun el Sprite sheet que se usa.
+                </p>
+                <p>
+                    Prueba a posicionar un objeto BasicEnemy y un Player en tu GameLayer y verás que están animados sin necesidad de llamar a su metodo update que actualmente no hace nada, ya añadiremos funcionalidad mas tarde.
+                </p>    
+                <center><img class="img-rounded " src="../img/capitulo3/enemy_player_positionated.png" alt="enenmigo y jugador posicionados en el GameLayer" style="width:300px;"/><br/></center><br/>
+                <p>Descargar el proyecto configurado hasta este punto buscando el <strong>tag Ch-3.3</strong> en el repositorio de <a href="https://github.com/Seryusjj/Sky-Hunter/tree/Ch-3.3">GitHub</a>. En el siguiente capitulo haremos que el juego tenga funcionalidad como que las naves disparen y se maten entre ellas.</p>
+
             <!-- end container -->
         </div>
 

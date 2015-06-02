@@ -8,7 +8,17 @@
 		<pre class="prettyprint">
 #include "Player.h"
 
+
 USING_NS_CC;
+
+
+Player::Player() :
+_speed(150),
+_numBullets(30),
+_bulletIndex(0),
+_initialiced(false)
+{
+}
 
 
 bool Player::init(){
@@ -17,7 +27,11 @@ bool Player::init(){
 	{
 		return false;
 	}
-	_speed = 150;
+	
+	for (int i = 0; i < _numBullets; i++){
+		_bulletPool.pushBack(Bullet::createPlayerBullet());
+	}
+
 	_currentAnimation = IDLE;
 
 	_controller = TouchController::create();
@@ -27,9 +41,38 @@ bool Player::init(){
 
 	createExplosionAnimation();
 
-	//lanzamos la animacion por defecto
+	// lanzamos la animacion por defecto
 	runAction(_idleAnimation);
+
+	scheduleShoot();
 	return true;
+
+}
+
+void Player::setParent(Node* parent){
+	Sprite::setParent(parent);
+	//impide que las balas se incorporen mas de una vez a la escena
+	if (!_initialiced){
+		for (int i = 0; i < _numBullets; i++){
+			//incopra las balas al la escena
+			getParent()->addChild(_bulletPool.at(i));
+		}
+		_initialiced = true;
+	}
+}
+
+void Player::scheduleShoot(){
+	
+	//establecemos que la nave disparara cada medio segundo
+	DelayTime *delayAction = DelayTime::create(0.5f);
+
+	// cramos una accion a partir de una funcion
+	CallFunc *callSelectorAction = CallFunc::create(CC_CALLBACK_0(Player::shoot, this));
+	//creamos una secuencia que primero espera y luego dispara
+	auto shootSequence = Sequence::create(delayAction, callSelectorAction, NULL);
+
+	// envolvemos la secuencia un una accion RepeatForever
+	runAction(RepeatForever::create(shootSequence));
 }
 
 void Player::createIdleAnimation(){
@@ -66,6 +109,7 @@ void Player::createExplosionAnimation(){
 		animFrames.pushBack(frame);
 	}
 
+
 	auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f);
 
 	//creamos la accion de animar el objeto animation, en este caso no necesitamos
@@ -74,6 +118,7 @@ void Player::createExplosionAnimation(){
 
 	_explosionAnimation->setTag(Player::Animations::EXPLOSION);
 }
+
 
 
 void Player::update(float dt){
@@ -104,11 +149,21 @@ void Player::update(float dt){
 		setPositionY(getPositionY() + speed);
 	}
 }
+
+void Player::shoot(){
+	_bulletIndex = _bulletIndex % _numBullets;
+	auto bullet = _bulletPool.at(_bulletIndex);
+	bullet->setAnchorPoint(Point(0.5, 0));
+	if (!bullet->isVisible()){
+		bullet->setPosition(getPositionX(),getPositionY()+getBoundingBox().size.height*0.5);
+		bullet->setVisible(true);		
+	}
+	_bulletIndex++;
+}
 	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
 		</pre>
 	</body>
 </html>
-
 
 
 

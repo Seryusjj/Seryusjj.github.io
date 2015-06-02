@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Set up cocos2d-x v3.x en windows</title>
+    <title>Instalando cocos2d-x v3.x en windows</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,13 +27,11 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse device-fixed-width">
                     <ul class="nav navbar-nav">
-                        <li><a href="../index.html">Home</a>
+                        <li><a href="../index.html">Inicio</a>
                         </li>
                         <li class="active"><a href="../tutoriales.html">Tutoriales</a>
                         </li>
-                        <li><a href="../contact.html">Contact</a>
-                        </li>
-                        <li><a href="../faq.html">FAQ</a>
+                        <li><a href="../contact.html">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -46,7 +44,7 @@
         <div class="container afternav">
             <h1>Capítulo 1 - Introducción</h1>
             <p>
-                En este capitulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d-x, yo utilizaré windows 8.1 y los IDEs: Visual Studio (vale en su versión express 2012+) y Eclipse. Para mayor comodida todos los tutoriales se realizaran utilizando Visual Studio y finalmente se mostrará cómo compilar y lanzar la aplicación resultante en android desde eclipse y linea de comandos.
+                En este capítulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d-x, yo utilizaré windows 8.1 y los IDEs: Visual Studio (vale en su versión express 2012 - 2013) y Eclipse. Para mayor comodida todos los tutoriales se realizaran utilizando Visual Studio y finalmente se mostrará cómo compilar y lanzar la aplicación resultante en android desde eclipse y linea de comandos.
             </p>
 
             <h2>Manos a la obra</h2>
@@ -79,7 +77,7 @@
 
             <!-- Install and config -->
             <p>
-                Una vez tenemos todo descargado.
+                Una vez tenemos todo descargado. (Aunque auí aparecca v3.3 de cocos, los tutoriales se mantienen actualizados para su ultima versión)
                 <br/><br/>
                 
                 <img class="img-rounded mobile" src="../img/capitulo1/windows/descargas.PNG" alt="directorio con todas las descargas" style="width:300px;" />
@@ -109,18 +107,19 @@
             </p>
             <h2>Creando el proyecto</h2>
             <p>
-                Una vez instalado y configurado correctamente todo lo anterior solo tenemos que abrir una linea de comandos, yo por ejemplo la abriré desde el escritorio y escribir el siguiente comando <strong>cocos new &lt;NombreProyecto&gt; -p &lt;NombrePaqueteAndroid&gt; -l cpp </strong>
+                Una vez instalado y configurado correctamente todo lo anterior solo tenemos que abrir una linea de comandos, yo por ejemplo la abrí desde el escritorio y escribí el siguiente comando <strong>cocos new &lt;NombreProyecto&gt; -p &lt;NombrePaqueteAndroid&gt; -l cpp </strong> el -l cpp indica que usaremos C++ no lua o javascript.
                 <br/><br/>
                 
                 <img class="img-rounded mobile" src="../img/capitulo1/windows/createProject.PNG" style="width:600px;" alt="creando un proyecto" />
                 <br/><br/>
             </p>
-            <p>Ya tenemos el proyecto creado, basta con entrar al directorio "Test" en mi caso pues así llame al proyecto y ver que se han crado dentro de el varias carpetas que describiré a continuación:</p>
+            <p>
+                Ya tenemos el proyecto creado, basta con entrar al directorio "Test" en mi caso pues así llamé al proyecto y ver que se han creado dentro de él varias carpetas que describiré a continuación:</p>
             <ul>
                 <li>Classes: es donde irán nuestras clases y código en C++</li>
                 <li>cocos2d: la libreria de cocos</li>
                 <li>proj.*: proyecto especifico de la plataforma, puede ser android, mac, linux, windows ... etc.</li>
-                <li>Resources: en esta carpeta irán los recursos que usará nuestro juego, desde modelos 3D a imagenes y sonido.</li>
+                <li>Resources: en esta carpeta irán los recursos que usará nuestro juego, desde imagenes y sonido a modelos 3D.</li>
             </ul>
             
             <img class="img-rounded" src="../img/capitulo1/windows/projectStrucure.PNG" alt="estructura del proyecto" style="width:300px;" />

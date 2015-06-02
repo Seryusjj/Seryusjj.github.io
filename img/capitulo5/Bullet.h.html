@@ -6,35 +6,34 @@
 	
 	<body onload="prettyPrint()">
 		<pre class="prettyprint">
-#ifndef __PLAYER_H__
-#define __PLAYER_H__
+#ifndef __BULLET_H__
+#define __BULLET_H__
+
 
 #include "cocos2d.h"
 
-class Player : public cocos2d::Sprite
+
+class Bullet :public cocos2d::Sprite
 {
 private:
-	cocos2d::Action* _idleAnimation;
-	cocos2d::Action* _explosionAnimation;
-
-	void createIdleAnimation();
-	void createExplosionAnimation();
+	enum Type { ENEMY_BULLET = 0, PLAYER_BULLET = 1 };
+	CC_SYNTHESIZE(Type, _type, Type);
 
 public:
-	enum Animations
-	{
-		IDLE = 0, EXPLOSION = 1
-	};
-
-	CC_SYNTHESIZE(Animations, _currentAnimation, CurrentAnimation);
 	CC_SYNTHESIZE(float, _speed, Speed);
-	CREATE_FUNC(Player);
-	virtual bool init();
-	void update(float dt);
+	virtual void update(float dt);
+
+
+	static Bullet* createEnemyBullet();
+	static Bullet *createPlayerBullet();
+
+	virtual bool initWithFile(const std::string& filename);
 };
 
-#endif //__PLAYER_H__
+#endif //__BULLET_H__
+
 	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
 		</pre>
 	</body>
 </html>
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+void Player::scheduleShoot(){
+	
+	//establecemos que la nave disparara cada medio segundo
+	DelayTime *delayAction = DelayTime::create(0.5f);
+
+	// cramos una accion a partir de una funcion
+	CallFunc *callSelectorAction = CallFunc::create(CC_CALLBACK_0(Player::shoot, this));
+	//creamos una secuencia que primero espera y luego dispara
+	auto shootSequence = Sequence::create(delayAction, callSelectorAction, NULL);
+
+	// envolvemos la secuencia un una accion RepeatForever
+	runAction(RepeatForever::create(shootSequence));
+}
+
+
+void Player::shoot(){
+	_bulletIndex = _bulletIndex % _numBullets;
+	auto bullet = _bulletPool.at(_bulletIndex);
+	bullet->setAnchorPoint(Point(0.5, 0));
+	if (!bullet->isVisible()){
+		bullet->setPosition(getPositionX(),getPositionY()+getBoundingBox().size.height*0.5);
+		bullet->setVisible(true);		
+	}
+	_bulletIndex++;
+}
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
+
+
+
