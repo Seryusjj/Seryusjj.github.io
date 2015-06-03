@@ -26,11 +26,10 @@ Scene* GameLayer::createScene()
 	return scene;
 }
 
-// on "init" you need to initialize your instance
+
 bool GameLayer::init()
 {
-	//////////////////////////////
-	// 1. super init first
+	//primero la superclase
 	if (!Layer::init())
 	{
 		return false;
@@ -41,7 +40,7 @@ bool GameLayer::init()
 
 	_visibleSize = Director::getInstance()->getVisibleSize();
 
-	//create bg
+	//creamos el backgorund
 	_bg = Background::create();
 	addChild(_bg);
 
@@ -52,29 +51,28 @@ bool GameLayer::init()
 
 	for (int i = 0; i < _numEnemies; i++){
 		auto enemy = BasicEnemy::create();
-		//tell the enemies about the player.
+		//damos informacion a los enemigos acerca del jugador
 		enemy->setTarget(_player);
 		enemy->setVisible(false);
 		_enemyPool.pushBack(enemy);
 		addChild(enemy);
 	}
 
-	//tell the player about the enemies
+	//damos informacion al jugador acerca de los enemigos
 	_player->setTargets(_enemyPool);
 
-	//enemy ratio
-	// set up the time delay
+	//se generera un enemigo cada segundo
 	DelayTime *delayAction = DelayTime::create(1.0f);
 
-	// perform the selector call
+	// creamos la acción que despertara a los enemigos
 	CallFunc *callSelectorAction = CallFunc::create(CC_CALLBACK_0(GameLayer::awakeEnemy, this));
 	auto awakeEnemySequence = Sequence::create(delayAction, callSelectorAction, NULL);
 
-	// run the action all the time
+	// repetimos esto hasta el final del juego
 	runAction(RepeatForever::create(awakeEnemySequence));
 
 
-	//start game loop
+	//comenzamos el ciclo de juego
 	this->schedule(schedule_selector(GameLayer::update));
 	return true;
 }
@@ -86,23 +84,26 @@ void GameLayer::update(float dt){
 	}
 	
 	_player->update(dt);
-	//check for collision between enemies & player
+	
+	//miramos si hay colisiones entre los enemigos y el jugador
 	checkCollisions();
 }
 
 void GameLayer::awakeEnemy(){
 	_enemyIndex = _enemyIndex % _numEnemies;
+
 	auto enemy = _enemyPool.at(_enemyIndex);
-	//Positioning
-	//the enemy size is 50+50, take care about the anchor point.
+	//posicionamos de forma aleatoria en el eje x un enemigo, teniendo en cuenta
+	//que cada enemigo mide 50*50
 	enemy->setPositionX(RandomHelper::random_int(static_cast<int>(0 + 50 * 0.5),
 		static_cast<int>(_visibleSize.width - 50 * 0.5)));
 	enemy->setPositionY(_visibleSize.height + 50 * 0.5);
+	//reseteamos el estado del enemigo
 	enemy->setCurrentAnimation(BasicEnemy::Animations::IDLE);
-
 	if (!enemy->isVisible()){
 		enemy->setVisible(true);
 	}
+
 	_enemyIndex++;
 }
 

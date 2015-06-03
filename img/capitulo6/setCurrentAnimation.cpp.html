@@ -7,6 +7,7 @@
 	<body onload="prettyPrint()">
 		<pre class="prettyprint">
 void Player::setCurrentAnimation(Animations anim){
+	if (_currentAnimation == anim) return;
 	_currentAnimation = anim;
 	if (_currentAnimation == IDLE){
 		stopActionByTag(EXPLOSION);

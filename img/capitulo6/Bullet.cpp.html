@@ -19,7 +19,7 @@ bool Bullet::initWithFile(const std::string& filename){
 	}
 	_enemyTarget = nullptr;
 	_speed = 160;
-	//invisible by default
+	//invisible por defecto
 	setVisible(false);
 	schedule(schedule_selector(Bullet::update));
 	return true;
@@ -54,7 +54,7 @@ void Bullet::update(float dt){
 	if (!this->isVisible()) return;
 
 	if (_type == PLAYER_BULLET){
-		//go up 
+		//para arriba
 		setAnchorPoint(Point(0.5, 0));
 		setPosition(getPositionX(), getPositionY() + _speed*dt);
 		if (getPositionY() > Director::getInstance()->getVisibleSize().height){
@@ -71,7 +71,7 @@ void Bullet::update(float dt){
 		}
 	}
 	else if (_type == ENEMY_BULLET){
-		//go down 
+		//para abajo
 		setAnchorPoint(Point(0.5, 1));
 		setPosition(getPositionX(), getPositionY() - _speed*dt);
 		if (getPositionY() < 0){

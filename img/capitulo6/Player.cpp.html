@@ -7,7 +7,6 @@
 	<body onload="prettyPrint()">
 		<pre class="prettyprint">
 #include "Player.h"
-#include "Bullet.h"
 #include "BasicEnemy.h"
 
 USING_NS_CC;
@@ -18,13 +17,6 @@ _numBullets(30),
 _bulletIndex(0),
 _initialiced(false)
 {
-}
-
-Player::~Player()
-{
-	CC_SAFE_RELEASE(_idleAnimation);
-	CC_SAFE_RELEASE(_explosionAnimation);
-	CC_SAFE_RELEASE(_shoot);
 }
 
 
@@ -49,7 +41,7 @@ bool Player::init(){
 
 	createExplosionAnimation();
 
-	//start the initial animation
+	// lanzamos la animacion por defecto
 	runAction(_idleAnimation);
 
 	scheduleShoot();
@@ -78,10 +70,10 @@ void Player::setTargets(cocos2d::Vector<BasicEnemy*>& targets){
 void Player::setParent(Node* parent){
 	Sprite::setParent(parent);
 
-	//prevent the bullet to been added more than once to the scene
+	//impide que las balas se incorporen mas de una vez a la escena
 	if (!_initialiced){
 		for (int i = 0; i < _numBullets; i++){
-			//add bullets to parent, in this case is GameLayer.
+			//incopra las balas al la escena
 			getParent()->addChild(_bulletPool.at(i));
 		}
 		_initialiced = true;
@@ -91,21 +83,24 @@ void Player::setParent(Node* parent){
 
 void Player::scheduleShoot(){
 
-	// set up the time delay
+	//establecemos que la nave disparara cada medio segundo
 	DelayTime *delayAction = DelayTime::create(0.5f);
 
-	// perform the selector call
+	// creamos una accion a partir de una funcion
 	CallFunc *callSelectorAction = CallFunc::create(CC_CALLBACK_0(Player::shoot, this));
+	
+	//creamos una secuencia que primero espera y luego dispara
 	auto shootSequence = Sequence::create(delayAction, callSelectorAction, NULL);
 
 	_shoot = RepeatForever::create(shootSequence);
 	_shoot->setTag(SHOOT_TAG);
-	// run the action all the time
+
+	// envolvemos la secuencia un una accion RepeatForever
 	runAction(_shoot);
 }
 
 void Player::createIdleAnimation(){
-	//create animation pool
+	//creamos un pool de imagenes para la animacion
 	Vector<SpriteFrame*> animFrames;
 	auto acc = 0;
 	for (int i = 0; i < 4; i++){
@@ -113,27 +108,27 @@ void Player::createIdleAnimation(){
 		acc += 50;
 		animFrames.pushBack(frame);
 	}
-	//set base sprite before run anything
+	//si ninguna animacion esta corriendo el esprite por defecto es definido aqui
 	this->setSpriteFrame(animFrames.at(0));
 
-	//create the animation with a deley of 0.25 ms between images
+	//creamos una animacion con un tiempo de espera entre cada frame de 0.25s
 	auto animation = Animation::createWithSpriteFrames(animFrames, 0.25f);
 
-	//create the action of animate with the previous animation
+	//creamos la accion de animar el objeto animation
 	auto animate = Animate::create(animation);
 
-	//set the periodicity of reproduction
+	//creamos la accion de animar el objeto animation
 	_idleAnimation = RepeatForever::create(animate);
 
-	//put a tag on the animation in order to identify and stop it in the future
+	//creamos una accion que repita para siempre la animacion
 	_idleAnimation->setTag(Player::Animations::IDLE);
 
-	//preserve for future uses
+	// le decimos a cocos que no elimine este objeto hasta que lo indiquemos o 
+	//hasta que el objeto player se elimine
 	_idleAnimation->retain();
 }
 
 void Player::createExplosionAnimation(){
-	//create animation pool
 	Vector<SpriteFrame*> animFrames;
 	auto acc = 0;
 	for (int i = 0; i < 4; i++){
@@ -142,14 +137,12 @@ void Player::createExplosionAnimation(){
 		animFrames.pushBack(frame);
 	}
 
-	//create the animation with a deley of 0.15 s between images
 	auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f);
 
-	//create the action of animate with the previous animation,
-	//the default perodicity for an animate object is 1
 	_explosionAnimation = Animate::create(animation);
 
-	//put a tag on the animation in oreder to identify and stop it in the future
+	//creamos la accion de animar el objeto animation, en este caso no necesitamos
+	//un RepeatForever porque solo debe explotar una vez y parar.
 	_explosionAnimation->setTag(Player::Animations::EXPLOSION);
 	_explosionAnimation->retain();
 
@@ -171,6 +164,7 @@ void Player::setCurrentAnimation(Animations anim){
 void Player::update(float dt){
 	//si la nave es destruida no podra moverse y dejara de verse tras explotar 
 	if (_currentAnimation == EXPLOSION){
+		//ademas debe dejar de disparar
 		stopActionByTag(SHOOT_TAG);
 		if (_explosionAnimation->isDone() && isVisible()){
 			setVisible(false);
