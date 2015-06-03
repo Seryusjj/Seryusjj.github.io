@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#include "Player.h"
+#include "Bullet.h"
+#include "BasicEnemy.h"
+
+USING_NS_CC;
+
+
+Player::Player() :_speed(150),
+_numBullets(30),
+_bulletIndex(0),
+_initialiced(false)
+{
+}
+
+
+
+bool Player::init(){
+	//primero la superclase
+	if (!Sprite::init())
+	{
+		return false;
+	}
+
+
+	for (int i = 0; i < _numBullets; i++){
+		_bulletPool.pushBack(Bullet::createPlayerBullet());
+	}
+
+	_currentAnimation = IDLE;
+
+	_controller = TouchController::create();
+	addChild(_controller);
+
+	createIdleAnimation();
+
+	createExplosionAnimation();
+
+	// lanzamos la animacion por defecto
+	runAction(_idleAnimation);
+
+	scheduleShoot();
+	return true;
+
+}
+
+void Player::setVisible(bool visible){
+	Sprite::setVisible(visible);
+	if (visible){
+		runAction(_shoot);
+	}
+	else{
+		stopActionByTag(SHOOT_TAG);
+	}
+}
+
+void Player::setTargets(cocos2d::Vector<BasicEnemy*>& targets){
+	_targets = targets;
+	for (int i = 0; i < _numBullets; i++){
+		_bulletPool.at(i)->setPlayerTargets(_targets);
+	}
+}
+
+
+void Player::setParent(Node* parent){
+	Sprite::setParent(parent);
+
+	//impide que las balas se incorporen mas de una vez a la escena
+	if (!_initialiced){
+		for (int i = 0; i < _numBullets; i++){
+			//incopra las balas al la escena
+			getParent()->addChild(_bulletPool.at(i));
+		}
+		_initialiced = true;
+	}
+
+}
+
+void Player::scheduleShoot(){
+
+	//establecemos que la nave disparara cada medio segundo
+	DelayTime *delayAction = DelayTime::create(0.5f);
+
+	// creamos una accion a partir de una funcion
+	CallFunc *callSelectorAction = CallFunc::create(CC_CALLBACK_0(Player::shoot, this));
+	
+	//creamos una secuencia que primero espera y luego dispara
+	auto shootSequence = Sequence::create(delayAction, callSelectorAction, NULL);
+
+	_shoot = RepeatForever::create(shootSequence);
+	_shoot->setTag(SHOOT_TAG);
+
+	// envolvemos la secuencia un una accion RepeatForever
+	runAction(_shoot);
+}
+
+void Player::createIdleAnimation(){
+	//creamos un pool de imagenes para la animacion
+	Animation* animation = animation = Animation::create();
+	std::string name = "";
+	for (int i = 0; i < 4; i++){
+		name.append("player");
+		name.append(std::to_string(i));
+		auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(name);
+		animation->addSpriteFrame(frame);
+		name = "";
+	}
+	//si ninguna animacion esta corriendo el esprite por defecto es definido aqui
+	this->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("player0"));
+
+	//creamos una animacion con un tiempo de espera entre cada frame de 0.25s
+	animation->setDelayPerUnit(0.25f);
+
+	//creamos la accion de animar el objeto animation
+	auto animate = Animate::create(animation);
+
+	//creamos una accion que repita para siempre la animacion
+	_idleAnimation = RepeatForever::create(animate);
+
+	//ponemos un tag para poder pararlo en el futuro
+	_idleAnimation->setTag(Player::Animations::IDLE);
+
+	// le decimos a cocos que no elimine este objeto hasta que lo indiquemos o 
+	//hasta que el objeto player se elimine
+	_idleAnimation->retain();
+}
+
+void Player::createExplosionAnimation(){
+
+	Animation* animation = animation = Animation::create();
+	std::string name = "";
+	for (int i = 0; i < 4; i++){
+		name.append("player_explosion");
+		name.append(std::to_string(i));
+		auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(name);
+		animation->addSpriteFrame(frame);
+		name = "";
+	}
+	animation->setDelayPerUnit(0.15f);
+
+	//creamos la accion de animar el objeto animation, en este caso no necesitamos
+	//un RepeatForever porque solo debe explotar una vez y parar.
+	_explosionAnimation = Animate::create(animation);
+
+	_explosionAnimation->setTag(Player::Animations::EXPLOSION);
+	_explosionAnimation->retain();
+}
+
+void Player::setCurrentAnimation(Animations anim){
+	if (_currentAnimation == anim) return;
+	_currentAnimation = anim;
+	if (_currentAnimation == IDLE){
+		stopActionByTag(EXPLOSION);
+		runAction(_idleAnimation);
+	}
+	if (_currentAnimation == EXPLOSION){
+		stopActionByTag(IDLE);
+		runAction(_explosionAnimation);
+	}
+}
+
+void Player::update(float dt){
+	//si la nave es destruida no podra moverse y dejara de verse tras explotar 
+	if (_currentAnimation == EXPLOSION){
+		//ademas debe dejar de disparar
+		stopActionByTag(SHOOT_TAG);
+		if (_explosionAnimation->isDone() && isVisible()){
+			setVisible(false);
+		}
+		return;
+	}
+
+	//mover la nave a donde el controlador indique
+	float speed = _speed*dt;
+	auto controller = _controller->getController();
+	if (controller.upRight){
+		setPosition(getPositionX() + speed, getPositionY() + speed);
+	}
+	else if (controller.upLeft){
+		setPosition(getPositionX() - speed, getPositionY() + speed);
+	}
+	else if (controller.downRight){
+		setPosition(getPositionX() + speed, getPositionY() - speed);
+	}
+	else if (controller.downLeft){
+		setPosition(getPositionX() - speed, getPositionY() - speed);
+	}
+	else if (controller.left){
+		setPositionX(getPositionX() - speed);
+	}
+	else if (controller.right){
+		setPositionX(getPositionX() + speed);
+	}
+	else if (controller.down){
+		setPositionY(getPositionY() - speed);
+	}
+	else if (controller.up){
+		setPositionY(getPositionY() + speed);
+	}
+}
+
+void Player::shoot(){
+	_bulletIndex = _bulletIndex % _numBullets;
+	auto bullet = _bulletPool.at(_bulletIndex);
+	bullet->setAnchorPoint(Point(0.5, 0));
+	if (!bullet->isVisible()){
+		bullet->setPosition(getPositionX(), getPositionY() + getBoundingBox().size.height*0.5);
+		bullet->setVisible(true);
+	}
+	_bulletIndex++;
+}
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
+
+
+

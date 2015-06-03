@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#include "GameLayer.h"
+
+
+USING_NS_CC;
+
+GameLayer::~GameLayer(){
+	//importante elimnar los objetos que o heredan de node
+	delete _bg;
+}
+
+Scene* GameLayer::createScene()
+{
+	// 'scene' is an autorelease object
+	auto scene = Scene::create();
+
+	// 'layer' is an autorelease object
+	auto layer = GameLayer::create();
+
+	// add layer as a child to scene
+	scene->addChild(layer);
+
+	// return the scene
+	return scene;
+}
+
+// on "init" you need to initialize your instance
+bool GameLayer::init()
+{
+	//primero la superclase
+	if (!Layer::init())
+	{
+		return false;
+	}
+	_numEnemies = 20;
+	_enemyIndex = 0;
+
+
+	_visibleSize = Director::getInstance()->getVisibleSize();
+
+	//inicializamos el SpriteFrameCache con el descriptor del sprite sheet
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Hunter.plist");
+	//creamos el SpriteBatchNode con las imagenes del sprite sheet
+	SpriteBatchNode* gameBatchNode = SpriteBatchNode::create("Hunter.png");
+	//añadimos el SpriteBatchNode a la escena,
+	//el resto de componetes seran hijos del SpriteBatchNode
+	addChild(gameBatchNode);
+
+	//creamos el backgorund que ahora no hereda de node
+	_bg = new Background();
+	_bg->setParent(gameBatchNode);
+	
+	
+	//creamos el jugador
+	_player = Player::create();
+	_player->setPosition(_visibleSize.width*0.5, _visibleSize.height*0.3);
+	gameBatchNode->addChild(_player);
+
+
+	for (int i = 0; i < _numEnemies; i++){
+		auto enemy = BasicEnemy::create();
+		//damos informacion a los enemigos acerca del jugador
+		enemy->setTarget(_player);
+		enemy->setVisible(false);
+		_enemyPool.pushBack(enemy);
+		gameBatchNode->addChild(enemy);
+	}
+
+	//damos informacion al jugador acerca de los enemigos
+	_player->setTargets(_enemyPool);
+
+	//se generera un enemigo cada segundo
+	DelayTime *delayAction = DelayTime::create(1.0f);
+
+	// creamos la accion que despertara a los enemigos
+	CallFunc *callSelectorAction = CallFunc::create(CC_CALLBACK_0(GameLayer::awakeEnemy, this));
+	auto awakeEnemySequence = Sequence::create(delayAction, callSelectorAction, NULL);
+
+	// repetimos esto hasta el final del juego
+	runAction(RepeatForever::create(awakeEnemySequence));
+
+
+	//comenzamos el ciclo de juego
+	this->schedule(schedule_selector(GameLayer::update));
+	return true;
+}
+
+
+void GameLayer::update(float dt){
+	if (_player->isVisible()){
+		_bg->update(dt);
+	}
+	
+	_player->update(dt);
+	//miramos si hay colisiones entre los enemigos y el jugador
+	checkCollisions();
+}
+
+void GameLayer::awakeEnemy(){
+	_enemyIndex = _enemyIndex % _numEnemies;
+
+	auto enemy = _enemyPool.at(_enemyIndex);
+	//posicionamos de forma aleatoria en el eje x un enemigo, teniendo en cuenta
+	//que cada enemigo mide 50*50
+	enemy->setPositionX(RandomHelper::random_int(static_cast<int>(0 + 50 * 0.5),
+		static_cast<int>(_visibleSize.width - 50 * 0.5)));
+	enemy->setPositionY(_visibleSize.height + 50 * 0.5);
+	//reseteamos el estado del enemigo
+	enemy->setCurrentAnimation(BasicEnemy::Animations::IDLE);
+	if (!enemy->isVisible()){
+		enemy->setVisible(true);
+	}
+
+	_enemyIndex++;
+}
+
+void GameLayer::checkCollisions(){
+	for (int i = 0; i < _numEnemies; i++){
+		auto enemy = _enemyPool.at(i);
+		if (_player->getBoundingBox().intersectsRect(enemy->getBoundingBox())
+			&& enemy->isVisible() && _player->isVisible()){
+			enemy->setCurrentAnimation(BasicEnemy::Animations::EXPLOSION);
+			_player->setCurrentAnimation(Player::Animations::EXPLOSION);
+		}
+	}
+}
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
+
