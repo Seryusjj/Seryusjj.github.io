@@ -27,14 +27,13 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse device-fixed-width">
                     <ul class="nav navbar-nav">
-                        <li><a href="../index.html">Home</a>
+                        <li><a href="../index.html">Inicio</a>
                         </li>
-                        <li class="active"><a href="../tutoriales.html">Tutoriales</a>
+                        <li class="active"><a href="../tutorialesBasico.html">Tutoriales</a>
                         </li>
-                        <li><a href="../contact.html">Contact</a>
+                        <li><a href="../contact.html">Contacto</a>
                         </li>
-                        <li><a href="../faq.html">FAQ</a>
-                        </li>
+
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -44,7 +43,7 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 6 - Introducción</h1>
+            <h1>Capítulo 8 - Introducción</h1>
             <p>
                 En este capítulo aprenderemos como usar  <strong>ui/CocosGUI.h</strong>. Nuestro proyecto ha sufrido una completa reestructuración para facilitar la extensión de nuestro juego, la lógica que ya conocemos hasta el momento se mantiene intacta.
             </p>
@@ -56,9 +55,9 @@
                 Queremos que el usuario pueda cambiar el volumen del sonido de fondo y de los efectos como los disparos o explosiones, además queremos guardar cuantos niveles ha superado y así saber cuál es el siguiente a desbloquear, todo esto lo gestionaremos mediante un singleto llamado GameManager que nos facilitará el trabajo. Echemos un vistazo a su implementación.
             </p>
             <h3>GameManager.h</h3>
-            <iframe  src="../img/capitulo6/GameManager.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/GameManager.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>GameManager.cpp</h3>
-            <iframe  src="../img/capitulo6/GameManager.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/GameManager.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Como vemos es simplemente una clase que nos proveé funciones para guardar datos en persistencia, <strong>UserDefault::getInstance()</strong> es quien realemnte hace el trabajo pues nos permite almacenar datos mediaante clave - valor igual que un hasmap en la persistencia de forma transparente a la plataforma en la que el juego se ejecuta, ya sea windows android IOS ... etc.
             </p>
@@ -70,24 +69,24 @@
                 Todos nuestros menús heredan de una clase común pues todos tendrán el mismo fondo con un comportamiento identico, heredaran de <strong>BaseMenuLayer.cpp</strong> y crearemos varios menús: MainMenuLayer, OptionsLayer, SelectMenuLayer mostrados consecutivamente abajo.
             </p>
             <center>
-                <img class="img-rounded " src="../img/capitulo6/main_menu.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
-                <img class="img-rounded " src="../img/capitulo6/options.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
-                <img class="img-rounded " src="../img/capitulo6/level_selector.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                <img class="img-rounded " src="../img/capitulo8/main_menu.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                <img class="img-rounded " src="../img/capitulo8/options.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                <img class="img-rounded " src="../img/capitulo8/level_selector.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
             </center>
             <br/>
             <p>
                 Como todos los menús son muy parecidos en cuanto a implementación, explicaré el BaseMenuLayer del cuál heredan todos los menús excepto SelectMenuLayer que hereda de MainMenuLayer así que explicaremos estos 3.
             </p>
             <h3>BaseMenuLayer.h</h3>
-            <iframe  src="../img/capitulo6/BaseMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/BaseMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>BaseMenuLayer.cpp</h3>
-            <iframe  src="../img/capitulo6/BaseMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/BaseMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>Nada que explicar realmente acerca de esta clase más que usa una clase Background, en su init() llamamos al scheduler para lanzar el update. Como ya lo hacemos en la clase padre, es muy importante no volver a hacerlo en la clase hija, lo que si podemos hacer es un override del metodo update, sin embargo no nos interesa ya que este update taan solo moverá el fondo del menú, a contuniación veremos por que no necesitamos hacer override del update</p>
 
             <h3>MainMenuLayer.h</h3>
-            <iframe  src="../img/capitulo6/MainMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/MainMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>MainMenuLayer.cpp</h3>
-            <iframe  src="../img/capitulo6/MainMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/MainMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 MainMenuLayer hereda de la calse anterior y añade a la escena una serie de botonos, estos botones pertenecen a <strong>ui/CocosGUI.h</strong>.Para crearlos, se le idnica la imagen de su estado normal, la imagen de su estado al pulsar y la imagen a mostrar cuando inhabilitamos el boton. Como vemos las acciones de los botones se indican mediante call backs con lo que no necesitamos sobreescribir el metodo update de la clase padre.
             </p>
@@ -99,9 +98,9 @@
             </p>
 
             <h3>SelectMenuLayer.h</h3>
-            <iframe  src="../img/capitulo6/SelectMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/SelectMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>SelectMenuLayer.cpp</h3>
-            <iframe  src="../img/capitulo6/SelectMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/SelectMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>Este menú muestra en forma de matríz una serie de botones, que nos dicen qué niveles hemos superado y cual es el siguiente nivel a jugar. Si superamos el nivel 1, se desbloqueara el 2 y así sucesivamente</p>
             <p>
                 En el método <strong>initButtons</strong> se crean los botones, algo muy importante a tener en cuenta es que cualquier valor absoluto que demos para posicionar objetos debe multiplicarse por el factor de escalado en el eje X ó Y según corresponda para que de esta forma siempre se vea igual al cambiar el tamaño de la pantalla. Sabiendo esto, vemos que este metodo tan solo itera y coloca botones dandoles su posición además de configurarlos, es decir los coloca y según el número de boton, este ha de hacer una coso u otra, para cargarle la funcionalidad usamos un vector inicializado con las acciones que su clase padre MainMenuLayer provee.
@@ -119,9 +118,9 @@
                 Si recordais nuestra GameLayer de capítulos anteriores, ahora se llama Level1 y hereda de BaseGameLayer, en esta clase BaseGameLayer, se encuentra la interfaz de nuestro juego y la lógica para manejarla así como aquellos componetes comunes a todos los niveles (el player, la UI, alguna lógica ...etc). Así que para explicar la interfaz, comenzaremos explicando la clase BaseGameLayer
             </p>
             <h3>BaseGameLayer.h</h3>
-            <iframe  src="../img/capitulo6/BaseGameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/BaseGameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>BaseGameLayer.cpp</h3>
-            <iframe  src="../img/capitulo6/BaseGameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/BaseGameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Como vemos todos los elementos comunes a  todos los niveles, entre ellos las UI estan encapsulados en esta clase, también su lógica, no es una clase compleja, ya que casi todos los metodos son de creación y posicionamiento de elementos. Prestaremos especial atecnión a como se ha creado la barra de salud y al metodo update de esta clase. Pare ello mira el metodo <strong>createHealthIndicator</strong> donde componemos y añadimos a la escena la barra de salud, esta barra tiene 3 componentes: healthContainerIndicator una imagen de una nave pequeña que indica que esa es la salud del jugador, healthContainer, una imagen de fondo para la barra de salud y por último la barra roja de salud healthBar para que esta barra se comporte como es debido se debe posicionar su anchorPoint en 0, 0.5 ya que no solo el posicionamiento de los Sprites va en función del anchor point sino también su rotación y escalado.
             </p>
@@ -135,9 +134,9 @@
                 El resto de componentes no es demasiado difícil advertir su funcionamiento así qu no los veremos en profundida. Mejor vemos el comportamiento de una clase derivada de esta.
             </p>
             <h3>Level1.h</h3>
-            <iframe  src="../img/capitulo6/Level1.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/Level1.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Level1.cpp</h3>
-            <iframe  src="../img/capitulo6/Level1.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/capitulo8/Level1.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Esta clase equivale a la que llamabamos GameLayer en capítulos anteriores. Como vemos hereda de BaseGameLayer veamos como se comporta.
             </p>
@@ -148,9 +147,9 @@
                 Además se implemente el metodo pauseButtonAction y resumeButtonAction sobreescribiendo los de la superclase para indicar cómo pausar el juego.Para más detalles acerca de esto echaremos un ojo más adelante al metodo pause de la clase Player. Este es el aspecto que presenta hasta este punto nuestro primer nivel.
             </p>
             <center>
-                <img class="img-rounded " src="../img/capitulo6/playing.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
-                <img class="img-rounded " src="../img/capitulo6/pause.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
-                <img class="img-rounded " src="../img/capitulo6/dead.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                <img class="img-rounded " src="../img/capitulo8/playing.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                <img class="img-rounded " src="../img/capitulo8/pause.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                <img class="img-rounded " src="../img/capitulo8/dead.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
             </center>        
             <!-- end container -->
         </div>
@@ -159,7 +158,7 @@
         <div>
             <br/>
             <center>
-                <a  href="capitulo5.html" >
+                <a  href="capitulo7.html" >
                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Capítulo anterior
                 </a>
                 |
