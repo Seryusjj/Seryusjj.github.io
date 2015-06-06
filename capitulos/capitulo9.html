@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creando Sky Hunter</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/capitulosCSS/capitulo1.css" rel="stylesheet">
+
+
+    <body>
+        <!--Nav bar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top device-fixed-height">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse device-fixed-width">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../index.html">Inicio</a>
+                        </li>
+                        <li class="active"><a href="../tutorialesBasico.html">Tutoriales</a>
+                        </li>
+                        <li><a href="../contact.html">Contacto</a>
+                        </li>
+                    </ul>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <!--Nav bar end-->
+
+
+        <div class="container afternav">
+            <h1>Capítulo 9 - Introducción</h1>
+            <p>
+                Ya sabemos manejar <strong>ui/CocosGUI.h</strong>. Ahora veremos como crear componentes de interfac de usuario dentro de nuestro juego como la barra de salud o los indicadores de puntuación.
+            </p>
+            <p>
+                Recuerda que en este capítulo usaremos las clases y recursos del capítulo anterior.
+            </p> 
+            <h2>Capítulo 9.1 - Score, Salud, botón de pausa ...</h2>
+            <p>
+                Si recordais nuestra GameLayer de capítulos anteriores, ahora se llama Level1 y hereda de BaseGameLayer, en esta clase BaseGameLayer, se encuentra la interfaz de nuestro juego y la lógica para manejarla así como aquellos componetes comunes a todos los niveles (el player, la UI, alguna lógica ...etc). Así que para explicar la interfaz, comenzaremos explicando la clase BaseGameLayer
+            </p>
+            <h3>BaseGameLayer.h</h3>
+            <iframe  src="../img/capitulo9/BaseGameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <h3>BaseGameLayer.cpp</h3>
+            <iframe  src="../img/capitulo9/BaseGameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                La interfaz de usuario se compone de: Botones de pausa y resume, barra de salud del jugador, indicador de puntuación, indicador de porcentaje de nivel completado y el texto que indica que el nivel se ha completado al llegar a una puntuación determinada.
+            </p>
+            <p>
+                Como vemos todos los elementos comunes a todos los niveles, entre ellos las UI estan encapsulados en esta clase, también su lógica, no es una clase compleja, ya que casi todos los metodos son de creación y posicionamiento de elementos. Prestaremos especial atecnión a como se ha creado la barra de salud y al metodo update de esta clase. Pare ello mira el metodo <strong>createHealthIndicator</strong> donde componemos y añadimos a la escena la barra de salud, esta barra tiene 3 componentes: healthContainerIndicator una imagen de una nave pequeña que indica que esa es la salud del jugador, healthContainer, una imagen de fondo para la barra de salud y por último la barra roja de salud healthBar para que esta barra se comporte como es debido se debe posicionar su anchorPoint en 0, 0.5 ya que no solo el posicionamiento de los Sprites va en función del anchor point sino también su rotación y escalado y esta barra será escalada en función de la salud del jugador.
+            </p>
+            <p>
+                Ahora que ya posicionamos la barra de salud echemos un ojo al <strong>update</strong> en concreto a la linea que pone <strong>_healthBar->setScaleX(static_cast(_player->getHealth()) / static_cast(MAX_HEALTH));</strong> como vemos se modifica el tamaño de la barra en función de la cantidad de vida que tiene el jugagdor escalando la barra, el factor de escalado lo obtenemos dividiendo el número de vidas del jugador entre la vida total del mismo.
+            </p>
+            <p>
+                En este metodo update también se gestiona qué debe aparecer en el Label de puntuación y porcentaje de completado del nivel. Si el jugador completa el nievel, se llama a la función <strong>levelCompleteActions</strong> que muestra un texto en pantalla para indicar que se completó el nivel y tras un par de segundos lanza al jugador a la pantall de selección de nivel para que elija si quiere jugar el siguiente nivel o jugar uno que ya haya superado. Además guarda mediante el GameManager el nivel superado por el jugador.
+            </p>
+            <p>
+                El resto de componentes no es demasiado difícil advertir su funcionamiento así qu no los veremos en profundida. Mejor vemos el comportamiento de una clase derivada de esta.
+            </p>
+            <h3>Level1.h</h3>
+            <iframe  src="../img/capitulo9/Level1.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <h3>Level1.cpp</h3>
+            <iframe  src="../img/capitulo9/Level1.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Esta clase equivale a la que llamabamos GameLayer en capítulos anteriores. Como vemos hereda de BaseGameLayer, veamos como se comporta.
+            </p>
+            <p>
+                En su metodo init() se llama antes al init de la superclase BaseGameLayer no al de Layer::init() además en su update antes llama al update de la superclase BaseGameLayer::update(dt) de esta forma la interfaz de usuario también se actualizará en cada frame. El resto ya lo conocemos de capítulos anteriores como la forma de lanzar enemigos en el juego.
+            </p>
+            <p>
+                Además se implemente el metodo pauseButtonAction y resumeButtonAction sobreescribiendo los de la superclase para indicar cómo pausar el juego. Para más detalles acerca de esto echaremos un ojo más adelante al metodo pause de la clase Player. Este es el aspecto que presenta hasta este punto nuestro primer nivel.
+            </p>
+            <h2>
+                Botones de pausa
+            </h2>
+            <p>
+                Estos botones son creados en la supercalse BaseGameLayer, ambos creados en la misma posición, solo que al comenzar el juego el boton de resume esta invisible y deshabilitado, al tocar el boton de pausa, es este el que pasa a estar invisible y deshabilidado y se habilita el de resume es decir al tocar uno de ellos este se deshabilita y habilita al opuesto. Su funcionalidad es extendida por clases derivadas, si vemos la implementación de <strong>pauseButtonAction</strong> en la calse Level1, vemos que primero llama al mismo método de la superclase y luego añade funcionalidad específica del nivel como pausar los enemigos o al jugador (o cualquier otro componente del nivel).
+            </p>
+            <center>
+                <img class="img-rounded " src="../img/capitulo9/playing.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                <img class="img-rounded " src="../img/capitulo9/pause.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+                
+            </center>        
+            <h2>
+                Boton de volver a jugar o respawn
+            </h2>
+            <p>
+                Este boton tambien es creado en la clase BaseGameLayer y extendido por sus clases derivadas, una vez pulsado se ejecutará el método <strong>respawnButtonAction</strong> que reseteará el nivel en cuestión. Basta con ver su implemetnación en la calse Level1. Este botón es mostrado en pantalla al pulsar el boton de pausa o al morir el jugador (ver clase BaseGameLayer)
+            </p>
+            <center>
+                <img class="img-rounded " src="../img/capitulo9/dead.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
+            </center>
+            <!-- end container -->
+        </div>
+
+        <!-- next chapter link -->
+        <div>
+            <br/>
+            <center>
+                <a  href="capitulo8.html" >
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Capítulo anterior
+                </a>
+                |
+                <a  href="capitulo10.html" >
+                    Capítulo siguiente <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> 
+                </a>
+            </center>
+            <br/>
+        </div>
+
+
+        <!-- BOOTSTRAP CORE JS -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-1.11.1.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script>
+            // from https://signalvnoise.com/posts/2407-device-scale-user-interface-elements-in-ios-mobile-safari
+            function getDeviceScale() {
+                var deviceWidth, landscape = Math.abs(window.orientation) == 90;
+                if (landscape) {
+                  // iPhone OS < 3.2 reports a screen height of 396px
+                  deviceWidth = Math.max(480, screen.height);
+                } else {
+                  deviceWidth = screen.width;
+                }
+                return window.innerWidth / deviceWidth;
+            }
+
+            // mobile only - keep the position:fixed header at constant size when page is zoomed
+            if (navigator.userAgent.match(/Mobi/)) {
+                $(window).on('load scroll', function() {
+                    var ds = getDeviceScale();
+                    $('.device-fixed-height').css('transform','scale(1,' + ds + ')')
+                        .css('transform-origin', '0 0');
+                    $('.device-fixed-width').css('transform', 'scale(' + ds + ',1)')
+                        .css('transform-origin', '0 0');
+                    })
+            }
+        </script>
+    </body>
+
+</html>
