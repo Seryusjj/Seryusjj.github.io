@@ -15,16 +15,9 @@ USING_NS_CC;
 
 Scene* BaseMenuLayer::createScene()
 {
-	// 'scene' is an autorelease object
 	auto scene = Scene::create();
-
-	// 'layer' is an autorelease object
 	auto layer = BaseMenuLayer::create();
-
-	// add layer as a child to scene
 	scene->addChild(layer);
-
-	// return the scene
 	return scene;
 }
 
@@ -42,8 +35,7 @@ bool BaseMenuLayer::init(){
 		return false;
 	}
 
-	//we want 3 rows and 3 columns 3*3=NUM_LEVELS
-	//create node with texture info & init TextureCache
+	//Todos nuestros menus tienen el mismo fondo.
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("mainMenu.plist", "mainMenu.png");
 	_gameBatchNode = SpriteBatchNode::create("mainMenu.png");
 	addChild(_gameBatchNode);

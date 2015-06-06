@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Creando Sky Hunter</title>
+    <title>Interfa de usuario con cocos2d-x</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,9 +48,9 @@
                 En este capítulo aprenderemos como usar  <strong>ui/CocosGUI.h</strong>. Nuestro proyecto ha sufrido una completa reestructuración para facilitar la extensión de nuestro juego, la lógica que ya conocemos hasta el momento se mantiene intacta.
             </p>
             <p>
-                Tan solo explicaremos el uso de los componentes pues el código es suficientemente autoexplicativo. Descarga el proyecto para analizar su código buscando el tag Ch-6 en el repositorio de <a href="https://github.com/Seryusjj/Sky-Hunter/tree/Ch-6">GitHub</a>.
+                Explicaremos el uso de nuevos componentes y la nueva estructura de la aplicación, para ello descar la carpeta Classes y Resources del proyecto <a href="../img/capitulo8/SkyHunter8.zip">aquí</a>. Estas clases y recursos también seran usadas en el capítulo siguiente.
             </p> 
-            <h2>Capítulo 6.1 - GameManager, manteniendo los avances del jugador</h2>
+            <h2>Capítulo 8.1 - GameManager, manteniendo los avances del jugador</h2>
             <p>
                 Queremos que el usuario pueda cambiar el volumen del sonido de fondo y de los efectos como los disparos o explosiones, además queremos guardar cuantos niveles ha superado y así saber cuál es el siguiente a desbloquear, todo esto lo gestionaremos mediante un singleto llamado GameManager que nos facilitará el trabajo. Echemos un vistazo a su implementación.
             </p>
@@ -59,14 +59,14 @@
             <h3>GameManager.cpp</h3>
             <iframe  src="../img/capitulo8/GameManager.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Como vemos es simplemente una clase que nos proveé funciones para guardar datos en persistencia, <strong>UserDefault::getInstance()</strong> es quien realemnte hace el trabajo pues nos permite almacenar datos mediaante clave - valor igual que un hasmap en la persistencia de forma transparente a la plataforma en la que el juego se ejecuta, ya sea windows android IOS ... etc.
+                Como vemos es simplemente una clase que nos proveé funciones para guardar datos en persistencia, <strong>UserDefault::getInstance()</strong> es quien realemente hace el trabajo pues nos permite almacenar datos mediaante clave - valor igual que un hasmap en la persistencia de forma transparente a la plataforma en la que el juego se ejecuta, ya sea windows android IOS ... etc.
             </p>
             <p>
-                Nuesto GameManager además de permitir guardar estos datos, también lleva la cuenta de la puntuación de la partida, aunque no la guarda en persistencia. Hace persistente el volumen especificado por el usuario, el siguiente nivel que el usuario puede jugar y la maxima puntiación obtenida por el jugador, este ultimo valor se usará en el modo de juego arcade.
+                Nuesto GameManager además de permitir guardar estos datos, también lleva la cuenta de la puntuación de la partida, aunque no la guarda en persistencia. Hace persistente el volumen especificado por el usuario, el siguiente nivel que el usuario puede jugar y la maxima puntiación obtenida por el jugador, este ultimo valor se usará en el modo de juego arcade cuya implementacion queda opcional para el lector.
             </p>
-            <h2>Capítulo 6.2 - Menús</h2>
+            <h2>Capítulo 8.2 - Menús</h2>
             <p>
-                Todos nuestros menús heredan de una clase común pues todos tendrán el mismo fondo con un comportamiento identico, heredaran de <strong>BaseMenuLayer.cpp</strong> y crearemos varios menús: MainMenuLayer, OptionsLayer, SelectMenuLayer mostrados consecutivamente abajo.
+                Todos nuestros menús heredan de una clase común pues todos tendrán el mismo fondo con un comportamiento identico, heredarán de <strong>BaseMenuLayer.cpp</strong> y crearemos varios menús: MainMenuLayer, OptionsLayer, SelectMenuLayer mostrados consecutivamente abajo.
             </p>
             <center>
                 <img class="img-rounded " src="../img/capitulo8/main_menu.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
@@ -75,13 +75,13 @@
             </center>
             <br/>
             <p>
-                Como todos los menús son muy parecidos en cuanto a implementación, explicaré el BaseMenuLayer del cuál heredan todos los menús excepto SelectMenuLayer que hereda de MainMenuLayer así que explicaremos estos 3.
+                Veremos las clases que implementas estos menús: la clase BaseMenuLayer de la cuál heredan todas las demas, la clase MainMenuLayer, la clase SelectMenuLayer que hereda de MainMenuLayer y por ultimo la clase OptionsLayer.
             </p>
             <h3>BaseMenuLayer.h</h3>
             <iframe  src="../img/capitulo8/BaseMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>BaseMenuLayer.cpp</h3>
             <iframe  src="../img/capitulo8/BaseMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>Nada que explicar realmente acerca de esta clase más que usa una clase Background, en su init() llamamos al scheduler para lanzar el update. Como ya lo hacemos en la clase padre, es muy importante no volver a hacerlo en la clase hija, lo que si podemos hacer es un override del metodo update, sin embargo no nos interesa ya que este update taan solo moverá el fondo del menú, a contuniación veremos por que no necesitamos hacer override del update</p>
+            <p>Nada que explicar realmente acerca de esta clase más que usa una clase Background, en su init() llamamos al scheduler para lanzar el update. Como ya lo hacemos en la clase padre, es muy importante no volver a hacerlo en la clase hija, lo que si podemos hacer es un override del metodo update, sin embargo no nos interesa ya que este update tan solo moverá el fondo del menú, a contuniación veremos por que no necesitamos hacer override del update</p>
 
             <h3>MainMenuLayer.h</h3>
             <iframe  src="../img/capitulo8/MainMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
@@ -94,7 +94,7 @@
                  Prestemos especial antención al boton start y al vector de punteros a función, <strong>initFunctions</strong> es una función que nos permite inicializar un vector con una serie de punteros a funciones, esto nos sirve para saber qué nivel debe lanzar el boton <strong>Start</strong> pues basta con obtener el numero del nivel a lanzar del GameManager y cargarlo en el boton a traves del vector _functions <strong>_functions.at(GameManager::getInstance()->getNextLevel())</strong>. 
             </p>
             <p>
-                Los niveles que se deben lanzar en función de la elección del GameManager están sin implementar, por el momento solo tenemos el nivel 1, el resto los crearemos en el capítulo 7 y en el apartado 6.3 de este capítulo analizaremos elementos como la barra de salud o cómo mostrar la puntuación del jugador.
+                Los niveles que se deben lanzar en función de la elección del GameManager están sin implementar, por el momento solo tenemos el nivel 1, el resto los crearemos en el capítulo 11.
             </p>
 
             <h3>SelectMenuLayer.h</h3>
@@ -106,51 +106,22 @@
                 En el método <strong>initButtons</strong> se crean los botones, algo muy importante a tener en cuenta es que cualquier valor absoluto que demos para posicionar objetos debe multiplicarse por el factor de escalado en el eje X ó Y según corresponda para que de esta forma siempre se vea igual al cambiar el tamaño de la pantalla. Sabiendo esto, vemos que este metodo tan solo itera y coloca botones dandoles su posición además de configurarlos, es decir los coloca y según el número de boton, este ha de hacer una coso u otra, para cargarle la funcionalidad usamos un vector inicializado con las acciones que su clase padre MainMenuLayer provee.
             </p>
             <p>
-                Por defecto todos los botones creados estarán deshabilitados y mostraran la imagen con el candado cerrado, así que tras añadirlos a la escena, iteramos hasta donde GameManager indique y desbloquemaos todos los niveles hasta el siguiente nivel que el usuario haya desbloqueado jugando.
-                Por último se crea un boton para volver al menu principal.
+                Por defecto todos los botones creados estarán deshabilitados y mostraran la imagen con el candado cerrado, así que tras añadirlos a la escena, iteramos hasta donde GameManager indique y desbloquemaos todos los niveles que el usuario haya desbloqueado jugando.
+                Por último se crea un boton para volver al menú principal.
             </p>
             <p>
-                En todas las clases de menú usamos ui/CocosGUI.h en el último menú cuya implentación no mostraremos (descargase proyecto completo) se ve como usar Sliders (otro componente como Button). Para más información acerca de componentes de interfac de usuario dirigete a la <a href="http://www.cocos2d-x.org/reference/native-cpp/V3.6/index.html">API reference</a>
+                En todas las clases de menú usamos ui/CocosGUI.h en el último menú se verá como usar Sliders (otro componente como Button).
             </p>
-
-            <h2>Capítulo 6.3 - Score, Salud y botón de pausa</h2>
+            <h3>OptionsLayer.h</h3>
+            <iframe  src="../img/capitulo8/OptionsLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <h3>OptionsLayer.cpp</h3>
+            <iframe  src="../img/capitulo8/OptionsLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Si recordais nuestra GameLayer de capítulos anteriores, ahora se llama Level1 y hereda de BaseGameLayer, en esta clase BaseGameLayer, se encuentra la interfaz de nuestro juego y la lógica para manejarla así como aquellos componetes comunes a todos los niveles (el player, la UI, alguna lógica ...etc). Así que para explicar la interfaz, comenzaremos explicando la clase BaseGameLayer
-            </p>
-            <h3>BaseGameLayer.h</h3>
-            <iframe  src="../img/capitulo8/BaseGameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <h3>BaseGameLayer.cpp</h3>
-            <iframe  src="../img/capitulo8/BaseGameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Como vemos todos los elementos comunes a  todos los niveles, entre ellos las UI estan encapsulados en esta clase, también su lógica, no es una clase compleja, ya que casi todos los metodos son de creación y posicionamiento de elementos. Prestaremos especial atecnión a como se ha creado la barra de salud y al metodo update de esta clase. Pare ello mira el metodo <strong>createHealthIndicator</strong> donde componemos y añadimos a la escena la barra de salud, esta barra tiene 3 componentes: healthContainerIndicator una imagen de una nave pequeña que indica que esa es la salud del jugador, healthContainer, una imagen de fondo para la barra de salud y por último la barra roja de salud healthBar para que esta barra se comporte como es debido se debe posicionar su anchorPoint en 0, 0.5 ya que no solo el posicionamiento de los Sprites va en función del anchor point sino también su rotación y escalado.
+                Comprendamos el funcionamiento del Slider, por ejemplo el elemento <strong>_backGroundVolume</strong> que es un slider, vemos que tras crearlo y posicionarlo le añadimos un call back <strong>_backGroundVolume->addEventListener(CC_CALLBACK_0(OptionsLayer::actionBackGroundVolumeSlider, this))</strong> gracias a esto, el método <strong>actionBackGroundVolumeSlider</strong>  será llamado cada vez que el valor del slidere varíe lo que nos permite actualizar en el GameManager el valor establecido por el usuario.
             </p>
             <p>
-                Ahora que ya posicionamos la barra de salud echemos un ojo al <strong>update</strong> en concreto a la linea que pone <strong>_healthBar->setScaleX(static_cast(_player->getHealth()) / static_cast(MAX_HEALTH));</strong> como vemos se modifica el tamaño de la barra en función de la cantidad de vida que tiene el jugagdor escalando la barra, el factor de escalado lo obtenemos dividiendo el número de vidas del jugador entre la vida total del mismo.
+                Presta atencion al call back del boton de ir hacia atrás. Ahora no solo vuelve al menú principal si no que además llama al GameManager para guardar los valores establecidos por el usuario.
             </p>
-            <p>
-                En este metodo update también se gestiona qué debe aparecer en el Label de puntua´ción y porcentaje de completado del nivel. Si el jugador completa el nievel, se llama a la función <strong>levelCompleteActions</strong> que muestra un texto en pantalla para indicar que se completó el nivel y tras un par de segundos lanza al jugador a la pantall de selección de nivel para que elija si quiere jugar el siguiente nivel o jugar uno que ya haya superado. Además guarda mediante el GameManager el nivel superado por el jugador.
-            </p>
-            <p>
-                El resto de componentes no es demasiado difícil advertir su funcionamiento así qu no los veremos en profundida. Mejor vemos el comportamiento de una clase derivada de esta.
-            </p>
-            <h3>Level1.h</h3>
-            <iframe  src="../img/capitulo8/Level1.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <h3>Level1.cpp</h3>
-            <iframe  src="../img/capitulo8/Level1.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Esta clase equivale a la que llamabamos GameLayer en capítulos anteriores. Como vemos hereda de BaseGameLayer veamos como se comporta.
-            </p>
-            <p>
-                En su metodo init() se llama antes al init de la superclase BaseGameLayer no al de Layer::init() además en su update antes llama al update de la superclase BaseGameLayer::update(dt).El resto ya lo conocemos de capítulos anteriores como la forma de lanzar enemigos en el juego.
-            </p>
-            <p>
-                Además se implemente el metodo pauseButtonAction y resumeButtonAction sobreescribiendo los de la superclase para indicar cómo pausar el juego.Para más detalles acerca de esto echaremos un ojo más adelante al metodo pause de la clase Player. Este es el aspecto que presenta hasta este punto nuestro primer nivel.
-            </p>
-            <center>
-                <img class="img-rounded " src="../img/capitulo8/playing.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
-                <img class="img-rounded " src="../img/capitulo8/pause.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
-                <img class="img-rounded " src="../img/capitulo8/dead.png" alt="menu principal" style="width:300px;margin-top:5px;"/>
-            </center>        
             <!-- end container -->
         </div>
 
