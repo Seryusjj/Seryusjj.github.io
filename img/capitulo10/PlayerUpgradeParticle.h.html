@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#ifndef __PLAYERUPGRADEPARTICLE_H__
+#define __PLAYERUPGRADEPARTICLE_H__
+
+#include "cocos2d.h"
+#include "Player.h"
+#include "PlayerBulletx2.h"
+
+class PlayerUpgradeParticle : public cocos2d::Node
+{	
+protected:
+	bool _initialized;
+	cocos2d::ParticleSystemQuad* _particle;
+	virtual PlayerBullet* createBullet();
+	
+
+public:
+	CC_SYNTHESIZE(float, _speed, Speed);
+	CC_SYNTHESIZE(Player*, _target, Target);
+	virtual void update(float dt);
+	virtual void setVisible(bool visible);
+	virtual bool init();
+	CREATE_FUNC(PlayerUpgradeParticle);
+};
+
+#endif //__PLAYERUPGRADEPARTICLE_H__
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>

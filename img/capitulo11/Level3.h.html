@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#ifndef __LEVEL3_SCENE_H__
+#define __LEVEL3_SCENE_H__
+#include "BaseGameLayer.h"
+
+
+class HealthParticle;
+class PlayerUpgradeParticle;
+class PlayerUpgradeParticle2;
+
+class Level3 : public BaseGameLayer
+{
+private:
+	enum ActionScheduler { MediumScheduler, HeightScheduler, Upgrade };
+	HealthParticle* _health;
+	PlayerUpgradeParticle * _upgrade;
+	PlayerUpgradeParticle2 * _upgrade2;
+
+	bool _heightSchedulerRunning;
+
+	//enemigos de nivel medio
+	int _numMediumEnemies;
+	int _mediumEnemyIndex;
+	//enemigos de nivel alto
+	int _numHeightEnemies;
+	int _heightEnemyIndex;
+
+
+	
+	void checkCollisions();
+
+	void awakeMediumEnemyScheduler();
+	void awakeMediumEnemy();
+
+	void awakeHeightEnemyScheduler();
+	void awakeHeightEnemy();
+	void launchHeightEnemies();
+	void launchMediumEnemies();
+
+	void scheduleActions();
+	void schduleUpgrades();
+	void launchHealth();
+	void launchUpgrade();
+	void launchUpgrade2();
+
+	void initActors();
+
+
+protected:
+	virtual void initializeVariables();
+	virtual void respawnButtonAction();
+	virtual void pauseButtonAction();
+	virtual void playButtonAction();
+
+public:
+	CC_SYNTHESIZE(float, _heightAwakeSpeed, HeightAwakeSpeed);
+	CC_SYNTHESIZE(float, _mediumAwakeSpeed, MediumAwakeSpeed);
+	static cocos2d::Scene* createScene();
+	virtual bool init();
+	void update(float dt);
+
+	CREATE_FUNC(Level3);
+};
+
+#endif // __LEVEL3_SCENE_H__
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>

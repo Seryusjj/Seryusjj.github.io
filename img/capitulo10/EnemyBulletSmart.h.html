@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#ifndef __ENEMYBULLETSMART_H__
+#define __ENEMYBULLETSMART_H__
+
+#include "EnemyBullet.h"
+
+class EnemyBulletSmart : public EnemyBullet
+{
+private:
+	cocos2d::Point _targetPosition;
+
+public:
+	CREATE_FUNC(EnemyBulletSmart);
+	virtual void update(float dt);
+	virtual bool init();
+	virtual void setVisible(bool visitible);
+	
+};
+
+#endif //__ENEMYBULLETSMART_H__
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>

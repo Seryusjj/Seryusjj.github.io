@@ -45,10 +45,55 @@
         <div class="container afternav">
             <h1>Capítulo 10 - Introducción</h1>
             <p>
-                En este capítulo veremos como utilizar y crear sistemas de particulas como los empleados cuadno una bala golpea al jugador, hay infinidad de herramientas pero una vez mas de pago, sin embargo para sistemas de particulas en 2d con cocos podemos utilizar la web <a href="http://particle2dx.com/">particle2dx</a>, una web para generar sistemas de particulas compatibles con cocos. Además de aprender a usar sistemas de particulas crearemos algunos upgrades y nuevos enemigos. Las imagenes para estos nuevos componentes ya están integradas en los spritesheets que se descargarón en el capítulo 8.
+                En este capítulo veremos como utilizar y crear sistemas de particulas como los empleados cuando una bala golpea al jugador, hay infinidad de herramientas pero una vez más de pago, sin embargo para sistemas de particulas en 2d con cocos, podemos utilizar la web <a href="http://particle2dx.com/">particle2dx</a>, una web para generar sistemas de particulas compatibles con cocos. 
             </p>
-            <h2>Sistemas de particulas</h2>
+            <p>
+                Además de aprender a usar sistemas de particulas crearemos algunos upgrades y nuevos enemigos. Las imagenes para estos nuevos componentes ya están integradas en los spritesheets que se descargarón en el capítulo 8. Así que basta con que descargues las clases empleadas en este capítulo <a href="../img/capitulo10/Classes10.zip">aquí</a>.
+            </p>
+            <h2>Capítulo 10.1 Sistemas de particulas</h2>
+            <p>
+                Como pudimos ver en la clase player se añadieron varias funcionalidades extra, entra ellas aparece la clase <strong>ParticleSystemQuad</strong> que nos permite renderizar el sistemas de particulas en formato .plist generados con la web mencionada anteriormente. Para crear las particulas usamos <strong>_hitEffect = ParticleSystemQuad::create("impact.plist")</strong> este sistemas de partículas puede pararse, reproducirse y resetearse. La duracion de el sistema de particulas ha de indicarse en el momento de la edición en este caso se reporduce y desapareen las particulas. Vemos como se usa en el método runHitEffect de laa calse Player.
+            </p>
+            <h3>runHitEffect</h3>
+            <iframe  src="../img/capitulo10/runHitEffect.cpp.html" width="100%" height="170px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Este metodo se ejecutará cuando una bala golpee al jugador y entre otras cosas, podemos ver cómo se hace un <strong>_hitEffect->resetSystem()</strong> para que el sistema de particulas se ejecute.
+            </p>
             <h2>Componentes extra</h2>
+            <p>
+                Ya conocemos el funcionamiento de los sistemas de particulas, ahora veremos algunas clses que hacen uso de ellos, pero antes vamos a ver otro método interesante de la clase player. Queremos que cuadno el player entre en contacto con algun objeto especia, un upgrade, este cambie su tipo de bala, de una bala inicial a otro tipo que haga mas daño o tenga una imagen diferente. Para esto hemos creado el siguiente método.
+            </p>
+            <h3>updateBullets</h3>
+            <iframe  src="../img/capitulo10/updateBullets.cpp.html" width="100%" height="250px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Este metodo no spermetirá actulaizar las balas de nuestro jugador, recibe como parametro una función que creará el tipo de bala concreto, entonces el método hace que la nave deje de desparar, elemina de la escena las balas viejas y añadae las nuevas y posteriormente reactiva el disparo de la nave. Este método es importante pues los componetes "upgrade" proveeran la función que creará uno u otro tio de bala vemos como.
+            </p>
+            <p>
+                Ahora vamos a ver el componentes PlayerUpgradeParticle
+            </p>
+            <h3>PlayerUpgradeParticle.h</h3>
+            <iframe  src="../img/capitulo10/PlayerUpgradeParticle.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <h3>PlayerUpgradeParticle.cpp</h3>
+            <iframe  src="../img/capitulo10/PlayerUpgradeParticle.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                La clase no hace nada que no conoccamos, esta clase guarda una referencia a la calse Player y en su metodo update ademaás de ir hacia anbajo, verifica si colisiona o no  con este, al igual que las balas de los enemigos, solo que si colisiona con el jugador, llama a su metodo updateBullets y le pasa como funcíón de creacion de balas la sulla propia. La función se llama <strong>createBullet</strong> si nos fijamos en el .h <strong>virtual PlayerBullet* createBullet()</strong> vemos que esta función es virtual lo que quiere decir que futuras clases derivadas de esta podrán sobreescribir unicamente esta función y proveer un nuevo tipo de bala (vease PlayerUpgradeParticle2).
+            </p>
+            <p>
+                Ademas de los upgrades inclumos dos tipos nuevos de bala para el jugador y un nuevo tipoi de bala para los eemigos veamos la bala nueva pra enemigops pues tiene una funcionalidad un tanto distinta a la vista hasta ahora.
+            </p>
+            <h3>EnemyBulletSmart.h</h3>
+            <iframe  src="../img/capitulo10/EnemyBulletSmart.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <h3>EnemyBulletSmart.cpp</h3>
+            <iframe  src="../img/capitulo10/EnemyBulletSmart.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Este tipo de bala hereda de EnemyBullet y se diferencia d su clase padre sobre todo en la funcionalidad, fijate en el metodo <strong>setVisible</strong> donde creamos una acción moveTo donde le indicamos a la bala que se dirija a la posicion X del jugador en el momento de ser disparada la bala, con alguna restriccion.
+            </p>
+            <p>
+                En el método update como siempre verificamos las colisiones y si debemos desactivar la bala.
+            </p>
+            <p>
+                El resto de componentes no son mucho más complejos que estos con lo que con echar un vistazo a su código se entendrán. Pasemos ahora al siguiente capítulo donde veremos como utilizar algunos de estos omponentes.
+            </p>
             <!-- end container -->
         </div>
 

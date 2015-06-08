@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+void Player::updateBullets(const std::function<PlayerBullet*()>& create)
+{
+	stopActionByTag(SHOOT_TAG);
+	for (int i = 0; i < _numBullets; i++){
+		_parent->removeChild(_bulletPool.at(i), true);
+		auto bullet = create();
+		bullet->setPlayerTargets(_targets);
+		_bulletPool.replace(i, bullet);
+		_parent->addChild(_bulletPool.at(i), getLocalZOrder());
+	}
+	runAction(_shoot);
+}
+	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
