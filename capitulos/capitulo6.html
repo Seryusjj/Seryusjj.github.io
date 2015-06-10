@@ -45,11 +45,11 @@
         <div class="container afternav">
             <h1>Capítulo 6 - Introducción</h1>
             <p>
-                En este haremos que las balas creadas en el capítulo 5 sepan algo acerca de los enemigos para permitirles colisionar con esteos y destruirlos, en otras palabras haremos explotar cosas.
+                En este capítulo haremos que las balas creadas en el capítulo 5 sepan algo acerca de los enemigos para permitirles colisionar con estos y destruirlos, en otras palabras haremos explotar cosas.
             </p>
             <h2>Capítulo 6.1 - Enemigos &amp; Colisiones</h2>
             <p>
-                En este punto tanto los enemigos como el jugador disparan pero que más da que disparen si no explota nada. A continuación veremos cómo tratar colisiones simples entre sprites en Cocos2d-x.
+                En este punto tanto los enemigos como el jugador disparan pero qué más da que disparen si no explota nada. A continuación veremos cómo tratar colisiones simples entre sprites en Cocos2d-x.
             </p>
             <p>
                 Para comenzar crearemos un pool de enemigos y añadiremos un par de enemigos a la escena pues un solo enemigo no es suficiente. Lo haremos de la misma forma que hacemos el pool de balas.
@@ -65,42 +65,42 @@
                 Si la bala es del jugador almacenará un pool de enemigos (todos los posibles en la escena) y en cada frame, verificará si está colisionando con un enemigo. En caso de ser así lo destruirá y la bala pasara a estar deshabilitada. Lo mismo sucede si la bala pertenece a un enemigo, sin embargo sólo almacenará referencia al Player.
             </p>
             <p>
-                Echemos también un ojo al metodo <strong>setCurrentAnimation</strong> de la clase Player por ejemplo. El resto de los cambios los veremos mas a delante.
+                Echemos también un ojo al método <strong>setCurrentAnimation</strong> de la clase Player por ejemplo. El resto de los cambios los veremos más adelante.
             </p>
 
             <iframe  src="../img/capitulo6/setCurrentAnimation.cpp.html" width="100%" height="200px">Your Browser doesn't support Frames.</iframe>
 
             <p>
-                Cuando se ejecute este metodo (llamado en el update de la clase Bullet cuando pertenece a un enemigo), al colisionar un bala con el jugador se producirá un error (error mencionado en el capitulo 4) pues el objeto <strong>_explosionAnimation</strong> ya no existirá. Esto es debido a que como dicho objeto no se utilizó nunca, cocos lo eliminó gracias a que es un release object. Para mantener ese objeto en memoria hasta que destruyamos el objeto Player, debemos llamar al metodo <strong>retain()</strong> y posteriormente será eliminado al eliminar el objeto Player.
+                Cuando se ejecute este método (llamado en el update de la clase Bullet cuando pertenece a un enemigo), al colisionar un bala con el jugador se producirá un error (error mencionado en el capítulo 4) pues el objeto <strong>_explosionAnimation</strong> ya no existirá. Esto es debido a que como dicho objeto no se utilizó nunca, cocos lo eliminó gracias a que es un release object. Para mantener ese objeto en memoria hasta que destruyamos el objeto Player, debemos llamar al método <strong>retain()</strong> y posteriormente será eliminado al eliminar el objeto Player.
             </p>
             <p>
-                Veamos como queda nuestra clase Player al completo.
+                Veamos cómo queda nuestra clase Player al completo.
             </p>
             <h3>Player.h</h3>
             <iframe  src="../img/capitulo6/Player.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>Player.cpp</h3>
             <iframe  src="../img/capitulo6/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Como vemos ahora llamamos al método <strong>retain()</strong> al crear las animaciones. También hemos añadido unas lineas al metodo update justo al inicio del mismo donde miramos sí la nave está explotando, de ser así, hacemos que la nave no se pueda controlar y que deje de disparar, una vez termine de explotar, hacemos que deje de ser visible.
+                Como vemos ahora llamamos al método <strong>retain()</strong> al crear las animaciones. También hemos añadido unas líneas al método update justo al inicio del mismo donde miramos sí la nave está explotando, de ser así, hacemos que la nave no se pueda controlar y que deje de disparar, una vez termine de explotar, hacemos que deje de ser visible.
             </p>
             <p>
-                Otro metodo importante es <strong>setTargets</strong> donde actualizamos con el listado de enemigos todas las balas del jugador. 
+                Otro método importante es <strong>setTargets</strong> donde actualizamos con el listado de enemigos todas las balas del jugador.
             </p>
             <p>
-                Ya tenemos la clase Player lista, la clase <strong>BasicEnemy</strong> es muy similar solo que obviamente con un comportamiento distiton en el update, y además solo almezanará una referencia al player en lugar de un pool de objetos. Además en el init() de BasicEnemy hacemos una llamada al método <strong>scheduleUpdate()</strong> que equivale a <strong>schedule(schedule_selector(BasicEnemy::update))</strong> la razon por la que hacemos esto es para que en cada frame se llame al método update sin necesidad de hacer un loop en el GameLayer que llame al update de cada enemigo. </strong>Veamos ahora <strong>GameLayer</strong> para analizar su comportamiento.
+                Ya tenemos la clase Player lista, la clase <strong>BasicEnemy</strong> es muy similar solo que obviamente con un comportamiento distinto en el update, y además solo almacenará una referencia al player en lugar de un pool de objetos. Además en el init() de BasicEnemy hacemos una llamada al método <strong>scheduleUpdate()</strong> que equivale a <strong>schedule(schedule_selector(BasicEnemy::update))</strong> la razón por la que hacemos esto es para que en cada frame se llame al método update sin necesidad de hacer un loop en el GameLayer que llame al update de cada enemigo. </strong>Veamos ahora <strong>GameLayer</strong> para analizar su comportamiento.
             </p>
             <p>
-                En nuestra escena pricipal generaremos enemigos que aparecerán en posiciones aleatorias y gestionaremos colisiones entre los enemigos y el jugador.
+                En nuestra escena principal generaremos enemigos que aparecerán en posiciones aleatorias y gestionaremos colisiones entre los enemigos y el jugador.
             </p>
             <h3>GameLayer.h</h3>
             <iframe  src="../img/capitulo6/GameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>GameLayer.cpp</h3>
             <iframe  src="../img/capitulo6/GameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Como vemos usamos una tecnica para generar enemigos muy similar a como gestionamos los disparos del jugador y los enemigos, usando una seuencia de cocos. Solo que ahora se generan desde la parte superior de la pantalla y se deshabilitan al ser destruidos o llegar al final de la pantalla para poder ser rehabilitados de nuevo.
+                Como vemos usamos una técnica para generar enemigos muy similar a como gestionamos los disparos del jugador y los enemigos, usando una secuencia de cocos. Solo que ahora se generan desde la parte superior de la pantalla y se deshabilitan al ser destruidos o llegar al final de la pantalla para poder ser rehabilitados de nuevo.
             </p>
             <p>
-                En el metodo update tan solo miramos si el jugador está chocando con algun enemigo, en cullo caso destruimos a ambos. En caso de que el jugador sea destruido, es decir <strong>_player->isVisible()==false</strong> hacemos que el fondo deje de moverse pues el jugador ya no está avanzando. En Capítulos siguientes añadiremos mecanismo para volver a comenzar el juego y mostrar alguna información en pantalla.
+                En el método update tan solo miramos si el jugador está chocando con algún enemigo, en cuyo caso destruimos a ambos. En caso de que el jugador sea destruido, es decir <strong>_player->isVisible()==false</strong> hacemos que el fondo deje de moverse pues el jugador ya no está avanzando. En Capítulos siguientes añadiremos mecanismo para volver a comenzar el juego y mostrar alguna información en pantalla.
             </p>
             <p>
                 Descarga la carpeta Classes del proyecto hasta el momento <a href="../img/capitulo6/Classes6.1.zip">aquí</a>.

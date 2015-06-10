@@ -44,7 +44,7 @@
         <div class="container afternav">
             <h1>Capítulo 2 - Introducción</h1>
             <p>
-                En esta sección veremos las estructura básica de una aplicación en cocos2d-x además de algunos elementos esenciales como el tratamiento de los ejes de coordenadas y los elementos pricipales como Sprite, Layer y Scene. El resto de componentes los dejamos para capítulos posteriores.
+                En esta sección veremos la estructura básica de una aplicación en cocos2d-x además de algunos elementos esenciales como el tratamiento de los ejes de coordenadas y los elementos principales como Sprite, Layer y Scene. El resto de componentes los dejamos para capítulos posteriores.
             </p>
 
             <h2>2.1 Estructura</h2>
@@ -54,13 +54,13 @@
 
            
             <p>
-                Una vez creamos el proyecto abrimos la solucion de visual studio, para ello abrimos el archivo <strong> SkyHunter/proj.win32/SkyHunter.sln </strong>.
+                Una vez creamos el proyecto abrimos la solución de Visual Studio, para ello abrimos el archivo <strong> SkyHunter/proj.win32/SkyHunter.sln </strong>.
                 <br/><br/>
 
                 <img class="img-rounded mobile" src="../img/capitulo2/solucionVS.PNG" alt="solucion visual studio" style="width:400px;"/>
                 
                 <br/><br/>
-                Como vemos, en la solución encontramos libcocos2d que es la librería de cocos, tambien encontramos libbox2d para física y libSpine para skeletal animations en 2d. A lo largo de estos tutoriales usaremos sobre todo libcocos2d.
+                Como vemos, en la solución encontramos libcocos2d que es la librería de cocos, también encontramos libbox2d para física y libSpine para skeletal animations en 2d. A lo largo de estos tutoriales usaremos sobre todo libcocos2d.
                 <br/>Ahora echaremos un vistazo a src que en realidad se corresponde con la carpeta Classes de nuestro proyecto general de cocos. <strong>(Para crear clases nuevas, las crearemos directamente en la carpeta Classes y posteriormente las vincularemos a esta carpeta de la solución de visual studio para no tener problemas durante la compilación)</strong>. Aquí vemos las clases de la plantilla del proyecto AppDelegate y HelloWorldSene. 
                 <br/>
             </p>
@@ -73,18 +73,18 @@
             <p>
                 <h3>HelloWorldScene.h</h3>
                 <iframe  src="../img/capitulo2/HelloWorldScene.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-                Con ver el header de esta clase es suficiente pues la implementación de la plantilla la borraremos y la haremos nosotros mismos. Esta clase hereda de <strong>public cocos2d::Layer</strong> al igual que todas nuestras escenas. Más adelante veremos como implementar una escena.
+                Con ver el header de esta clase es suficiente pues la implementación de la plantilla la borraremos y la haremos nosotros mismos. Esta clase hereda de <strong>public cocos2d::Layer</strong> al igual que todas nuestras escenas. Más adelante veremos cómo implementar una escena.
             </p>
 
 
             <h2>2.2 Conceptos básicos</h2>
             <h3>Cocos2d-x y C++</h3>
             <p>
-                Si tienes experiencia en lenguajes de programación como Java y nunca usaste C++, Cocos te lo pone fácil. Todos los objetos como Sprite o Layer heredan de Node, esto quiere decir que Cocos hace la gestión de memoría por ti. Sin miedos a memory leaks siempre y cuando tus objetos hereden de cocos2d::Node.
+                Si tienes experiencia en lenguajes de programación como Java y nunca usaste C++, Cocos te lo pone fácil. Todos los objetos como Sprite o Layer heredan de Node, esto quiere decir que Cocos hace la gestión de memoria por ti. Sin miedos a memory leaks siempre y cuando tus objetos hereden de cocos2d::Node.
             </p>
             <h3>Macros</h3>
             <p>
-                Cocos cuenta con una gran cantidad de macros para el preprocesador, algunas de ellas son simples como <strong>USING_NS_CC</strong> que equivale a<strong>using namespace cocos2d</strong>, pero también tenemos algunas un poco más complejas como <strong>CC_SYNTHESIZE</strong> para generar automaticamente getters y setters. Iremos viendo algunas de ellas durante los próximos capítulos</p>
+                Cocos cuenta con una gran cantidad de macros para el preprocesador, algunas de ellas son simples como <strong>USING_NS_CC</strong> que equivale a<strong>using namespace cocos2d</strong>, pero también tenemos algunas un poco más complejas como <strong>CC_SYNTHESIZE</strong> para generar automáticamente getters y setters. Iremos viendo algunas de ellas durante los próximos capítulos</p>
             <h3>Eje de coordenadas</h3>
             <p>
                 Cocos tiene un eje de coordenadas como el siguiente:
@@ -95,12 +95,12 @@
                     <img class="img-rounded" src="../img/capitulo2/landscape.png" alt="eje de coordenadas landscape" style="width:320px;height:200px;margin-top:3%;"/>
                 </center>
                 <br/>
-                Está abstraido de tal forma que independientemente de la orientación de nuestro juego, ya sea portrait o landscape, el  {0,0} siempre estará en la parte inferior izquierda de la pantalla.El eje Z se usa para saber que imagen debe ser dibujada más adelante o más atras, de tal forma que se verá siempre la imagen cuyo valor para Z sea mayor.
-                Este valor de Z se puede cambiar dirtectamente en el nodo en en el momneto de añadirlo a un nodo padre.
+                Está abstraído de tal forma que independientemente de la orientación de nuestro juego, ya sea portrait o landscape, el  {0,0} siempre estará en la parte inferior izquierda de la pantalla. El eje Z se usa para saber qué imagen debe ser dibujada más adelante o más atrás, de tal forma que se verá siempre la imagen cuyo valor para Z sea mayor.
+                Este valor de Z se puede cambiar directamente en el nodo en el momento de añadirlo a un nodo padre.
             </p>
             <h3>Anchor point</h3>
             <p>
-                El anchor point de un Sprite indica desde donde se realizaran las operaciones como mover ó rotar, es decir puedo mover un Sprite o rotarlo desde su centro, desde una esquina o desde donde se le indique a cocos.Basta con cambiar su Anchor Point. El valor por defecto es el centro <strong>mySprite->setAnchorPoint(0.5, 0.5)</strong>  mejor veamoslo graficamente</p>
+                El anchor point de un Sprite indica desde donde se realizaran las operaciones como mover o rotar, es decir puedo mover un Sprite o rotarlo desde su centro, desde una esquina o desde donde se le indique a cocos. Basta con cambiar su Anchor Point. El valor por defecto es el centro <strong>mySprite->setAnchorPoint(0.5, 0.5)</strong>  mejor veámoslo gráficamente</p>
             <br/>
              <center><img class="img-rounded " src="../img/capitulo2/anchor.png" alt="eje de coordenadas landscape" style="width:280px;height:280px;"/>
              </center>
@@ -110,11 +110,13 @@
             </p>
             <h2>2.3 Usando estos tutoriales</h2>
             <p>
-                En cada capítulo se aporta un link de descarga del código relativo a cada capítulo. Tan solo crea un proyecto con cocos y reemplaza el contenido de las carpetas <strong>Classes</strong> y <strong>Resources</strong> del proyecto creado por ti con el contenido proveido en los capítulos.
+                En cada capítulo se aporta un link de descarga del código relativo a cada capítulo. Tan solo crea un proyecto con cocos y reemplaza el contenido de las carpetas <strong>Classes</strong> y <strong>Resources</strong> del proyecto creado por ti con el contenido provisto en los capítulos.
             </p>
-
-
-
+            <p>
+                <strong>
+                    Recuerda arrastrar desde la carpeta clases a la carpeta src de la solución de Visual Studio para compilarlas. Si ya has compilado algo antes en modo debug, recuerda eliminar la carpeta *.tlog. Por ejemplo, si mi proyecto se llama Test, elimina la carpeta Test\proj.win32\Debug.win32\Test.tlog.
+                </strong>
+            </p>
             <!-- end container -->
         </div>
 

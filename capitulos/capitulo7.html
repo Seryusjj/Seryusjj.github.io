@@ -48,39 +48,39 @@
             </p>
             <h2>Capítulo 7.1 - Optimizando</h2>
             <p>
-                Aquí viene un poco de teoria, ¿por qué necesitamos empaquetar las texturas? pues bien para minimizar el número de accesos a disco gracias a que cocos provee un clase llamada SpriteBatchNode que funciona de la siguiente manera: inicialmente se carga un descriptor en el SpriteFrameCahe, este descriptor es un .plist (una especie de xml pero para mac) pues bien una vez cargado el descriptor en la cache, podremos crear sprites a partir de los nombres cargados en dicho descriptor obviamente solo con dicho descriptor no podemos renderizar imagenes. 
+                Aquí viene un poco de teoría, ¿por qué necesitamos empaquetar las texturas? pues bien para minimizar el número de accesos a disco gracias a que cocos provee un clase llamada SpriteBatchNode que funciona de la siguiente manera: inicialmente se carga un descriptor en el SpriteFrameCahe, este descriptor es un .plist (una especie de xml pero para Mac) pues bien una vez cargado el descriptor en la cache, podremos crear sprites a partir de los nombres cargados en dicho descriptor obviamente solo con dicho descriptor no podemos renderizar imágenes.
             </p>
             <p>
-                Despues de cargar este descriptor, creamos el SpriteBatchNode a partir de la spritesheet con las texturas que especifica el descriptor y a partir de aquí cualquier sprite que creemos con el SpriteFrameCache lo añadimos al SpriteBatchNode con addChild y automaticamente le asiganrá la textura correspondiente. Además de minimizar el numero de accesos a disco, añade otra ventaja muy importante. Cuando creamos sprites con su metodo create, se genera un batch para rendirizar dicho sprite, de esta nueva forma solo se genera un batch para el SpriteBatchNode que permite renderizar todos sus nodos hijos, esto es una ventaja muy importante pues crear dicho batch es muy costoso.
+                Después de cargar este descriptor, creamos el SpriteBatchNode a partir de la spritesheet con las texturas que especifica el descriptor y a partir de aquí cualquier sprite que creemos con el SpriteFrameCache lo añadimos al SpriteBatchNode con addChild y automáticamente le asignará la textura correspondiente. Además de minimizar el número de accesos a disco, añade otra ventaja muy importante. Cuando creamos sprites con su método create, se genera un batch para rendirizar dicho sprite, de esta nueva forma solo se genera un batch para el SpriteBatchNode que permite renderizar todos sus nodos hijos, esto es una ventaja muy importante pues crear dicho batch es muy costoso.
             </p>
             <p>
-                ¿Cómo puedo empaquetar mis texturas? hay varias herramientas en el mercado como TexturePacker pero son de pago, yo recomiendo usar <a href="https://code.google.com/p/libgdx-texturepacker-gui/">libgdx-texturepacker-gui</a> que es una herramiento de empaquetado de otro framework llamado libgdx. Sin embargo el formato del descriptor no es compatible con cocos por eso he realizado un pequeño script en java para transformar el formato del empaquetador a .plist <a href="https://github.com/Seryusjj/Atlas2Plist">Aquí esta el codigo del parser</a> y de este otro <a href="../img/capitulo7/SkyHunterResources.zip">link</a> puedes bajar las texturas empaquetadas y el script para generar el .plist 
+                ¿Cómo puedo empaquetar mis texturas? hay varias herramientas en el mercado como TexturePacker pero son de pago, yo recomiendo usar <a href="https://code.google.com/p/libgdx-texturepacker-gui/">libgdx-texturepacker-gui</a> que es una herramienta de empaquetado de otro framework llamado libgdx. Sin embargo el formato del descriptor no es compatible con cocos por eso he realizado un pequeño script en java para transformar el formato del empaquetador a .plist <a href="https://github.com/Seryusjj/Atlas2Plist">Aquí está el código del parser</a> y de este otro <a href="../img/capitulo7/SkyHunterResources.zip">link</a> puedes bajar las texturas empaquetadas y el script para generar el .plist
             </p>
             <p>
-                El resultado final de empaquetar nuestras texturas será algo asi:
+                El resultado final de empaquetar nuestras texturas será algo así:
             </p>
              <center><img class="img-rounded " src="../img/capitulo7/Hunter.png" alt="enenmigo y jugador posicionados en el GameLayer" style="width:350px;"/><br/></center><br/>
              <p>
-                Una única imagen con todos los sprites. Veamos un poco de código para ver como usar el SpriteBatchNode.
+                Una única imagen con todos los sprites. Veamos un poco de código para ver cómo usar el SpriteBatchNode.
                 Con ver el GameLayer y la clase Player será suficiente.
              </p>
              <h3>GameLayer.cpp</h3>
              <iframe  src="../img/capitulo7/GameLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
              <p>
-                Tan solo hace falta fijarse en el init(), la lógia se mantiene igual que en los capítulos anteriores. Como vemos tal y como dijimos previamente, primero cargarmos el descriptor en la caché con <strong>SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Hunter.plist")</strong> y luego creamos el batchNode <strong>SpriteBatchNode* gameBatchNode = SpriteBatchNode::create("Hunter.png")</strong> y para finalizar añadimos a la escena dicho nodo.
+                Tan solo hace falta fijarse en el init(), la lógica se mantiene igual que en los capítulos anteriores. Como vemos tal y como dijimos previamente, primero cargaremos el descriptor en la caché con <strong>SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Hunter.plist")</strong> y luego creamos el batchNode <strong>SpriteBatchNode* gameBatchNode = SpriteBatchNode::create("Hunter.png")</strong> y para finalizar añadimos a la escena dicho nodo.
              </p>
              <p>
-                El resto de clases las añadimos como hijas de este nodo, este nodo solo puede tener como nodos hijo, nodos Sprite o clases derivadas. Es por esto que nuestro TouchController pasará a heredar de Sprite en lugar de Node ya que para funionar debe ser hijo de Player y ahora player será hijo del SpriteBachNode.
+                El resto de clases las añadimos como hijas de este nodo, este nodo solo puede tener como nodos hijo, nodos Sprite o clases derivadas. Es por esto que nuestro TouchController pasará a heredar de Sprite en lugar de Node ya que para funcionar debe ser hijo de Player y ahora player será hijo del SpriteBachNode.
              </p>
              <p>
-                Veamos como crear Sprites a partir de la caché.
+                Veamos cómo crear Sprites a partir de la caché.
              </p>
 
              <h3>Player.cpp</h3>
              <iframe  src="../img/capitulo7/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
 
             <p>
-                Aquí tenemos nuestra ya conocida clase Player, veamos en que ha cambiado. Si echamos un ojo al metodo <strong>createIdleAnimation()</strong> podremos apreciar que los frames de las animaciones ya no se crean igual, ahora usamos <strong>priteFrameCache::getInstance()->getSpriteFrameByName(name)</strong>. La clase Sprite tambien permite crear sprites a partir de un spriteFrameName sin necsidad de usar la caché de la siguiten forma <strong>Sprite::createWithSpriteFrameName(name)</strong> es importante añadir cualquier nodo creado de esta forma a un nodo padre <strong>SpriteBatchNode</strong> que contenga la información necesaria para completar al nodo hijo creado a partir del descriptor. De no ser así obtendremos un error al ejecutar el juego.
+                Aquí tenemos nuestra ya conocida clase Player, veamos en que ha cambiado. Si echamos un ojo al método <strong>createIdleAnimation()</strong> podremos apreciar que los frames de las animaciones ya no se crean igual, ahora usamos <strong>priteFrameCache::getInstance()->getSpriteFrameByName(name)</strong>. La clase Sprite también permite crear sprites a partir de un spriteFrameName sin necesidad de usar la caché de la siguiente forma <strong>Sprite::createWithSpriteFrameName(name)</strong> es importante añadir cualquier nodo creado de esta forma a un nodo padre <strong>SpriteBatchNode</strong> que contenga la información necesaria para completar al nodo hijo creado a partir del descriptor. De no ser así obtendremos un error al ejecutar el juego.
             </p>
             <p>
                 Descarga las carpetas Classes y Resources del proyecto hasta el momento <a href="../img/capitulo7/SkyHunter7.1.zip">aquí</a>
@@ -94,7 +94,7 @@
                 Para comenzar crea una carpeta llamada <strong>music</strong>  dentro de tu carpeta <strong>resources</strong> y añade estos <a href="../img/capitulo7/music.zip">sonidos</a>
             </p>
             <p>
-                Lo normal en cocos seria usar SimpleAudioEngine, sin embargo en win32 no funciona el ajuste de volumen, en windows phone, Android e IOS funciona correctamente, además el formato aceptado por todas las plataformas al usar SimpleAudioEngine es wav sin embargo vamos a crear una clase que nos permita ejecutar los sonidos también en win32 y poder probar facilmente nuestro juego, la única pega es que en win32 el formato de audio será mp3 y para el resto wav.
+                Lo normal en cocos seria usar SimpleAudioEngine, sin embargo en win32 no funciona el ajuste de volumen, en Windows phone, Android e IOS funciona correctamente, además el formato aceptado por todas las plataformas al usar SimpleAudioEngine es wav sin embargo vamos a crear una clase que nos permita ejecutar los sonidos también en win32 y poder probar fácilmente nuestro juego, la única pega es que en win32 el formato de audio será .mp3 y para el resto .wav.
             </p>
             <h3>CustomAudioManager.h</h3>
             <iframe  src="../img/capitulo7/CustomAudioManager.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
@@ -104,7 +104,7 @@
                 Esta clase está diseñada para que trabaje de forma similar a SimpleAudioEngine, es un singleton y permite precarga de los sonidos. Esa precarga solo será efectiva en plataformas como Android e IOS en win32 no.
             </p>
             <p>
-                Para reproducir sonidos basta con llamar al singleton y luego a su metodo playEffect o Background segun convenga, además para facilitar nuestro código, nuestro audio engine asumirá que tenemos una copia de los ficheros de audio .wav también en .mp3 con lo que en el codigo llamaremos al fichero con extensión .wav y esta clase automaticamente usará uno u otro fichero si estamos en win32 o no. Esto implica tener audio duplicado con lo que a la hora de publicar en Android por ejemplo hay que recordar borrar los ficheros .mp3 que nunca serán usados.
+                Para reproducir sonidos basta con llamar al singleton y luego a su metodo playEffect o Background segun convenga, además para facilitar nuestro código, nuestro audio engine asumirá que tenemos una copia de los ficheros de audio .wav también en .mp3 con lo que en el código llamaremos al fichero con extensión .wav y esta clase automáticamente usará uno u otro fichero si estamos en win32 o no. Esto implica tener audio duplicado con lo que a la hora de publicar en Android por ejemplo hay que recordar borrar los ficheros .mp3 que nunca serán usados.
             </p>
             <p>
                 Veamos como precargar el audio en nuestro appDelegate
@@ -112,10 +112,10 @@
             <h3>AppDelegate.cpp</h3>
             <iframe  src="../img/capitulo7/AppDelegate.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Como vemos ahora junto con la configuración de pantalla, tenemos la precarga del audio. Fijate también que llamamos al pauseAll() y resumeAll() para parar y recomenzar la reporducción de audio cuando se sale y entra en el juego.
+                Como vemos ahora junto con la configuración de pantalla, tenemos la precarga del audio. Fíjate también que llamamos al pauseAll() y resumeAll() para parar y recomenzar la reproducción de audio cuando se sale y entra en el juego.
             </p>
             <p>
-                Una vez tenemos la precarga hecha, podemos reporducir los sonidos en modo loop o no, en el metodo init de nuestro GameLayer añade <strong>CustomAudioManager::getInstance()->playBackgroundSound("music/Cetus.wav", true)</strong> para reproducer en bucle el sonido de fondo para nuestro juego.
+                Como vemos ahora junto con la configuración de pantalla, tenemos la precarga del audio. Fíjate también que llamamos al pauseAll() y resumeAll() para parar y recomenzar la reproducción de audio cuando se sale y entra en el juego.
             </p>
             <p>
                 Descarga la carpeta Classes con el sonido integrado y la carpeta Resources del proyecto hasta el momento  <a href="../img/capitulo7/SkyHunter7.2.zip">aquí</a>

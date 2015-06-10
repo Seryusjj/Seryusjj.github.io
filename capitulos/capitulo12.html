@@ -52,29 +52,29 @@
                 Hay varias formas de compilar nuestro jugo para Android, la primera es usando desde la raíz del proyecto el comando <strong>cocos run -p android</strong> pero antes de ejecutarlo hay que hacer un par de cosas.
             </p>    
             <p>
-                Lo primero, si nuestro proyecto se llama SkyHunter, hay que ir a <strong>SkyHunter/proj.android/jni</strong> y una vez ahí editar el fichero que se llama <strong>Android.mk</strong> este fichero es el que indica como compilar el proyecto para android, si abrimos el fichero con un editor de textos veremos algo así
+                Lo primero, si nuestro proyecto se llama SkyHunter, hay que ir a <strong>SkyHunter/proj.android/jni</strong> y una vez ahí editar el fichero que se llama <strong>Android.mk</strong> este fichero es el que indica como compilar el proyecto para Android, si abrimos el fichero con un editor de textos veremos algo así
             </p>
             <center>
-                <img class="img-rounded mobile" src="../img/capitulo12/androidMK.png" alt="android.mk" style="width:600px;"/>
+                <img class="img-rounded mobile" src="../img/capitulo12/androidMK.png" alt="android.mk" style="width:500px;"/>
             </center>
             <p>
-                Si e fijas en la linea 13 es donde deben ir los nombres de nuestros ficheros en c++ pero escribir 1 a 1 a mano cada fichero no es muy rapido entonces he creado un pequeño script en Java que lo hara por nosotros. descar el jar <a href="../img/capitulo12/indexer">aquí</a> descomprime el contenido en tu carpeta Classes y lanza el .bat, una vez lanzado se generará un archivo .txt del que solo tendras que copiar su contenido en el android.mk
+                Si te fijas en la línea 13 es donde deben ir los nombres de nuestros ficheros en C++ pero escribir 1 a 1 a mano cada fichero no es muy rápido entonces he creado un pequeño script en Java que lo hará por nosotros. Descarga el Jar <a href="../img/capitulo12/indexer">aquí</a> descomprime el contenido en tu carpeta Classes y lanza el .bat, una vez lanzado se generará un archivo .txt del que solo tendrás que copiar su contenido en el android.mk
             </p>
             <center>
                 <img class="img-rounded mobile" src="../img/capitulo12/idexer.png" alt="android.mk" style="width:400px;"/>
             </center>
             <p>
-                Despues de ejecutar el script, copiamos lo generado el andorid.mk
+                Después de ejecutar el script, copiamos lo generado el andorid.mk
             </p>
             <center>
                 <img class="img-rounded mobile" src="../img/capitulo12/adnroidMK2.PNG" alt="android.mk" style="width:400px;"/>
             </center>
             <p>
-                Un último cambio antes de compilar, hay que modificar otro fichero cuya ubicacion es <strong>SkyHunter/proj.android/AndroidManifest.xml</strong> donde debemos indicar la orientación del juego, es decir landscape o portrait, en este caso será protrait <strong>android:screenOrientation="portrait"</strong>. Ahora si, conecta tu movil al ordenaro en modo debug, ejecuta el comando que vimos al principio y tendras el juego ejecutandose en tu terminal. Sin embargo para poder subir tu juego al gooogle play hay que firmar el .apk entonces vamos a ver como importar ahora el proyecto en eclipse.
+                Un último cambio antes de compilar, hay que modificar otro fichero cuya ubicación es <strong>SkyHunter/proj.android/AndroidManifest.xml</strong> donde debemos indicar la orientación del juego, es decir landscape o portrait, en este caso será protrait <strong>android:screenOrientation="portrait"</strong>. Ahora si, conecta tu móvil al ordenador en modo debug, ejecuta el comando que vimos al principio y tendrás el juego ejecutándose en tu terminal. Sin embargo para poder subir tu juego al gooogle play hay que firmar el .apk entonces vamos a ver como importar ahora el proyecto en eclipse.
             </p>
             <h2>12.2 Importando en eclipse</h2>
             <p>
-                Lo primero que se debe hacer es ejecutar el script en python llamado <strong>build_native.py</strong> SkyHunter/proj.android/build_native.py tras hacer esto abre eclipse (supongo que ya tienes los ADT instalados)
+                Lo primero que se debe hacer es ejecutar el script en Python llamado <strong>build_native.py</strong> SkyHunter/proj.android/build_native.py tras hacer esto abre eclipse (supongo que ya tienes los ADT instalados)
             </p>
             <p>
                 En eclipse selecciona import  -> Android -> Existing Android Code into Workspace y selecciona las opciones de la imagen.
@@ -83,7 +83,7 @@
                 <img class="img-rounded mobile" src="../img/capitulo12/imporitng.PNG" alt="android.mk" style="width:600px;"/>
             </center>
             <p>
-                El proyecto queda con este aspecto donde podemos editar código Java como en cualquier aplicación android normal.
+                El proyecto queda con este aspecto donde podemos editar código Java como en cualquier aplicación Android normal.
             </p>
              <center>
                 <img class="img-rounded mobile" src="../img/capitulo12/afterImport.PNG" alt="android.mk" style="height:400px;"/>

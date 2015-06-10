@@ -44,11 +44,11 @@
         <div class="container afternav">
             <h1>Capítulo 4 - Introducción</h1>
             <p>
-                En este capítulo comenzaremos a usar animaciones, aprenderemos que son Aciones en cocos y veremos como crearlas y usarlas juntos con otras acciones. Descarga la carpeta Resources para este capítulo <a href="../img/capitulo4/Resources4.1.zip">aquí</a>
+               En este capítulo comenzaremos a usar animaciones, aprenderemos que estas son Aciones en cocos y veremos cómo crearlas y usarlas juntos con otras acciones. Descarga la carpeta Resources para este capítulo <a href="../img/capitulo4/Resources4.1.zip">aquí</a>
             </p>
             <h2>4.1 Usando Animaciones</h2>
             <p>
-                Ahora vamos a crear las clases Player y BasicEnemy ambas harán uso de animaciones, en este punto ambas clases serán identicas, tan sólo varía el recurso que utilizan así que solo veremos una de ellas, en lugar de emplear herencia, se harán en clases separadas porque en el futuro será necesario. Veamos entonces como usar animaciones.
+                Ahora vamos a crear las clases Player y BasicEnemy ambas harán uso de animaciones, en este punto ambas clases serán idénticas, tan sólo varía el recurso que utilizan así que solo veremos una de ellas, en lugar de emplear herencia, se harán en clases separadas porque en el futuro será necesario. Veamos entonces como usar animaciones.
             </p>
             <h3>Player.h</h3>
             <iframe  src="../img/capitulo4/Player.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
@@ -59,22 +59,22 @@
                 Como vemos hacemos que Player herede de Sprite y colocamos en  su método init aquello que queremos que haga al crearse. En nuetro caso crearemos dos animaciones, Una para el esatado normal del jugador y otra para cuando este es destruido.
             </p>
             <p>
-                En el metodo <strong>createIdleAnimation()</strong> creamos la animación por defecto, para ello creamos un vector en el que añadir los difrentes SpriteFrames que compondrán la animación.
+                En el método <strong>createIdleAnimation()</strong> creamos la animación por defecto, para ello creamos un vector en el que añadir los diferentes SpriteFrames que compondrán la animación.
                 Para crear estos Sprite frames cogemos cada una de las secciones de nuestro sprite sheet.
             </p>
             <p>
-                Nuestro sprite sheet contiene 4 imagenes (4 frames) y mide 200x63 por lo que para obtener cada uno de ellos debemos decirle a cocos desde donde hasta donde mide cada frame y eso lo indicamos así: <strong>SpriteFrame::create("animacion_nave.png", Rect(acc, 0, 50, 63))</strong>. Como vemos acc es donde comienza el frame en cuestión, 0 la altura a la que comienza, 50 el ancho de cada frame y 63 la altura. Una vez obteneidos todos los frames de nuestro sprite sheet, creamos la animación <strong>auto animation = Animation::createWithSpriteFrames(animFrames, 0.25f)</strong> aquí decimos que nuestra animación se compone de este vector de frames y que entre cada frame deben pasar 0.25s. Cuando tenemos la animación, procedemos a crear la acción de animarla <strong>auto animate = Animate::create(animation)</strong> con esto ya tendriamos una animación que se ejecutaría una vez, sin emabargo nos interesa que se repita todo el tiempo hasta que la destruyamos por ello creamos una ación derivada <strong>_idleAnimation = RepeatForever::create(animate)</strong>.
+                Nuestro sprite sheet contiene 4 imágenes (4 frames) y mide 200x63 por lo que para obtener cada uno de ellos debemos decirle a cocos desde donde hasta donde mide cada frame y eso lo indicamos así: <strong>SpriteFrame::create("animacion_nave.png", Rect(acc, 0, 50, 63))</strong>. Como vemos acc es donde comienza el frame en cuestión, 0 la altura a la que comienza, 50 el ancho de cada frame y 63 la altura. Una vez obtenidos todos los frames de nuestro sprite sheet, creamos la animación <strong>auto animation = Animation::createWithSpriteFrames(animFrames, 0.25f)</strong> aquí decimos que nuestra animación se compone de este vector de frames y que entre cada frame deben pasar 0.25s. Cuando tenemos la animación, procedemos a crear la acción de animarla <strong>auto animate = Animate::create(animation)</strong> con esto ya tendríamos una animación que se ejecutaría una vez, sin embargo nos interesa que se repita todo el tiempo hasta que la destruyamos por ello creamos una ación derivada <strong>_idleAnimation = RepeatForever::create(animate)</strong>.
             </p> 
                        
             <p>
-                Ya tenemos nuestras animaciones, ahora lanzaremos la animacion por defecto que sera la IDLE. <strong>runAction(_idleAnimation)</strong>. El proceso de creación es identico para la animacion de la explosión y para las animaciones de los enemigos solo que pueden variar los tamaños, segun el Sprite sheet que se usa.
+                Ya tenemos nuestras animaciones, ahora lanzaremos la animación por defecto que será la IDLE. <strong>runAction(_idleAnimation)</strong>. El proceso de creación es idéntico para la animación de la explosión y para las animaciones de los enemigos solo que pueden variar los tamaños, según el Sprite sheet que se usa.
             </p>
             <p>
-                Prueba a posicionar un objeto BasicEnemy y un Player en tu GameLayer y verás que están animados sin necesidad de llamar a su metodo update que actualmente no hace nada, ya añadiremos funcionalidad mas tarde.
+                Prueba a posicionar un objeto BasicEnemy y un Player en tu GameLayer y verás que están animados sin necesidad de llamar a su método update que actualmente no hace nada, ya añadiremos funcionalidad más tarde.
             </p>
             <p>
                 <strong>
-                    En estas clases (Player y BasicEnemy) hay errores relacionados con la forma en que cocos gestiona la memoria introducidos de forma deliverada, para ver como solucionarlos más adelante (capítulo 6). Por ahora basta con dejarlo así.
+                    En estas clases (Player y BasicEnemy) hay errores relacionados con la forma en que cocos gestiona la memoria introducidos de forma deliberada, para ver cómo solucionarlos más adelante (capítulo 6). Por ahora basta con dejarlo así.
                 </strong>
             </p>    
             <center><img class="img-rounded " src="../img/capitulo4/enemy_player_positionated.png" alt="enenmigo y jugador posicionados en el GameLayer" style="width:300px;"/><br/></center><br/>
