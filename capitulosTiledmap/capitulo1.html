@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Instalando cocos2d-x v3.x en windows</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/capitulosCSS/capitulo1.css" rel="stylesheet">
+
+
+
+
+        <nav class="navbar navbar-inverse navbar-fixed-top device-fixed-height">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse device-fixed-width">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../index.html">Inicio</a>
+                        </li>
+                        <li class="active">
+                            <a href="../tutorialesBasico.html">Tutoriales</a>
+                        </li>
+                        <li><a href="../contact.html">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <!--Nav bar end-->
+
+
+        <div class="container afternav">
+            <h1>Capítulo 1 - Introducción</h1>
+            <p>
+                En este capítulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d-x, yo utilizaré Windows 8.1 y los IDEs: Visual Studio (vale en su versión express 2012 - 2013) y Eclipse. Para mayor comodidad todos los tutoriales se realizaran utilizando Visual Studio y finalmente se mostrará cómo compilar y lanzar la aplicación resultante en Android desde eclipse y línea de comandos.
+            </p>
+
+            <h2>Manos a la obra</h2>
+            <p>
+                Comenzaremos descargando todo lo necesario para empezar a utilizar cocos2d.
+            </p>
+
+            <!-- Listado de dependencias -->
+            <ul>
+                <li>
+                    Cocos2d-x v3.x <a href="http://www.cocos2d-x.org/download">(descarga)</a>.
+                </li>
+                <li>
+                    Ant <a href="http://ant.apache.org/bindownload.cgi">(descarga)</a>.
+                </li>
+                <li>
+                    Java JDK <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">(descarga)</a>.
+                </li>
+                <li>
+                    Android SDK <a href="http://developer.android.com/sdk/index.html">(descarga)</a>.
+                </li>
+                <li>
+                    Android NDK <a href="https://developer.android.com/tools/sdk/ndk/index.html">(descarga)</a>.
+                </li>
+                <li>
+                    Python 2.x <a href="https://www.python.org/downloads/">(descarga)</a>.
+                </li>
+            </ul>
+            <!-- End listado dependencias -->
+
+            <!-- Install and config -->
+            <p>
+                Una vez tenemos todo descargado. (Aunque aquí aparezca v3.3 de cocos, los tutoriales se mantienen actualizados para su última versión)
+                <br/><br/>
+                
+                <img class="img-rounded mobile" src="../img/capitulo1/windows/descargas.PNG" alt="directorio con todas las descargas" style="width:300px;" />
+                <br/>Comenzamos con la instalación de las herramientas y configuración de las mismas. Para comenzar, instalamos el JDK (siguiente, siguiente, sin mayor complicación). Yo crearé una carpeta llamada Cocos en <strong>C:\Cocos</strong> para meter ahí todos los paquetes necesarios.
+                <br/>Comenzaremos descomprimiendo el Zip que contiene el código de cocos2d-x, luego el de ant, también haremos doble click sobre el paquete de android-ndk y comenzará a auto extraerse. Cuando haya terminado movemos los paquetes recién extraídos a nuestra carpeta <strong>C:\Cocos</strong>. A continuación instalamos el sdk de Android en el mismo directorio.
+                <br/><br/>
+                <img class="img-rounded mobile" src="../img/capitulo1/windows/pathAndroidSdk.PNG" alt="configuración de la instalción del sdk" style="width:400px;" />
+                <br/><br/>Tras esta última instalación, iniciamos el Android sdk y descargamos lo que veremos a continuación: (SDK tools + API 10)
+                <br/><br/>
+                <img class="img-rounded mobile" src="../img/capitulo1/windows/sdkDescargas.PNG" style="width:600px;" alt="paquetes necesarios del anroid sdk" />
+                <br/><br/>
+            </p>
+            <p>
+                Continuamos con la instalación, ahora le toca a Python. Todo "siguiente" hasta llegar a la opción de la imagen donde seleccionaremos <strong>"Entire feature will be installed on local hard drive" de forma que Python sea añadido al path de nuestro sistema.</strong>
+                <br/><br/>
+                <img class="img-rounded mobile" src="../img/capitulo1/windows/pythonInstall.png" alt="instrucciones de instalación de python" style="width:400px;" /><br/><br/>
+            </p>
+            <p>
+                Llegados a este punto nuestra carpeta <strong>C:\Cocos</strong>> debe tener un aspecto similar a este, si hemos seguido todos los pasos.
+                <br/><br/>
+                <img class="img-rounded mobile" src="../img/capitulo1/windows/carpetaFinal.png" style="width:600px;" alt="aspecto carpeta final" />
+                <br/><br/>Ahora toca configurar cocos2d-x, para ello vamos a la carpeta <strong>C:\Cocos\cocos2d-x-3.3</strong> y ejecutamos el script setup.py usando Python. El script nos pedirá el path al SDK, ndk y ant. Por fortuna ya lo tenemos todo. Un pequeño apunte, a la hora de darle la ruta de ant, debemos indicarle la ruta de <strong>C:\Cocos\apache-ant-1.9.4\bin</strong> como vemos en la imagen del terminal.
+                <br/><br/>
+                <img class="img-rounded mobile" style="width:600px;" src="../img/capitulo1/windows/setup.PNG" alt="setup.py" />
+                <br/><br/>
+                Para que la configuración haga efecto debemos reiniciar el quipo pues lo que realmente hace este script, es añadir al path del sistema (variables de entorno) las rutas de esos programas.
+            </p>
+            <h2>Creando el proyecto</h2>
+            <p>
+                Una vez instalado y configurado correctamente todo lo anterior solo tenemos que abrir una línea de comandos, yo por ejemplo la abrí desde el escritorio y escribí el siguiente comando <strong>cocos new &lt;NombreProyecto&gt; -p &lt;NombrePaqueteAndroid&gt; -l cpp </strong> el -l cpp indica que usaremos C++ no lua o JavaScript.
+                <br/><br/>
+                
+                <img class="img-rounded mobile" src="../img/capitulo1/windows/createProject.PNG" style="width:600px;" alt="creando un proyecto" />
+                <br/><br/>
+            </p>
+            <p>
+                Ya tenemos el proyecto creado, basta con entrar al directorio "Test" en mi caso pues así llamé al proyecto y ver que se han creado dentro de él varias carpetas que describiré a continuación:
+            </p>
+            <ul>
+                <li>Classes: es donde irán nuestras clases y código en C++</li>
+                <li>cocos2d: la librería de cocos</li>
+                <li>proj.*: proyecto específico de la plataforma, puede ser Android, Mac, Linux, Windows ... etc.</li>
+                <li>Resources: en esta carpeta irán los recursos que usará nuestro juego, desde imágenes y sonido a modelos 3D.</li>
+            </ul>
+            
+            <img class="img-rounded" src="../img/capitulo1/windows/projectStrucure.PNG" alt="estructura del proyecto" style="width:300px;" />
+
+            <!-- end container -->
+        </div>
+
+
+        <!-- next chapter link -->
+        <div>
+            <br/>
+            <center>
+                <a  href="capitulo2.html" >
+                    Capítulo siguiente <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> 
+                </a>
+            </center>
+            <br/>
+        </div>
+
+
+
+
+        <!-- BOOTSTRAP CORE JS -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-1.11.1.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script>
+            // from https://signalvnoise.com/posts/2407-device-scale-user-interface-elements-in-ios-mobile-safari
+            function getDeviceScale() {
+                var deviceWidth, landscape = Math.abs(window.orientation) == 90;
+                if (landscape) {
+                  // iPhone OS < 3.2 reports a screen height of 396px
+                  deviceWidth = Math.max(480, screen.height);
+                } else {
+                  deviceWidth = screen.width;
+                }
+                return window.innerWidth / deviceWidth;
+            }
+
+            // mobile only - keep the position:fixed header at constant size when page is zoomed
+            if (navigator.userAgent.match(/Mobi/)) {
+                $(window).on('load scroll', function() {
+                    var ds = getDeviceScale();
+                    $('.device-fixed-height').css('transform','scale(1,' + ds + ')')
+                        .css('transform-origin', '0 0');
+                    $('.device-fixed-width').css('transform', 'scale(' + ds + ',1)')
+                        .css('transform-origin', '0 0');
+                    })
+            }
+        </script>
+         <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-63954706-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </body>
+
+</html>
