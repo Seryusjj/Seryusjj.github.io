@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#pragma once
+#include "cocos2d.h"
+#include "Enemy.h"
+
+
+class EnemyFactory
+{
+private:
+	enum EnemyType  {
+		LADYBUG = 257,
+		SLIME_BLUE = 258,
+		SLIME_PURPLE = 259,
+		WORM_GREEN = 260,
+		FROG = 262,
+		MOUSE = 263,
+		SLIME_GREEN = 264,
+		SNAIL = 265, 
+		WORM_PINK = 266
+	};
+
+	static EnemyFactory* _instance;
+	DISALLOW_COPY_AND_ASSIGN(EnemyFactory);
+	EnemyFactory();
+public:
+	static EnemyFactory* getInstance();
+	Enemy* getEnemy(int tileGID);
+
+};
+	<script type="text/javascript" src="../../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
+

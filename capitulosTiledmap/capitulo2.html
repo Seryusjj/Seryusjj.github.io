@@ -43,52 +43,55 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 1 - Introducción</h1>
+            <h1>Capítulo 2 - Introducción</h1>
             <p>
-                Tiled map es un editor para generar mapas de tiles, estos mapas pueden ser cargados en cocos2d-x y usados para crear niveles de videojuegos. En este tutorial veremos como crear un nivel en tiledmap compatible con cocos. Como estos tutoriales son avnazados, descarga el código completo del juego "Super alien" juntos con sus recursos <a href="../img/tiledmap/capitulo1/SuperAlienWorld.zip">aquí</a> y en cada capítulo veremos el funcionamiento del mismo.
+                En este capítulo vamos a ver como tratar capas de tiles y qué hacer con ellas.
             </p>
 
-            <h2>1.1 Manos a la obra</h2>
+            <h2>2.1 Creando los enemigos</h2>
             <p>
-                Antes de comenzar a examinar código, veremos cómo usar Tiled map editor. Comenzamos descargando Tiledmap <a href="http://www.mapeditor.org/">aquí</a> y algunos tiles para nuestro juego <a href="http://kenney.nl/assets">aquí</a> (o simplemente usa los que encontraras en la carpeta Resources de Super Alien).
+                Lo primero que haremos será cargar el mapa creado en Tiledmap en cocos. Para ellos <strong>_map = TMXTiledMap::create(_levelName);</strong> (ver metodo createBackground). Una vez creado nuestro mapa podemos extrar las diferentes capas que lo conforman y hacer con ellas lo que queramos. En este caso obtendremos la capa de tiles que contiene los enemigos y reemplazaremos estos por enemigos creados por nosotros con funcionalidad.
             </p>
             <p>
-                Ya tenemos todo listo, tras instalar tiledmap abrelo, y verás algo como esto:
+                Antes de continuar veremos una clase llamada EnemyFactory que en función de un identificador u otro crea un tipo de enemigo u otro.
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/tiledmap-open.png" width="800px"></center>
+            <h3>EnemyFactory.h</h3>
+            <iframe  src="../img/tiledmap/capitulo2/EnemyFactory.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <br/>
+            <h3>EnemyFactory.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo2/EnemyFactory.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                En Tiled existen 3 tipos de capas, capa de patrones, objetos e imagen. Solo necesitamos la de patrones y objetos. Crea un nuevo mapa y configuralo como en la imagen, nos vale un alto de 7 patrones y ponemos un ancho de 100, luego podremos recortar o agrandar el mapa a nuestro gusto. Observa que de ancho y alto de patron ponemos 128px esto es porque los tiles de la carpeta Resources de Super alien, tienen esta medida. Si usases otros tiles, debes poner ahí su alto y ancho.
-            </p>  
-            <center><img img class="img-rounded " src="../img/tiledmap/capitulo1/configmap.png" width="400px"></center>  
-            <p>
-                Hemos creado el mapa falta añadir los tiles para pintarlo. Para ello ve al menu de la imagen y despues se abrirá un dialogo.
+                Esta clase simplemente retorna un tipo u otro de enemigo en función de un identificador numérico. Más adelante veremos que este identificador numérico lo genera el propio tiledmap, a continuación lo ceremos.
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/patrones.png" width="800px"></center>  
             <p>
-                En el dialogo que veras a continuación, selecciona explorar y carga el sprite sheet con los patrones que quieras. Para que funcione en cocos, el mapa debe estar en la misma ubicacion que los Sprite sheet, si tienes duda abre el fuchero generado con un editor de texto (el mapa no es más que un XML).
+                En la clase BaseLevel tras cargar el nivel generado en Tiledmap, obtenemos la capa llamada enemies y ahora veremos que hacer con ella
             </p>
-            <center><img img class="img-rounded " src="../img/tiledmap/capitulo1/dialog.png" width="400px"></center> 
+            <h2>createEnemies.cpp</h2>
+            <iframe  src="../img/tiledmap/capitulo2/createEnemies.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Ya tenemos los patrones asi que a pintar. Cocos solo permite un sprite sheet por capa, es decir para cada capa pintada en tiledmap solo podemos usar componentes de un sprite sheet. Si queremos usar componentes de otra Sprite Sheet, debemos crear otra capa.
+                Las capas de los niveles con como matrices, obtenemos la capa <strong>_map->getLayer("enemies")</strong> y luego su tamaño. Una vez tenemos su tamaño, iteramos sobre la capa hasta que <strong>enemyLayer->getTileGIDAt(Point(i, j))</strong> nos da un valor distinto de 0, el 0 se usa para representar que no hay ninguna imagen asociada a esa posición, cada imagen tendará su identificador asi es como al obtener este GID podemos identificar el tipo de enemigo que deseamos. Una vez creado el enemigo del tipo deseado, hay que posicionarlo y para ello hay que convertir la posicion del tile a una posicion válida de cocos2d-x esto lo hacemos con el método <strong>tileCoordinateToCocosPosition</strong>
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/tiles.png" width="800px"></center>  
             <p>
-                Además de capas de patrones, existen capas de objetos que nos permiten posicionar puntos en el mapa si abres alguno de los niveles de la carpeta Resources de Super Alien verás como son usadas estas capas.
+                Una vez creados y posicionados los enemigos sólo nos falta eliminar esta capa pues de no ser eliminada los tiles de los enemigos segurían visibles <strong>enemyLayer->getParent()->removeChild(enemyLayer)</strong>.
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/nivel1.png" width="800px"></center>  
             <p>
-                Mirando esta imagen se puede apreciar que las capas de objetos se usaran apra detectar colisiones, es decir colocas una capa de objetos llamada "ground" por ejemplo y en ella pintas las lineas que serán el suelo de nuestro juego o una capa para pintar las zonas de fin de partida y asi sucesivamente, es importante separar en capas las distintas funcionalidades si no, no podremos distinguirlas y mantener la nomenclatura de las capas en todos los niveles de forma que nuestro código sea valido para todos ellos . Otro dato importante a tener en cuenta es que los ejes de coordenadas de Tiledmap no se corresponden con los de cocos, en Tiledmap el 0,0 está situado arriba a la izquierda y en cocos está situado abajo a la izquierda. En futuros capítulos veremos como lidiar con esto.
+                Ademáss de capas de tiles como esta, también existen capas de objetos, en el proximo capítulo veremos cómo tratar estas capas.
             </p>
-          
+            
+
             <!-- end container -->
         </div>
 
 
-        <!-- next chapter link -->
+         <!-- next chapter link -->
         <div>
             <br/>
             <center>
-                <a  href="capitulo2.html" >
+                <a  href="capitulo1.html" >
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Capítulo anterior
+                </a>
+                |
+                <a  href="capitulo3.html" >
                     Capítulo siguiente <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> 
                 </a>
             </center>

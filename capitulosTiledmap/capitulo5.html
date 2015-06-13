@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Instalando cocos2d-x v3.x en windows</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/capitulosCSS/capitulo1.css" rel="stylesheet">
+
+
+
+
+        <nav class="navbar navbar-inverse navbar-fixed-top device-fixed-height">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse device-fixed-width">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../index.html">Inicio</a>
+                        </li>
+                        <li class="active">
+                            <a href="../tutorialesTiledmap.html">Tutoriales</a>
+                        </li>
+                        <li><a href="../contact.html">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <!--Nav bar end-->
+
+
+        <div class="container afternav">
+            <h1>Capítulo 5 - Introducción</h1>
+            <p>
+                En este capítulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d-x, yo utilizaré Windows 8.1 y los IDEs: Visual Studio (vale en su versión express 2012 - 2013) y Eclipse. Para mayor comodidad todos los tutoriales se realizaran utilizando Visual Studio y finalmente se mostrará cómo compilar y lanzar la aplicación resultante en Android desde eclipse y línea de comandos.
+            </p>
+
+            <h2>5.1 Colisiones con el suelo</h2>
+            <h2>5.2 Colisiones con las paredes</h2>
+            <h2>5.3 Colisiones con la zona de partida ganada</h2>
+            
+            <!-- end container -->
+        </div>
+
+
+        <!-- next chapter link -->
+        <div>
+            <br/>
+            <center>
+                <a  href="capitulo4.html" >
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Capítulo anterior
+                </a>
+                |
+                <a  href="capitulo6.html" >
+                    Capítulo siguiente <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> 
+                </a>
+            </center>
+            <br/>
+        </div>
+
+
+
+
+        <!-- BOOTSTRAP CORE JS -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-1.11.1.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script>
+            // from https://signalvnoise.com/posts/2407-device-scale-user-interface-elements-in-ios-mobile-safari
+            function getDeviceScale() {
+                var deviceWidth, landscape = Math.abs(window.orientation) == 90;
+                if (landscape) {
+                  // iPhone OS < 3.2 reports a screen height of 396px
+                  deviceWidth = Math.max(480, screen.height);
+                } else {
+                  deviceWidth = screen.width;
+                }
+                return window.innerWidth / deviceWidth;
+            }
+
+            // mobile only - keep the position:fixed header at constant size when page is zoomed
+            if (navigator.userAgent.match(/Mobi/)) {
+                $(window).on('load scroll', function() {
+                    var ds = getDeviceScale();
+                    $('.device-fixed-height').css('transform','scale(1,' + ds + ')')
+                        .css('transform-origin', '0 0');
+                    $('.device-fixed-width').css('transform', 'scale(' + ds + ',1)')
+                        .css('transform-origin', '0 0');
+                    })
+            }
+        </script>
+         <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-63954706-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </body>
+
+</html>

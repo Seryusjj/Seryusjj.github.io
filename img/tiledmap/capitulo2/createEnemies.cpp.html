@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+void BaseLevel::createEnemies(){
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("enemies.plist", "enemies.png");
+	auto _gameBatchNode1 = SpriteBatchNode::create("enemies.png");
+	addChild(_gameBatchNode1);
+	auto enemyLayer = _map->getLayer("enemies");
+	auto layerSize = enemyLayer->getLayerSize();
+	for (int i = 0; i < layerSize.width; i++){
+		for (int j = 0; j < layerSize.height; j++){
+			auto GID = enemyLayer->getTileGIDAt(Point(i, j));
+			if (GID != 0) {
+				auto enemy = EnemyFactory::getInstance()->getEnemy(GID);
+				enemy->setPosition(tileCoordinateToCocosPosition(layerSize, Point(i, j)));
+				_gameBatchNode1->addChild(enemy);
+			}
+		}
+	}
+	//descarta esta capa
+	enemyLayer->getParent()->removeChild(enemyLayer);
+}
+
+Point BaseLevel::tileCoordinateToCocosPosition(Size layerSize, Point tileCoordinate){
+	//anchor point (0.5 0.5) -> layerSize.width / 2
+	float x = floor(layerSize.width / 2 * getScaleX() + tileCoordinate.x * _map->getTileSize().width * getScaleX());
+	//recuerda que el eje Y esta invertido
+	float y = floor(layerSize.height / 2 * getScaleY() + (layerSize.height-tileCoordinate.y) * _map->getTileSize().height * getScaleY());
+	//return a cocos 2d position
+	return Point(x, y);
+}
+	<script type="text/javascript" src="../../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>

@@ -43,43 +43,38 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 1 - Introducción</h1>
+            <h1>Capítulo 3 - Introducción</h1>
             <p>
-                Tiled map es un editor para generar mapas de tiles, estos mapas pueden ser cargados en cocos2d-x y usados para crear niveles de videojuegos. En este tutorial veremos como crear un nivel en tiledmap compatible con cocos. Como estos tutoriales son avnazados, descarga el código completo del juego "Super alien" juntos con sus recursos <a href="../img/tiledmap/capitulo1/SuperAlienWorld.zip">aquí</a> y en cada capítulo veremos el funcionamiento del mismo.
+                ELas capas de onbjetos nos facilitan la creacion de figuras geometricas como circulos, cuadrados o lineas, en nuestro juego solo usaremos estas últimas, estas lineas se llaman polyLine, para facilitar el tratamiento de nuestros niveles, todas las capas de objetos contienen exclusivamente este tipo de objeto. Veamos ahora las plicaciones que esto tiene
             </p>
 
-            <h2>1.1 Manos a la obra</h2>
+            <h2>3.1 Ground</h2>
             <p>
-                Antes de comenzar a examinar código, veremos cómo usar Tiled map editor. Comenzamos descargando Tiledmap <a href="http://www.mapeditor.org/">aquí</a> y algunos tiles para nuestro juego <a href="http://kenney.nl/assets">aquí</a> (o simplemente usa los que encontraras en la carpeta Resources de Super Alien).
+                Cada nivel cosnta de estas 3 capas de objetos: Ground, Wall y Winning cada capa contiene varias polyLines, la separación en capas es apra separar la funcionalidad, es decir si el jugador choca contra el suelo quiero que haga algo y si choca contra una pared deseo que haga algo distinto que al colisionar con el suelo, lo mismo sucede si colisiona con la puerta de final de partida.
             </p>
             <p>
-                Ya tenemos todo listo, tras instalar tiledmap abrelo, y verás algo como esto:
+                Todas son capas de objetos pero cada una deberá tener una función distinta y para ello les asignamos un tag específico a cada una.
+                Seguimos en la calse BaseLevel, vemaos la creación del suelo.
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/tiledmap-open.png" width="800px"></center>
+            <h3>createGround.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo2/createGround.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                En Tiled existen 3 tipos de capas, capa de patrones, objetos e imagen. Solo necesitamos la de patrones y objetos. Crea un nuevo mapa y configuralo como en la imagen, nos vale un alto de 7 patrones y ponemos un ancho de 100, luego podremos recortar o agrandar el mapa a nuestro gusto. Observa que de ancho y alto de patron ponemos 128px esto es porque los tiles de la carpeta Resources de Super alien, tienen esta medida. Si usases otros tiles, debes poner ahí su alto y ancho.
-            </p>  
-            <center><img img class="img-rounded " src="../img/tiledmap/capitulo1/configmap.png" width="400px"></center>  
-            <p>
-                Hemos creado el mapa falta añadir los tiles para pintarlo. Para ello ve al menu de la imagen y despues se abrirá un dialogo.
+                Como vemos, usamos <strong>auto groundObjLayer = _map->getObjectGroup("ground")</strong> para obtener la capa que contiene las polyLines, de esta capa otemos un listado de objetos e iteramos, cada objeto contendrá una polyLine y unos valores de posición que usaremos como offset en el eje X y eje Y. Estos offset se usan para posicionar correctamente los puntos de las polylines (recordar que los ejes y de cocos y Tiledmap no corresponden). Las lineas comentas crean un DrawNode que nos permitirá dibujar estas polyLines. Descomenta estas lineas del lineDrawer para ver dibujada la linea en el juego, además de dibujar las lineas, estos puntos sirven para generar la física del suelo del juego gracias al método <strong>createPhysicsBodyFromPoints</strong> que veremos en capítulos siguientes relativos a la física del juego. A este método le pasamos un tag <strong>GROUND_TAG</strong> que identificará a las lineas que forman la física del suelo en el futuro.
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/patrones.png" width="800px"></center>  
+            <h2>3.2 Wall</h2>
             <p>
-                En el dialogo que veras a continuación, selecciona explorar y carga el sprite sheet con los patrones que quieras. Para que funcione en cocos, el mapa debe estar en la misma ubicacion que los Sprite sheet, si tienes duda abre el fuchero generado con un editor de texto (el mapa no es más que un XML).
+                Como acabamos de ver al crear la física, le asignamos un tag a esas lineas para identificar su funcionalidad, tal como dijimos previamente esto no sería posible si las lineas que queremos separar por funcionalidad, no lo estuviesen también separadas por capas. Veamos ahora como crear las lineas que conforman las paredes del juego.
             </p>
-            <center><img img class="img-rounded " src="../img/tiledmap/capitulo1/dialog.png" width="400px"></center> 
+            <h3>createWall.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo2/createWall.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Ya tenemos los patrones asi que a pintar. Cocos solo permite un sprite sheet por capa, es decir para cada capa pintada en tiledmap solo podemos usar componentes de un sprite sheet. Si queremos usar componentes de otra Sprite Sheet, debemos crear otra capa.
+                Este método es identico al anterior, sólo cambia el tag empleado que en este caso será <strong>WALL_TAG</strong>. Una vez mas vemos nuestro lineDrawer comentado, si queremos ver estas lineas dibujadas en el juego, deberemos descomentar ese código
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/tiles.png" width="800px"></center>  
             <p>
-                Además de capas de patrones, existen capas de objetos que nos permiten posicionar puntos en el mapa si abres alguno de los niveles de la carpeta Resources de Super Alien verás como son usadas estas capas.
+                Hay una última capa de objetos que será tratada de forma identica a las dos anterirores por lo que no la mostraremos, simplemnte cambiamos su tag para poder identificar su funcionalidad.
             </p>
-            <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/nivel1.png" width="800px"></center>  
-            <p>
-                Mirando esta imagen se puede apreciar que las capas de objetos se usaran apra detectar colisiones, es decir colocas una capa de objetos llamada "ground" por ejemplo y en ella pintas las lineas que serán el suelo de nuestro juego o una capa para pintar las zonas de fin de partida y asi sucesivamente, es importante separar en capas las distintas funcionalidades si no, no podremos distinguirlas y mantener la nomenclatura de las capas en todos los niveles de forma que nuestro código sea valido para todos ellos . Otro dato importante a tener en cuenta es que los ejes de coordenadas de Tiledmap no se corresponden con los de cocos, en Tiledmap el 0,0 está situado arriba a la izquierda y en cocos está situado abajo a la izquierda. En futuros capítulos veremos como lidiar con esto.
-            </p>
-          
+            
+
             <!-- end container -->
         </div>
 
@@ -89,6 +84,10 @@
             <br/>
             <center>
                 <a  href="capitulo2.html" >
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Capítulo anterior
+                </a>
+                |
+                <a  href="capitulo4.html" >
                     Capítulo siguiente <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> 
                 </a>
             </center>

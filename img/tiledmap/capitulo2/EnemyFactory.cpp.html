@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+#include "EnemyFactory.h"
+#include "EnemyFrog.h"
+#include "EnemyLadybug.h"
+#include "EnemySlimeBlue.h"
+#include "EnemySlimePurple.h"
+#include "EnemySlimeGreen.h"
+#include "EnemyWormGreen.h"
+#include "EnemySnail.h"
+#include "EnemyMouse.h"
+
+
+EnemyFactory* EnemyFactory::_instance = nullptr;
+EnemyFactory::EnemyFactory(){}
+
+EnemyFactory* EnemyFactory::getInstance(){
+	if (_instance == nullptr){
+		_instance = new EnemyFactory();
+	}
+	return _instance;
+}
+
+Enemy* EnemyFactory::getEnemy(int tileGID){
+	switch (tileGID)
+	{
+	case WORM_PINK:		return Enemy::create();
+	case FROG:			return EnemyFrog::create();
+	case LADYBUG:		return EnemyLadybug::create();
+	case SLIME_BLUE:	return EnemySlimeBlue::create();
+	case SLIME_PURPLE:	return EnemySlimePurple::create();
+	case WORM_GREEN:	return EnemyWormGreen::create();
+	case MOUSE:			return EnemyMouse::create();
+	case SLIME_GREEN:	return EnemySlimeGreen::create();;
+	case SNAIL:			return EnemySnail::create();
+	default:			return Enemy::create();
+	}
+}
+	<script type="text/javascript" src="../../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
+

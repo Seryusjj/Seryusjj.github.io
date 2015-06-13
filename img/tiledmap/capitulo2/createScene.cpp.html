@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+Scene* BaseLevel::createScene()
+{
+	auto scene = Scene::createWithPhysics();
+	scene->getPhysicsWorld()->setGravity(Point(0, -2000));
+	auto layer = BaseLevel::create();
+	scene->addChild(layer);
+	return scene;
+}
+	<script type="text/javascript" src="../../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>
