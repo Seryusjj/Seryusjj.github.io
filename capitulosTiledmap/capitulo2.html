@@ -48,20 +48,9 @@
                 En este capítulo vamos a ver como tratar capas de tiles y qué hacer con ellas.
             </p>
 
-            <h2>2.1 Creando los enemigos</h2>
-            <p>
+            <h2>2.1 Tratando las capas de tiles</h2>
+             <p>
                 Lo primero que haremos será cargar el mapa creado en Tiledmap en cocos. Para ellos <strong>_map = TMXTiledMap::create(_levelName);</strong> (ver metodo createBackground). Una vez creado nuestro mapa podemos extrar las diferentes capas que lo conforman y hacer con ellas lo que queramos. En este caso obtendremos la capa de tiles que contiene los enemigos y reemplazaremos estos por enemigos creados por nosotros con funcionalidad.
-            </p>
-            <p>
-                Antes de continuar veremos una clase llamada EnemyFactory que en función de un identificador u otro crea un tipo de enemigo u otro.
-            </p>
-            <h3>EnemyFactory.h</h3>
-            <iframe  src="../img/tiledmap/capitulo2/EnemyFactory.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <br/>
-            <h3>EnemyFactory.cpp</h3>
-            <iframe  src="../img/tiledmap/capitulo2/EnemyFactory.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Esta clase simplemente retorna un tipo u otro de enemigo en función de un identificador numérico. Más adelante veremos que este identificador numérico lo genera el propio tiledmap, a continuación lo ceremos.
             </p>
             <p>
                 En la clase BaseLevel tras cargar el nivel generado en Tiledmap, obtenemos la capa llamada enemies y ahora veremos que hacer con ella
@@ -69,14 +58,28 @@
             <h2>createEnemies.cpp</h2>
             <iframe  src="../img/tiledmap/capitulo2/createEnemies.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Las capas de los niveles con como matrices, obtenemos la capa <strong>_map->getLayer("enemies")</strong> y luego su tamaño. Una vez tenemos su tamaño, iteramos sobre la capa hasta que <strong>enemyLayer->getTileGIDAt(Point(i, j))</strong> nos da un valor distinto de 0, el 0 se usa para representar que no hay ninguna imagen asociada a esa posición, cada imagen tendará su identificador asi es como al obtener este GID podemos identificar el tipo de enemigo que deseamos. Una vez creado el enemigo del tipo deseado, hay que posicionarlo y para ello hay que convertir la posicion del tile a una posicion válida de cocos2d-x esto lo hacemos con el método <strong>tileCoordinateToCocosPosition</strong>
+                Las capas de los niveles son como matrices, obtenemos la capa <strong>_map->getLayer("enemies")</strong> y luego su tamaño. Una vez tenemos su tamaño, iteramos sobre la capa hasta que <strong>enemyLayer->getTileGIDAt(Point(i, j))</strong> nos da un valor distinto de 0, el 0 se usa para representar que no hay ninguna imagen asociada a esa posición, cada imagen tendará su identificador así es como al obtener este GID podemos identificar el tipo de enemigo que deseamos. Una vez creado el enemigo del tipo deseado, de lo cual se encarga la clase <strong>EnemyFactory</strong> como vemos en <strong>EnemyFactory::getInstance()->getEnemy</strong>. Esta clase la veremos posteriormente con mas detalle.Ahor hay que posicionar los enemigos y para ello hay que convertir la posicion del tile a una posicion válida de cocos2d-x esto lo hacemos con el método <strong>tileCoordinateToCocosPosition</strong> este proceso debe hacerse porque el tamaño de la capa nos la da en número de tiles, es labor nuestra transformar esto a pixeles y por supuesto corregir los ejes de coordenadas.
             </p>
             <p>
-                Una vez creados y posicionados los enemigos sólo nos falta eliminar esta capa pues de no ser eliminada los tiles de los enemigos segurían visibles <strong>enemyLayer->getParent()->removeChild(enemyLayer)</strong>.
+                Una vez creados y posicionados los enemigos sólo nos falta eliminar esta capa pues de no ser eliminada los tiles de los enemigos estáticos segurían visibles <strong>enemyLayer->getParent()->removeChild(enemyLayer)</strong>.
             </p>
             <p>
                 Ademáss de capas de tiles como esta, también existen capas de objetos, en el proximo capítulo veremos cómo tratar estas capas.
             </p>
+            <h2>2.2 Creando los enemigos</h2>
+           
+            <p>
+                Antes de continuar veremos una clase llamada EnemyFactory que en función de un identificador u otro crea el tipo de enemigo correcto.
+            </p>
+            <h3>EnemyFactory.h</h3>
+            <iframe  src="../img/tiledmap/capitulo2/EnemyFactory.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <br/>
+            <h3>EnemyFactory.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo2/EnemyFactory.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Esta clase simplemente retorna un tipo u otro de enemigo en función de un identificador numérico. Este identificador numérico se llama GID y es creado por Tiledmap, tendremos que abrir el nivel generado por tiledmap con un editor de textos y observar el identificador numérico asignado a cada tile, normalmente son valores consecutivos.
+            </p>
+            
             
 
             <!-- end container -->
