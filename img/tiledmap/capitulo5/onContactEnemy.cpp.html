@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+bool Player::onContactEnemy(Node* node1, Node* node2){
+	if (areThisTwoTypes(node1, node2, PLAYER_TAG, ENEMY_TAG)){
+		Player * player = nullptr;
+		Enemy* enemy = nullptr;
+		if (node1->getTag() == PLAYER_TAG){
+			player = dynamic_cast<Player*>(node1);
+			enemy = dynamic_cast<Enemy*>(node2);
+		}
+		else{
+			player = dynamic_cast<Player*>(node2);
+			enemy = dynamic_cast<Enemy*>(node1);
+		}
+		
+
+		if (!player->_grounded && enemy->getCurrentAnimation() != Enemy::Animations::DEAD){
+			//mata al enemigo
+			enemy->setCurrentAnimation(Enemy::Animations::DEAD);
+			player->getPhysicsBody()->setVelocity(Point(0, 500));
+			enemy->getPhysicsBody()->setVelocity(Point(0, 400));
+			enemy->setGrouned(false);
+			enemy->getPhysicsBody()->setGravityEnable(true);
+		}
+		else if (!player->_grounded && enemy->getCurrentAnimation() == Enemy::Animations::DEAD){
+			//no colisiones con el enemigo, ya esta muerto.
+			return false;
+		}
+		else if (enemy->getCurrentAnimation() != Enemy::Animations::DEAD){
+			//mata al jugador
+			player->_dead = true;
+			player->getPhysicsBody()->setVelocity(Point(0, 400));
+			player->getPhysicsBody()->setGravityEnable(true);
+			//no colisiones con el enemigo, ya esta muerto el jugador.
+			return false;
+		}
+	}
+	return true;
+}
+			<script type="text/javascript" src="../../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>

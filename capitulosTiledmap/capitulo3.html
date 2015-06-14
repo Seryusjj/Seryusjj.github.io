@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Instalando cocos2d-x v3.x en windows</title>
+    <title>Capas de objetos</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,35 +43,39 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 3 - Introducción</h1>
+            <h1>Capítulo 3 - Capas de objetos</h1>
             <p>
-                ELas capas de onbjetos nos facilitan la creacion de figuras geometricas como circulos, cuadrados o lineas, en nuestro juego solo usaremos estas últimas, estas lineas se llaman polyLine, para facilitar el tratamiento de nuestros niveles, todas las capas de objetos contienen exclusivamente este tipo de objeto. Veamos ahora las plicaciones que esto tiene
+                Las capas de objetos nos facilitan la creación de figuras geométricas como círculos, cuadrados o líneas, en nuestro juego solo usaremos líneas, estas líneas se llaman polyLines, para facilitar el tratamiento de nuestros niveles, todas las capas de objetos contienen exclusivamente este tipo de objeto. Veamos ahora las aplicaciones que esto tiene.
             </p>
 
-            <h2>3.1 Capas de objetos</h2>
+            <h2>3.1 Tratando capas de objetos</h2>
             <p>
-                Cada nivel cosnta de estas 3 capas de objetos: Ground, Wall y Winning cada capa contiene varias polyLines, la separación en capas es apra separar la funcionalidad, es decir si el jugador choca contra el suelo quiero que haga algo y si choca contra una pared deseo que haga algo distinto que al colisionar con el suelo, lo mismo sucede si colisiona con la puerta de final de partida.
+                Cada nivel consta de estas 3 capas de objetos: Ground, Wall y Winning cada capa contiene varias polyLines, la separación en capas es para separar la funcionalidad, es decir si el jugador choca contra el suelo quiero que haga algo y si choca contra una pared deseo que haga algo distinto que al colisionar con el suelo, lo mismo sucede si colisiona con la puerta de final de partida.
             </p>
             <p>
-                Todas son capas de objetos pero cada una deberá tener una función distinta y para ello les asignamos un tag específico a cada una.
-                Seguimos en la calse BaseLevel, vemaos la creación del suelo.
+                Todas son capas de objetos pero cada una deberá tener una función distinta y para ello le asignamos un tag específico a cada una.
+                Seguimos en la clase BaseLevel, veamos cómo obtener estas plyLines y tratarlas.
+
             </p>
-            <h3>createGround.cpp</h3>
-            <iframe  src="../img/tiledmap/capitulo2/createGround.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <h3>createPhysicsFromLayer.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo3/createPhysicsFromLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Como vemos, usamos <strong>auto groundObjLayer = _map->getObjectGroup("ground")</strong> para obtener la capa que contiene las polyLines, de esta capa otemos un listado de objetos e iteramos, cada objeto contendrá una polyLine y unos valores de posición que usaremos como offset en el eje X y eje Y. Estos offset se usan para posicionar correctamente los puntos de las polylines (recordar que los ejes y de cocos y Tiledmap no corresponden). Las lineas comentas crean un DrawNode que nos permitirá dibujar estas polyLines. Descomenta estas lineas del lineDrawer para ver dibujada la linea en el juego, además de dibujar las lineas, estos puntos sirven para generar la física del suelo del juego gracias al método <strong>createPhysicsBodyFromPoints</strong> que veremos en capítulos siguientes relativos a la física del juego. A este método le pasamos un tag <strong>GROUND_TAG</strong> que identificará a las lineas que forman la física del suelo en el futuro.
-            </p>
-            <h2>3.2 Wall</h2>
-            <p>
-                Como acabamos de ver al crear la física, le asignamos un tag a esas lineas para identificar su funcionalidad, tal como dijimos previamente esto no sería posible si las lineas que queremos separar por funcionalidad, no lo estuviesen también separadas por capas. Veamos ahora como crear las lineas que conforman las paredes del juego.
-            </p>
-            <h3>createWall.cpp</h3>
-            <iframe  src="../img/tiledmap/capitulo2/createWall.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
-            <p>
-                Este método es identico al anterior, sólo cambia el tag empleado que en este caso será <strong>WALL_TAG</strong>. Una vez mas vemos nuestro lineDrawer comentado, si queremos ver estas lineas dibujadas en el juego, deberemos descomentar ese código
+                Como vemos, usamos <strong>auto groundObjLayer = _map->getObjectGroup("nombre-capa")</strong> para obtener la capa que contiene los objetos, como en nuestros niveles solo usamos polyLines, iteramos sobre el listado de objetos, y de cada objeto obtenemos una polyLine y unos valores de posición que usaremos como offset en el eje X y eje Y. Estos offset se usan para posicionar correctamente los puntos de las polylines (recordar que el eje Y de cocos y Tiled no corresponden).
             </p>
             <p>
-                Hay una última capa de objetos que será tratada de forma identica a las dos anterirores por lo que no la mostraremos, simplemnte cambiamos su tag para poder identificar su funcionalidad.
+                Con el objetivo de ver que los puntos obtenidos, se han calculado correctamente, usamos un DrawNode de cocos que nos permitirá dibujar líneas en nuestro juego, para ello creamos el DrawNode <strong>auto lineDrawer = DrawNode::create()</strong> y luego simplemente llamamos a su método drawLine para cada par de puntos. Esto es sólo para debug, recuerda comentar o eliminar el código relativo al lineDrawer para ver bien el juego.
+            </p>
+            <p>
+                Si ejecutamos veremos las líneas que bordean el terreno entre otras pintadas de color naranja. Además de crear etas líneas, se llama al método <strong>createPhysicsBodyFromPoints</strong> que es el que añade la física relativa a estas capas de objetos y cuya implementación veremos en capítulos siguientes.
+            </p>
+            <h2>3.2 Obtener cada capa</h2>
+            <p>
+                Como sabemos, cada capa de objetos está separada en capas para poder distinguir funcionalidades y esto lo hacemos asignando un tag concreto a cada grupo de líneas. En el método init, vemos como se llama al método <strong>createPhysicsFromLayer</strong>  explicado anteriormente con los nombres de cada capa de objetos y el Tag correspondiente a esa capa.
+            </p>
+            <h3>init.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo3/init.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Como vemos, usar sólo polyLines, nos permite reutilizar la función <strong>createPhysicsFromLayer</strong> para cada capa de objetos en nuestro juego, en capítulos siguientes veremos para que sirve asignar esos tags, y cómo funciona la física en cocos2d-x.
             </p>
             
 

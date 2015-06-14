@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+	<link href="../../../google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="../../../google-code-prettify/vsLike.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body onload="prettyPrint()">
+		<pre class="prettyprint">
+bool Player::onContactBegin(PhysicsContact& contact){
+	auto node1 = contact.getShapeA()->getBody()->getNode();
+	auto node2 = contact.getShapeB()->getBody()->getNode();
+	onContactWinningArea(node1, node2);
+	onContactWall(node1, node2);
+	return onContactEnemy(node1, node2) && onContactTerrain(node1, node2);
+}
+
+void Player::onContactWall(Node* node1, Node* node2){
+	if (areThisTwoTypes(node1, node2, PLAYER_TAG, WALL_TAG)){
+		Player * player = getPlayer(node1, node2);
+		player->getPhysicsBody()->setVelocity(Point(-350, 500));
+	}
+}
+
+
+void Player::onContactWinningArea(Node* node1, Node* node2){
+	if (areThisTwoTypes(node1, node2, PLAYER_TAG, WINNING_AREA)){
+		Player* player = getPlayer(node1, node2);
+		player->_winner = true;
+	}
+}
+
+bool Player::areThisTwoTypes(Node* node1, Node* node2, int tag1, int tag2){
+	return (node1->getTag() == tag1 && node2->getTag() == tag2
+		|| node2->getTag() == tag1 && node1->getTag() == tag2);
+}
+
+Player* Player::getPlayer(Node* node1, Node* node2){
+	Player* player = nullptr;
+	if (node1->getTag() == PLAYER_TAG){
+		player = dynamic_cast<Player*>(node1);
+	}
+	else{
+		player = dynamic_cast<Player*>(node2);
+	}
+	return player;
+}
+			<script type="text/javascript" src="../../../google-code-prettify/prettify.js"></script>
+		</pre>
+	</body>
+</html>

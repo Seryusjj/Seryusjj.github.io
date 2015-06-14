@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Instalando cocos2d-x v3.x en windows</title>
+    <title>Chipmunk physics</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,31 +43,34 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 4 - Introducción</h1>
+            <h1>Capítulo 4 - Chipmunk physics</h1>
             <p>
                 Cocos trae varios módulos de física en 2d como Box2d sin embargo el que mejor integrado está con el engine es Chipmunk por ello este será el que utilicemos.
             </p>
 
             <h2>4.1 Física en Super Alien</h2>
             <p>
-                Al igual que en el capítulo anterior, trabajamos sobre la clase <strong>BaseLevel</strong>. Lo primero que hay que hacer para integrar la física en un juego sera crear la física del mundo, en el método createScene.
+                Al igual que en el capítulo anterior, trabajamos sobre la clase <strong>BaseLevel</strong>. Lo primero que hay que hacer para integrar la física en un juego será crear la física del mundo, en el método createScene.
             </p>
             <h3>createScene.cpp</h3>
-            <iframe  src="../img/tiledmap/capitulo2/createScene.cpp.html" width="100%" height="150px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/tiledmap/capitulo4/createScene.cpp.html" width="100%" height="150px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Gracias a este <strong>Scene::createWithPhysics()</strong> los physicsBodies introducidos en la escena se verán afectados por la gravedad. Veamos ahora como crear estos physicsBodies.
             </p>
             <p>
-                Si recordaís en el capitulo anteriro, donde tratabamos las capas de objetos de tiledmap, llamabamos a un método <strong>createPhysicsBodyFromPoints</strong>. Este método genera lineas que contienen physicsBodies no dinamicos esto es que no estan afectados por la física por así decirlo, es decir no se moveran de su posición ni se alterán por accion de otros physicsBodies
+                Si recordáis en el capítulo anterior, a la hora de tratar capas de objetos llamábamos al método <strong>createPhysicsFromLayer</strong> este método a su vez llama a otro llamado <strong>createPhysicsBodyFromPoints</strong>. Este último método genera  physicsBodies con forma de línea a partir de dos puntos, esto physicsBodies, son no dinámicos, esto es, que no están afectados por la física por así decirlo, es decir no se moverán de su posición ni se alteran por acción de otros physicsBodies sin embargo ellos si influirán sobre physicsBodies que sean dinámicos.
             </p>
             <h3>createPhysicsBodyFromPoints.cpp</h3>
-            <iframe  src="../img/tiledmap/capitulo2/createPhysicsBodyFromPoints.cpp.html" width="100%" height="200px">Your Browser doesn't support Frames.</iframe>
+            <iframe  src="../img/tiledmap/capitulo4/createPhysicsBodyFromPoints.cpp.html" width="100%" height="200px">Your Browser doesn't support Frames.</iframe>
             <p>
-                La linea <strong>physicsBody->setContactTestBitmask(PLAYER_CONTACT_MASK)</strong> es importante para que estos objetos puedan ser tratados en un contactListener ya que sin esa linea estos objetos no tomaría parte del listener. 
-                Con esto ya tendríamos completa la física de nuestro nivel, ahora debemos añadir physicsBodies al player y a los enemigos.
+                Los physicsBodies deben estar asociados a un nodo, como vemos aquí creamos una línea con <strong>PhysicsBody::createEdgeSegment(origin, destination)</strong>, esta línea será hija de un objeto Node posteriormente.
             </p>
             <p>
-                En el siguiente capítulo veremos como trata la clase player las colisiones con el suelo.
+                El fragmento de código <strong>physicsBody->setContactTestBitmask(PLAYER_CONTACT_MASK)</strong> es importante para que estos objetos puedan ser tratados en un contactListener ya que sin esa línea estos objetos no tomarían parte del listener que veremos en el capítulo siguiente. 
+                Con esto ya tendríamos completa la física de nuestro nivel, ahora debemos añadir physicsBodies al player y a los enemigos, estos physicasBodies serán dinámicos, es decir se verán afectados por la gravedad del mundo del juego y por las colisiones con estos otros physicsBodies no dinámicos.
+            </p>
+            <p>
+                En el siguiente capítulo veremos cómo trata la clase player las colisiones y como crear un contact listener.
             </p>
 
             

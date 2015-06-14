@@ -8,30 +8,29 @@
 	
 	<body onload="prettyPrint()">
 		<pre class="prettyprint">
-void BaseLevel::createGround(){
-	auto groundObjLayer = _map->getObjectGroup("ground");
-	auto values = groundObjLayer->getObjects();
+void BaseLevel::createPhysicsFromLayer(std::string layerName, int tag){
+	auto objLayer = _map->getObjectGroup(layerName);
+	auto values = objLayer->getObjects();
 	for (int i = 0; i < values.size(); i++){
-		ValueMap groundCollider = values.at(i).asValueMap();
-		auto line = groundCollider["polylinePoints"].asValueVector();
+		auto collider = values.at(i).asValueMap();
+		auto line = collider["polylinePoints"].asValueVector();
 
-		auto xOffset = groundCollider["x"].asFloat();
-		auto yOffset = groundCollider["y"].asFloat();
+		auto xOffset = collider["x"].asFloat();
+		auto yOffset = collider["y"].asFloat();
 
-		//auto lineDrawer = DrawNode::create();
+		auto lineDrawer = DrawNode::create();
 		for (int i = 0; i < line.size() - 1; i++){
 			auto originValue = line.at(i).asValueMap();
 			auto destinationValue = line.at(i + 1).asValueMap();
 			Point origin(xOffset + originValue["x"].asFloat(), (yOffset - originValue["y"].asFloat()));
 			Point destination(xOffset + destinationValue["x"].asFloat(), (yOffset - destinationValue["y"].asFloat()));
-
 			//fisica
-			createPhysicsBodyFromPoints(origin, destination, GROUND_TAG);
+			createPhysicsBodyFromPoints(origin, destination, tag);
 
 			//debug
-			//lineDrawer->drawLine(origin, destination, Color4F::ORANGE);
+			lineDrawer->drawLine(origin, destination, Color4F::ORANGE);
 		}
-		//addChild(lineDrawer);
+		addChild(lineDrawer);
 	}
 }
 	<script type="text/javascript" src="../../../google-code-prettify/prettify.js"></script>

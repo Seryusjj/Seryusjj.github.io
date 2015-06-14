@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Instalando cocos2d-x v3.x en windows</title>
+    <title>Introducción a tiledmap</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,41 +43,41 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 1 - Introducción</h1>
+            <h1>Capítulo 1 - Introducción a tiledmap</h1>
             <p>
-                Tiled map es un editor para generar mapas de tiles, estos mapas pueden ser cargados en cocos2d-x y usados para crear niveles de videojuegos. En este tutorial veremos como crear un nivel en tiledmap compatible con cocos. Como estos tutoriales son avnazados, descarga el código completo del juego "Super alien" juntos con sus recursos <a href="../img/tiledmap/capitulo1/SuperAlienWorld.zip">aquí</a> y en cada capítulo veremos el funcionamiento del mismo.
+                Tiled es un editor para generar mapas de tiles, estos mapas pueden ser cargados en cocos2d-x y usados para crear niveles de videojuegos. En este tutorial veremos cómo crear un nivel en Tiled es compatible con cocos. Como estos tutoriales son avanzados, descarga el código completo del juego "Super alien" juntos con sus recursos <a href="../img/tiledmap/capitulo1/SuperAlienWorld.zip">aquí</a> y en cada capítulo veremos el funcionamiento del mismo.
             </p>
 
             <h2>1.1 Manos a la obra</h2>
             <p>
-                Antes de comenzar a examinar código, veremos cómo usar Tiled map editor. Comenzamos descargando Tiledmap <a href="http://www.mapeditor.org/">aquí</a> y algunos tiles para nuestro juego <a href="http://kenney.nl/assets">aquí</a> (o simplemente usa los que encontraras en la carpeta Resources de Super Alien).
+                Antes de comenzar a examinar código, veremos cómo usar el editor de Tiled. Comenzamos descargando Tiled <a href="http://www.mapeditor.org/">aquí</a> y algunos tiles para nuestro juego <a href="http://kenney.nl/assets">aquí</a> (o simplemente usa los que encontraras en la carpeta Resources de Super Alien).
             </p>
             <p>
-                Ya tenemos todo listo, tras instalar tiledmap abrelo, y verás algo como esto:
+                Ya tenemos todo listo, tras instalar Tiled,  ábrelo, y verás algo como esto:
             </p>
             <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/tiledmap-open.png" width="800px"></center>
             <p>
-                En Tiled existen 3 tipos de capas, capa de patrones, objetos e imagen. Solo necesitamos la de patrones y objetos. Crea un nuevo mapa y configuralo como en la imagen, nos vale un alto de 7 patrones y ponemos un ancho de 100, luego podremos recortar o agrandar el mapa a nuestro gusto. Observa que de ancho y alto de patron ponemos 128px esto es porque los tiles de la carpeta Resources de Super alien, tienen esta medida. Si usases otros tiles, debes poner ahí su alto y ancho.
+                En Tiled existen 3 tipos de capas, capa de patrones, objetos e imagen. Solo necesitamos la de patrones y objetos. Crea un nuevo mapa y configúralo como en la imagen, nos vale un alto de 7 patrones y ponemos un ancho de 100, luego podremos recortar o agrandar el mapa a nuestro gusto. Observa que de ancho y alto de patrón ponemos 128px esto es porque los tiles de la carpeta Resources de Super alien, tienen esta medida. Si usases otros tiles, debes poner ahí su alto y ancho.
             </p>  
             <center><img img class="img-rounded " src="../img/tiledmap/capitulo1/configmap.png" width="400px"></center>  
             <p>
-                Hemos creado el mapa falta añadir los tiles para pintarlo. Para ello ve al menu de la imagen y despues se abrirá un dialogo.
+                Hemos creado el mapa falta añadir los tiles para pintarlo. Para ello ve al menú de la imagen y después se abrirá un dialogo.
             </p>
             <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/patrones.png" width="800px"></center>  
             <p>
-                En el dialogo que veras a continuación, selecciona explorar y carga el sprite sheet con los patrones que quieras. Para que funcione en cocos, el mapa debe estar en la misma ubicacion que los Sprite sheet, si tienes duda abre el fuchero generado con un editor de texto (el mapa no es más que un XML).
+                En el dialogo que veras a continuación, selecciona explorar y carga el sprite sheet con los patrones que quieras. Para que funcione en cocos, el mapa debe estar en la misma ubicación que los Sprite sheet, si tienes duda abre el fichero generado con un editor de texto (el mapa no es más que un XML).
             </p>
             <center><img img class="img-rounded " src="../img/tiledmap/capitulo1/dialog.png" width="400px"></center> 
             <p>
-                Ya tenemos los patrones asi que a pintar. Cocos solo permite un sprite sheet por capa, es decir para cada capa pintada en tiledmap solo podemos usar componentes de un sprite sheet. Si queremos usar componentes de otra Sprite Sheet, debemos crear otra capa.
+                Ya tenemos los patrones así que a pintar. Cocos solo permite un sprite sheet por capa, es decir para cada capa pintada en Tiled solo podemos usar componentes de un sprite sheet. Si queremos usar componentes de otra Sprite Sheet, debemos crear otra capa.
             </p>
             <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/tiles.png" width="800px"></center>  
             <p>
-                Además de capas de patrones, existen capas de objetos que nos permiten posicionar puntos en el mapa si abres alguno de los niveles de la carpeta Resources de Super Alien verás como son usadas estas capas.
+                Además de capas de patrones, existen capas de objetos que nos permiten posicionar puntos en el mapa si abres alguno de los niveles de la carpeta Resources de Super Alien verás cómo son usadas estas capas.
             </p>
             <center><img img class="img-rounded mobile" src="../img/tiledmap/capitulo1/nivel1.png" width="800px"></center>  
             <p>
-                Mirando esta imagen se puede apreciar que las capas de objetos se usaran apra detectar colisiones, es decir colocas una capa de objetos llamada "ground" por ejemplo y en ella pintas las lineas que serán el suelo de nuestro juego o una capa para pintar las zonas de fin de partida y asi sucesivamente, es importante separar en capas las distintas funcionalidades si no, no podremos distinguirlas y mantener la nomenclatura de las capas en todos los niveles de forma que nuestro código sea valido para todos ellos . Otro dato importante a tener en cuenta es que los ejes de coordenadas de Tiledmap no se corresponden con los de cocos, en Tiledmap el 0,0 está situado arriba a la izquierda y en cocos está situado abajo a la izquierda. En futuros capítulos veremos como lidiar con esto.
+                Mirando esta imagen se puede apreciar que las capas de objetos se usaran para detectar colisiones, es decir colocas una capa de objetos llamada "ground" por ejemplo y en ella pintas las líneas que serán el suelo de nuestro juego o una capa para pintar las zonas de fin de partida y así sucesivamente, es importante separar en capas las distintas funcionalidades si no, no podremos distinguirlas y mantener la nomenclatura de las capas en todos los niveles de forma que nuestro código sea válido para todos ellos . Otro dato importante a tener en cuenta es que los ejes de coordenadas de Tiled no se corresponden con los de cocos, en Tiled el 0,0 está situado arriba a la izquierda y en cocos está situado abajo a la izquierda. En futuros capítulos veremos cómo lidiar con esto.
             </p>
           
             <!-- end container -->

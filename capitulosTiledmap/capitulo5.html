@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Instalando cocos2d-x v3.x en windows</title>
+    <title>Colisiones</title>
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,15 +43,48 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 5 - Introducción</h1>
+            <h1>Capítulo 5 - Colisiones</h1>
             <p>
-                En este capítulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d-x, yo utilizaré Windows 8.1 y los IDEs: Visual Studio (vale en su versión express 2012 - 2013) y Eclipse. Para mayor comodidad todos los tutoriales se realizaran utilizando Visual Studio y finalmente se mostrará cómo compilar y lanzar la aplicación resultante en Android desde eclipse y línea de comandos.
+                En este capítulo veremos cómo crear un contact listener y cómo tratar los distintos tipos de colisiones que dividimos en capas en Tiled.
             </p>
 
-            <h2>5.1 Colisiones con el suelo</h2>
-            <h2>5.2 Colisiones con las paredes</h2>
-            <h2>5.3 Colisiones con la zona de partida ganada</h2>
-            
+            <h2>5.1 Set up</h2>
+            <p>
+                Comenzaremos por ver como inicializar la física del jugador y un contact listener
+            </p>
+            <h3>createPhysicsBodyFromPoints.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo5/physicsSetUp.cpp.html" width="100%" height="250px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Un contact listener tiene varios métodos: begin, pre-solve, post-solve, separate. De todos estos sólo necesitaremos el begin y el separate. El método begin se ejecuta al colisionar dos objetos, si se retorna false es como si la colisión no hubiese sucedido y el resto de métodos pre-solve, post-solve, separate no se ejecutan. El método separate se ejecuta cuando dos objetos que están colisionando se separa.
+            </p>
+            <p>
+                Como podemos ver la primera parte de este método, creamos el listener, añadimos las funciones y lo subscribimos para que escuche las colisiones. En el capítulo anterior se nombró el método <strong>setContactTestBitmask</strong> si no se establece esta mascara, el listener no será llamado.
+            </p>
+            <p>
+                Tras crear el listener, añadimos la física al jugador.
+            </p>
+            <h2>5.2 Diferenciando colisiones</h2>
+            <p>
+                La mayor parte del trabajo se realizará en el método begin veamos como implementa la clase player el suyo:
+            </p>
+            <h3>onContactBegin.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo5/onContactBegin.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Como vemos en el onContactBegin se llaman a varios métodos, vayamos por partes. El más simple de ellos es <strong>onContactWinningArea</strong>. Primero hay que verificar que se trata de una colisión entre la winning área y el jugador con el método auxiliar <strong>areThisTwoTypes</strong>, una vez se sabe que estos son los nodos que colisionan, se actúa en consecuencia, es decir si el jugador ha llegado a la winning zone, declaramos que el jugador ha ganado. De esta forma procedemos con el resto de tipos de colisiones, en el método <strong>onContactWall</strong> vemos como al colisionar el jugador con las paredes se le hace retroceder <strong>player->getPhysicsBody()->setVelocity(Point(-350, 500))</strong>.
+            </p>
+            <p>
+                A continuación presta atención a los métodos <strong>onContactEnemy</strong> y <strong>onContactTerrain</strong>
+            </p>
+            <h3>onContactEnemy.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo5/onContactEnemy.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Después de obtener al jugador y al enemigo con el que colisiona, verificamos si el jugador está saltando, de ser así hacemos que el enemigo muera, si no es así, es el player el que muere y si colisiona con un enemigo ya muerto hacemos que la colisión no se tenga en cuenta haciendo return false.
+            </p>    
+            <h3>onContactTerrain.cpp</h3>
+            <iframe  src="../img/tiledmap/capitulo5/onContactTerrain.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+            <p>
+                Este método gestiona las colisiones con el terreno, como vemos, al colisionar con el terreno, hacemos que la gravedad deje de afectar al player, esto es porque Chipmunk en ocasiones lanzaba mi personaje por los aires sin sentido alguno y la única solución que encontré es desactivar la gravedad al calcular la colisión con el suelo, posteriormente en el <strong>onContactSeperate</strong> la gravedad vuelve a activarse.
+            </p>
             <!-- end container -->
         </div>
 
