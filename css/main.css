@@ -3,3 +3,46 @@
 .afternav {
     margin-top: 70px;
 }
+
+.navbar-inverse {
+    background-color: #4A4A4A;
+    border-color: #181818;
+}
+.navbar-inverse .navbar-nav > li  {
+    color: #FFF;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #FFF;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #FFF;
+    background-color: #000;
+}
+
+
+
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0px;
+    border-width: 1px 1px 1px 5px;
+    border-style: solid;
+    border-color: #EEE;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-radius: 3px;
+}
+
+.bs-callout-warning {
+    border-left-color: #8F6E10;
+}
+
+.bs-callout-warning h4 {
+    color: #AA7F06;
+}
