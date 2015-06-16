@@ -67,7 +67,14 @@
                 Una vez creados y posicionados los enemigos sólo nos falta eliminar esta capa pues de no ser eliminada los tiles de los enemigos estáticos seguirían visibles <strong>enemyLayer->getParent()->removeChild(enemyLayer)</strong>.
             </p>
             <p>
-                Además de capas de tiles como esta, también existen capas de objetos, en el próximo capítulo veremos cómo tratar estas capas.
+                El resultado de nuestro juego hasta este punto aunque añadamos enemigos seá el sisguiente
+            </p>
+            <center>
+                <img class="img-rounded " src="../img/tiledmap/capitulo2/tileLayer.png" alt="juego" style="width:600px";margin-top:"5px;"/>
+                <br><br>
+            </center>
+            <p>
+                Esto es debido a que como los enemigos estan afectados por la gravedad y no existe nada en el suelo que los retenga, caen por debajo de la pantalla. En el siguietne capitulo trataremos capas de objetos que nos ayudaran a crear este suelo.
             </p>
             <h2>2.2 Creando los enemigos</h2>
            

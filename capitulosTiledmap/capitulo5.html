@@ -88,6 +88,16 @@
             <p>
                 Este método gestiona las colisiones con el terreno, como vemos, al colisionar con el terreno, hacemos que la gravedad deje de afectar al player, esto es porque Chipmunk en ocasiones lanzaba mi personaje por los aires sin sentido alguno y la única solución que encontré es desactivar la gravedad al calcular la colisión con el suelo, posteriormente en el <strong>onContactSeperate</strong> la gravedad vuelve a activarse.
             </p>
+            <p>
+                En la calse enemy el proceso es identico sólo que únicamente tratamos las colisiones con el suelo. El resultado final es el siguiente:
+            </p>
+            <center>
+                <img class="img-rounded " src="../img/tiledmap/capitulo5/player.png" alt="juego" style="width:600px";margin-top:"5px;"/>
+                <br><br>
+            </center>
+            <p>
+                Recuerda comentar él código que pinta las líneas del suelo en el método visto en el capítulo 3 acerca de capas de objetos.
+            </p>
             <!-- end container -->
         </div>
 
