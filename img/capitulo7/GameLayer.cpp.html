@@ -51,7 +51,7 @@ bool GameLayer::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Hunter.plist");
 	//creamos el SpriteBatchNode con las imagenes del sprite sheet
 	SpriteBatchNode* gameBatchNode = SpriteBatchNode::create("Hunter.png");
-	//añadimos el SpriteBatchNode a la escena,
+	//inserta el SpriteBatchNode a la escena,
 	//el resto de componetes seran hijos del SpriteBatchNode
 	addChild(gameBatchNode);
 

@@ -50,7 +50,35 @@
             <p>
                 En este capítulo comenzaremos el desarrollo del juego SkyHunter, aprenderemos a configurar la pantalla y a usar Sprites. En cada apartado se proveerá un link de descarga de las clases y recursos usados, se recomienda al final de cada capítulo descargar y colocar esas clases en la carpeta Classes de tu proyecto para compilar sin problemas.
             </p>
-            <h2>2.1 Configuración de pantalla </h2>
+             <h2>2.1 Estructura</h2>
+            <p>
+                Creamos el proyecto que usaremos en capítulos siguientes <strong>cocos new SkyHunter -p skyHunter.net.sytes.seryux -l cpp</strong> como ya sabemos SkyHunter será el nombre del proyecto, skyHunter.net.sytes.seryux el nombre de paquete para Android y cpp indica que usaremos el lenguaje de programación C++.
+            </p>
+
+           
+            <p>
+                Una vez creamos el proyecto abrimos la solución de Visual Studio, para ello abrimos el archivo <strong> SkyHunter/proj.win32/SkyHunter.sln </strong>.
+                <br/><br/>
+
+                <img class="img-rounded mobile" src="../img/capitulo3/solucionVS.PNG" alt="solucion visual studio" style="width:400px;"/>
+                
+                <br/><br/>
+                Como vemos, en la solución encontramos libcocos2d que es la librería de cocos, también encontramos libbox2d para física y libSpine para skeletal animations en 2d. A lo largo de estos tutoriales usaremos sobre todo libcocos2d.
+                <br/>Ahora echaremos un vistazo a src que en realidad se corresponde con la carpeta Classes de nuestro proyecto general de cocos. <strong>(Para crear clases nuevas, las crearemos directamente en la carpeta Classes y posteriormente las vincularemos a esta carpeta de la solución de visual studio para no tener problemas durante la compilación)</strong>. Aquí vemos las clases de la plantilla del proyecto AppDelegate y HelloWorldSene. 
+                <br/>
+            </p>
+            <p>
+                <h3>AppDelegate.cpp</h3>
+                <iframe  src="../img/capitulo3/AppDelegate.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+                Esta clase <strong>class  AppDelegate : private cocos2d::Application</strong> hereda de Application y es la clase que hará que nuestro juego y escenas sean inicializadas y puestas en ejecución. Aquí vemos que se llama al singleton Director para cargar la escena HelloWorld <strong>director->runWithScene(scene)</strong>.
+                <br/> Por el momento no indagaremos mucho más sobre esta clase.
+            </p>
+            <p>
+                <h3>HelloWorldScene.h</h3>
+                <iframe  src="../img/capitulo3/HelloWorldScene.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
+                Con ver el header de esta clase es suficiente pues la implementación de la plantilla la borraremos y la haremos nosotros mismos. Esta clase hereda de <strong>public cocos2d::Layer</strong> al igual que todas nuestras escenas. Más adelante veremos cómo implementar una escena.
+            </p>
+            <h2>2.2 Configuración de pantalla </h2>
             <p>
                 Tras crear el proyecto, lo primero que haremos será borrar el contenido de nuestra clase HelloWorldScene.cpp y HelloWorldScene.h hasta dejarlos como veremos a continuación y posteriormente renombrarlos como GameLayer.cpp y GameLayer.h respectivamente.
                 <h3>GameLayer.h</h3>
@@ -62,7 +90,7 @@
             
             <p>
                 Una vez hecho esto, configuraremos la pantalla del juego.<br/>
-                Como será un juego para móvil en orientación portrait (vertical), le diremos a cocos que nos muestre una pantalla de ese formato. En mi caso como tengo un Sony Xperia U, le diré a cocos que quiero una ventana de 480x854 <strong>glview->setFrameSize(480, 854)</strong> con esta directiva en AppDelegate.cpp. Si quisiéramos un juego con esta misma resolución en landscape (como si girásemos el móvil) basta con indicar 854x480. Si ejecutamos esto es lo que deberíamos de ver:
+                Como será un juego para móvil en orientación portrait (vertical), le diremos a cocos que nos muestre una pantalla de ese formato. En nuestro caso, le diremos a cocos que queremos una ventana de 480x854 <strong>glview->setFrameSize(480, 854)</strong> con esta directiva en AppDelegate.cpp. Si quisiéramos un juego con esta misma resolución en landscape (como si girásemos el móvil) basta con indicar 854x480. Si ejecutamos esto es lo que deberíamos de ver:
 
                 <br/><br/>
                 <img class="img-rounded mobile" src="../img/capitulo2/screen.png" alt="solucion visual studio" style="width:100%;"/><br/>
