@@ -228,7 +228,7 @@ void Level3::awakeMediumEnemy()
 
 void Level3::awakeHeightEnemy()
 {
-	//indice entre 0 y 15, añadir offset correspondiente al tipo de enemigo,
+	//indice entre 0 y 15, suma el offset correspondiente al tipo de enemigo,
 	//para ellos tenemos 15, 15 y 15 enemigos de cada tipo
 	_enemyIndex = _enemyIndex % (_numEnemies - _numMediumEnemies - _numHeightEnemies);
 
