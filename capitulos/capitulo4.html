@@ -68,20 +68,27 @@
                 Para crear estos Sprite frames cogemos cada una de las secciones de nuestro sprite sheet.
             </p>
             <p>
-                Nuestro sprite sheet contiene 4 imágenes (4 frames) y mide 200x63 por lo que para obtener cada uno de ellos debemos decirle a cocos desde donde hasta donde mide cada frame y eso lo indicamos así: <strong>SpriteFrame::create("animacion_nave.png", Rect(acc, 0, 50, 63))</strong>. Como vemos acc es donde comienza el frame en cuestión, 0 la altura a la que comienza, 50 el ancho de cada frame y 63 la altura. Una vez obtenidos todos los frames de nuestro sprite sheet, creamos la animación <strong>auto animation = Animation::createWithSpriteFrames(animFrames, 0.25f)</strong> aquí decimos que nuestra animación se compone de este vector de frames y que entre cada frame deben pasar 0.25s. Cuando tenemos la animación, procedemos a crear la acción de animarla <strong>auto animate = Animate::create(animation)</strong> con esto ya tendríamos una animación que se ejecutaría una vez, sin embargo nos interesa que se repita todo el tiempo hasta que la destruyamos por ello creamos una ación derivada <strong>_idleAnimation = RepeatForever::create(animate)</strong>.
+                Nuestro sprite sheet contiene 4 imágenes (4 frames) y mide 200x63 por lo que para obtener cada uno de ellos debemos decirle a cocos desde donde hasta donde mide cada frame y eso lo indicamos así: <strong>SpriteFrame::create("animacion_nave.png", Rect(acc, 0, 50, 63))</strong>. Como vemos acc es donde comienza el frame en cuestión, 0 la altura a la que comienza, 50 el ancho de cada frame y 63 la altura. Una vez obtenidos todos los frames de nuestro sprite sheet, creamos la animación <strong>auto animation = Animation::createWithSpriteFrames(animFrames, 0.25f)</strong> aquí decimos que nuestra animación se compone de este vector de frames y que entre cada frame deben pasar 0.25s.
+            <p/>
+            <p>
+                Cuando tenemos la animación, procedemos a crear la acción de animarla <strong>auto animate = Animate::create(animation)</strong> con esto ya tendríamos una animación que se ejecutaría una vez, sin embargo nos interesa que se repita todo el tiempo hasta que la destruyamos por ello creamos una ación derivada <strong>_idleAnimation = RepeatForever::create(animate)</strong>.
             </p> 
                        
             <p>
                 Ya tenemos nuestras animaciones, ahora lanzaremos la animación por defecto que será la IDLE. <strong>runAction(_idleAnimation)</strong>. El proceso de creación es idéntico para la animación de la explosión y para las animaciones de los enemigos solo que pueden variar los tamaños, según el Sprite sheet que se usa.
             </p>
-            <p>
-                Prueba a posicionar un objeto BasicEnemy y un Player en tu GameLayer y verás que están animados sin necesidad de llamar a su método update que actualmente no hace nada, ya añadiremos funcionalidad más tarde.
-            </p>
-            <p>
-                <strong>
+
+            <div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
+                <h4 id="may-require-additional-positioning">Advertencia<a class="anchorjs-link" href="#may-require-additional-positioning"><span class="anchorjs-icon"></span></a></h4>
+                <p>
                     En estas clases (Player y BasicEnemy) hay errores relacionados con la forma en que cocos gestiona la memoria introducidos de forma deliberada, para ver cómo solucionarlos más adelante (capítulo 6). Por ahora basta con dejarlo así.
-                </strong>
-            </p>    
+                </p>
+            </div>
+            <div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
+                <p>
+                        Prueba a posicionar un objeto BasicEnemy y un Player en tu GameLayer y verás que están animados sin necesidad de llamar a su método update que actualmente no hace nada, ya añadiremos funcionalidad más tarde.
+                </p>
+            </div>
             <center><img class="img-rounded " src="../img/capitulo4/enemy_player_positionated.png" alt="enenmigo y jugador posicionados en el GameLayer" style="width:300px;"/><br/></center><br/>
             <p>
                 Descarga las carpetas Classes y resources del proyecto hasta el momento <a href="../img/capitulo4/SkyHunter4.1.zip">aquí</a>.
