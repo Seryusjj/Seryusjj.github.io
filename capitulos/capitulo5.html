@@ -49,7 +49,7 @@
         <div class="container afternav">
             <h1>Capítulo 5 - Touch input</h1>
             <p>
-                En este capítulo trataremos el input del usuario, hay varios tipos de input como acelerómetro teclado game cotroller... sin embargo nosotros solo veremos el touch input el más común en los juegos móviles.
+                En este capítulo trataremos el input del usuario, hay varios tipos de input como acelerómetro teclado game cotroller... sin embargo nosotros solo veremos el touch input el más común en los juegos para móviles.
             </p>
             <p>
                 Además haremos que tanto el jugador como los enemigos disparen.
@@ -60,7 +60,7 @@
                 Para comenzar este capítulo haremos que nuestra nave se mueva allá donde el jugador ponga el dedo. Para ello debemos escuchar los touchEvent que se producen y decir a cocos que hacer en cada uno de ellos.
             </p>
             <p>
-                Crearemos una clase Touchcontroller que añadiremos como nodo hijo a la clase player para que este controller diga al player hacia donde debe moverse.
+                Crearemos una clase Touchcontroller que añadiremos como nodo hijo a la clase player y diga al player hacia donde debe moverse.
             </p>
             <h3>TouchController.h</h3>
             <iframe  src="../img/capitulo5/TouchController.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
@@ -72,7 +72,7 @@
             <iframe  src="../img/capitulo5/TouchController.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             
             <p>
-               En el método <strong>init()</strong> como los propios comentarios del código indican, creamos el listener mediante <strong>EventListenerTouchOneByOne::create()</strong> aquí creamos un listener para un touch event, si nuestro juego fuese multi touch usaríamos <strong>EventListenerTouchAllAtOnce::create()</strong> y los call back usados serian diferentes. Como no es el caso y solo necesitamos que el juego reconozca 1 toque a la vez, creamos este listener, le indicamos los call back usando el macro <strong>CC_CALLBACK_2</strong> que es el macro usado para crear un std::bind a partir de la función indicada. Con el fin de mostrar qué es lo que hace este macro, para asignar <strong>onTouchBegan</strong> lo hago a mano sin usar el macro <strong>CC_CALLBACK_2</strong> que crea este std::bind a partir de una función que recibe 2 parámetros. Existen más macros de este tipo de forma que <strong>CC_CALLBACK_3</strong> genera un std::bind a partir de una función de 3 parámetros, existe <strong>CC_CALLBACK_0</strong>... etc.
+               En el método <strong>init()</strong> como los propios comentarios del código indican, creamos el listener mediante <strong>EventListenerTouchOneByOne::create()</strong> aquí creamos un listener para un touch event, si nuestro juego fuese multi touch usaríamos <strong>EventListenerTouchAllAtOnce::create()</strong> y los call back usados serian diferentes. Como no es el caso y solo necesitamos que el juego reconozca 1 toque a la vez, creamos este listener, le indicamos los call back usando el macro <strong>CC_CALLBACK_2</strong> que es el macro usado para crear un std::bind a partir de la función indicada. Con el fin de mostrar qué es lo que hace este macro, para asignar <strong>onTouchBegan</strong> lo haremos a mano sin usar el macro <strong>CC_CALLBACK_2</strong> que crea este std::bind a partir de una función que recibe 2 parámetros. Existen más macros de este tipo de forma que <strong>CC_CALLBACK_3</strong> genera un std::bind a partir de una función de 3 parámetros, <strong>CC_CALLBACK_0</strong> genera el bind a aprtir de una función sin parametros ...etc.
             </p>
             <p>
                 Una vez creado el listener, le decimos a cocos que lo use <strong>_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this)</strong>. Normalmente todo el proceso de crear y añadir el listener se hace en lo que sería nuestro GameLayer, sin embargo para este caso tan solo nos interesa que sea el controlador quién gestione el input.
@@ -81,20 +81,23 @@
                 Hay que tener en cuenta que este objeto será hijo de nuestro objeto <strong>Player</strong> por lo que tendríamos dos opciones, una sería llamar al método update del TouchController en el update del <strong>Player</strong>, sin embargo esa opción ya la conocemos pues es lo que usamos en GameLayer, la otra opción es añadir el update del TouchController de la misma forma que el update del GameLayer, con <strong>schedule(schedule_selector(TouchController::update))</strong>
             </p>
             <p>
-                Perfecto ya tenemos todo listo para implementar lo que el Touch Controller debe hacer. en cada uno de los métodos del touchListener tan solo guardarnos las coordenadas que usuario tocó, en una variable global y cuando el usuario levanta el dedo limpiamos esta variable asignándole Point(-1,-1) para saber que el usuario no está tocando la pantalla.
+                Perfecto ya tenemos todo listo para implementar lo que el Touch Controller debe hacer.
+            </p>
+            <p>
+                En cada uno de los métodos del touchListener tan solo guardarnos las coordenadas que el usuario tocó, en una variable global y cuando el usuario levanta el dedo limpiamos esta variable asignándole Point(-1,-1) para saber que el usuario no está tocando la pantalla.
             </p>
             <p>
                 Ya casi hemos terminado con el controlador, echemos un ojo a su método <strong>update</strong>.
             </p>
              <iframe  src="../img/capitulo5/TouchController.Update.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe> 
              <p>
-                Bien, lo primero que hacemos antes de comenzar es limpiar todos los flags anteriores llamando al reset, luego comprobamos si el usuario está tocando la pantalla, de ser así, obtenemos la posición y el tamaño del <strong>Player</strong> llamando a <strong>getParent()</strong> pues este TouchController será un nodo hijo de <strong>Player</strong> como el anchor point está por defecto, al pedir la posición del Player nos dará su centro, en este caso nos interesa la esquina inferior izquierda, podemos cambiar el anchor point a Vec2(0,0) o restar a la posición que nos devuelve getPosition(), la mitad del alto y el ancho del sprite. Me decantaré por esta última opción para mantener el anchor point por defecto.
+                Bien, lo primero que hacemos antes de comenzar es limpiar todos los flags anteriores llamando al reset, luego comprobamos si el usuario está tocando la pantalla, de ser así, obtenemos la posición y el tamaño del <strong>Player</strong> llamando a <strong>getParent()</strong> pues este TouchController será un nodo hijo de <strong>Player</strong> como el anchor point está por defecto (es decir en el centro), al pedir la posición del Player nos dará su centro, en este caso nos interesa la esquina inferior izquierda, podemos cambiar el anchor point a Vec2(0,0) o restar a la posición que nos devuelve getPosition(), la mitad del alto y el ancho del sprite. Nos decantaremos por esta última opción para mantener el anchor point por defecto.
              </p>           
              <p>
                 Una vez que ya tenemos la posición y el tamaño del Player tan solo miramos donde está poniendo el usuario el dedo con respecto a la posición de la nave y ponemos a true el flag correspondiente de la estructura Controller.
              </p>
              <p>
-                Nuestra clase TouchController ya está terminada, solo falta añadirla al Player y decirle a este como moverse
+                Nuestra clase TouchController ya está terminada, solo falta añadirla al Player y decirle a este como moverse.
             </p>
             <h3>Player.h</h3>
             <iframe  src="../img/capitulo5/Player.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
@@ -105,10 +108,15 @@
                 addChild(_controller)</strong>
             </p>
             <p>
-                En el <strong>update</strong> de esta clase, obtenemos el Controller de TouchController y en función de los flags que estén en dicho controlador, movemos la nave en una dirección u otra. (No te olvides de llamar este método update en el update del GameLayer)
+                En el <strong>update</strong> de esta clase, obtenemos el Controller de TouchController y en función de los flags que estén en dicho controlador, movemos la nave en una dirección u otra. 
             </p>
+             <div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
+                <p>
+                     No te olvides de llamar este método update en el update del GameLayer o usar el schedule_selector para incluir el update del Player en el Game loop
+                </p>
+            </div>
             <p>
-                Ya está, si ejecutas ahora el juego y haces click sobre la pantalla, veras que la nave se dirigirá al puntero, de la misma forma en que irá hacia el lugar donde tocamos la pantalla cuando lancemos el juego en un Smartphone. Puedes descargar la carpeta Classes del proyecto <a href="../img/capitulo5/Classes5.1.zip">aquí</a>
+                Ya está, si ejecutas ahora el juego y haces click sobre la pantalla, veras que la nave se dirigirá al puntero del ratón, de la misma forma en que irá hacia el lugar donde tocamos la pantalla cuando lancemos el juego en un Smartphone. Puedes descargar la carpeta Classes del proyecto <a href="../img/capitulo5/Classes5.1.zip">aquí</a>
             </p>
             <h2>Capítulo 5.2 - Disparando</h2>
             <p>
@@ -120,7 +128,7 @@
             <iframe  src="../img/capitulo5/Bullet.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             
             <p>
-                No hay mucho que analizar de esta clase, ya sabemos para qué sirven todos los macros usados, en su método update simplemente movemos la bala hasta el final de la pantalla, si es una bala del player, se moverá hasta el final superior de la pantalla, si es una bala de un enemigo, se moverá hasta el final inferior de la pantalla. En ambos casos al llegar al final se llama a <strong>setVisisble(flase)</strong> por defecto ninguna bala será visible, veremos el por qué en la clase Player.
+                No hay mucho que analizar de esta clase, ya sabemos para qué sirven todos los macros usados. En su método update simplemente movemos la bala hasta el final de la pantalla, si es una bala del player, se moverá hasta el final superior de la pantalla, si es una bala de un enemigo, se moverá hasta el final inferior de la pantalla. En ambos casos al llegar al final se llama a <strong>setVisisble(flase)</strong> por defecto ninguna bala será visible, veremos el por qué en la clase Player.
             </p>
             <h3>Player.h</h3>
             <iframe  src="../img/capitulo5/Player2.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
@@ -128,7 +136,7 @@
             <iframe  src="../img/capitulo5/Player2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
                 Así queda la clase Player tras incorporar la funcionalidad de disparar, analicemos poco a poco que es lo nuevo que se ha añadido y como funciona.
-                Para comenzar, vemos en el método <strong>init()</strong> que hemos añadido un loop que crea y añade a un vector todas las balas del Player, es un pool de objetos. En nuestro caso con 30 es suficiente. Creamos esas 30 balas y posteriormente las haremos hijas de la escena principal, no del Player, esto es muy importante, ahora veremos cómo y porque hacemos esto.
+                Para comenzar, vemos en el método <strong>init()</strong> que hemos añadido un bucle que crea y añade a un vector todas las balas del Player, es un pool de objetos. En nuestro caso con 30 es suficiente. Creamos esas 30 balas y posteriormente <strong>las haremos hijas de la escena principal, no del Player</strong>, esto es muy importante, ahora veremos cómo y porque hacemos esto.
             </p>
             <h4>setParent(Node* parent)</h4>
             <iframe  src="../img/capitulo5/setParent.cpp.html" width="100%" height="250px">Your Browser doesn't support Frames.</iframe>
@@ -138,7 +146,7 @@
              <h4>scheduleShoot()</h4>
              <iframe  src="../img/capitulo5/scheduleShoot.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
              <p>
-                <strong>scheduleShoot()</strong> usa lo que se denomina una secuencia en cocos2d-x, una secuencia nos permite lanzar varias acciones con un orden determinado, en este caso construimos una secuencia que espera medio segundo y después llama al método <strong>shoot()</strong>, para crear una acción a partir de una función usamos el macro <strong>CC_CALLBACK_0</strong> que ya nos es familiar pues lo usamos en nuestro controlador.
+                <strong>scheduleShoot()</strong> usa lo que se denomina una secuencia en Cocos2d-x, una secuencia nos permite lanzar varias acciones con un orden determinado, en este caso construimos una secuencia que espera medio segundo y después llama al método <strong>shoot()</strong>. Para crear una acción a partir de una función usamos el macro <strong>CC_CALLBACK_0</strong> que ya nos es familiar pues lo usamos en nuestro controlador.
              </p>
              <p>
                 El metodo <strong>shoot()</strong> lo único que hace es iterar sobre el pool de balas y activa aquella a la que le llegue el turno. Si la bala llega al final de la pantalla o como veremos más adelante, si intercepta un enemigo, la bala se desactiva. Para activar o desactivar la bala usamos <strong>setVisible(true|false)</strong>.

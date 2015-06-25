@@ -15,7 +15,7 @@ void TouchController::update(float dt){
 	Point  tap = _tap;
 	
 	//donde esta posicionado el objeto al que se vincula el controlador
-	//en este caso a la poicion del objeto player le restamos la mita de su alto y la mitad de su ancho
+	//en este caso a la poicion del objeto player le restamos la mitad de su alto y la mitad de su ancho
 	//para obtener la esquina inferior izquierda
 	auto originX = getParent()->getPositionX() - getParent()->getBoundingBox().size.width*0.5;
 	auto originY = getParent()->getPositionY() - getParent()->getBoundingBox().size.height*0.5;

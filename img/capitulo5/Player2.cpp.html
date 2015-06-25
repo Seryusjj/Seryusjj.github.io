@@ -54,7 +54,7 @@ void Player::setParent(Node* parent){
 	//impide que las balas se incorporen mas de una vez a la escena
 	if (!_initialiced){
 		for (int i = 0; i < _numBullets; i++){
-			//incopra las balas al la escena
+			//incorpora las balas al la escena
 			getParent()->addChild(_bulletPool.at(i));
 		}
 		_initialiced = true;
@@ -66,7 +66,7 @@ void Player::scheduleShoot(){
 	//establecemos que la nave disparara cada medio segundo
 	DelayTime *delayAction = DelayTime::create(0.5f);
 
-	// cramos una accion a partir de una funcion
+	// creamos una accion a partir de una funcion
 	CallFunc *callSelectorAction = CallFunc::create(CC_CALLBACK_0(Player::shoot, this));
 	//creamos una secuencia que primero espera y luego dispara
 	auto shootSequence = Sequence::create(delayAction, callSelectorAction, NULL);
