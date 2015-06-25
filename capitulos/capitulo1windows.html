@@ -48,7 +48,7 @@
         <div class="container afternav">
             <h1>Capítulo 1 - Instalando cocos2d-x</h1>
             <p>
-                En este capítulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d-x, yo utilizaré Windows 8.1 y los IDEs: Visual Studio (vale en su versión express 2012 - 2013) y Eclipse. Para mayor comodidad todos los tutoriales se realizaran utilizando Visual Studio y finalmente se mostrará cómo compilar y lanzar la aplicación resultante en Android desde eclipse y línea de comandos.
+                En este capítulo vamos a hacer el set up de nuestro entorno de trabajo. Para desarrollar aplicaciones en cocos2d-x, yo utilizaré Windows 8.1 y los IDEs: Visual Studio (vale en su versión express 2012 - 2013) y Eclipse. Para mayor comodidad, todos los tutoriales se realizaran utilizando Visual Studio y finalmente se mostrará cómo compilar y lanzar la aplicación resultante en Android desde eclipse y línea de comandos.
             </p>
             <p>
                 Este software pude encontrarse aquí
@@ -61,7 +61,7 @@
 
             <h2>Manos a la obra</h2>
             <p>
-                Comenzaremos descargando todo lo necesario para empezar a utilizar cocos2d.
+                Comenzaremos descargando todo lo necesario para empezar a utilizar Cocos2d-x.
             </p>
 
             <!-- Listado de dependencias -->
@@ -93,8 +93,8 @@
                 <br/><br/>
                 
                 <img class="img-rounded mobile" src="../img/capitulo1/windows/descargas.PNG" alt="directorio con todas las descargas" style="width:300px;" />
-                <br/>Comenzamos con la instalación de las herramientas y configuración de las mismas. Para comenzar, instalamos el JDK (siguiente, siguiente, sin mayor complicación). Yo crearé una carpeta llamada Cocos en <strong>C:\Cocos</strong> para meter ahí todos los paquetes necesarios.
-                <br/>Comenzaremos descomprimiendo el Zip que contiene el código de cocos2d-x, luego el de ant, también haremos doble click sobre el paquete de android-ndk y comenzará a auto extraerse. Cuando haya terminado movemos los paquetes recién extraídos a nuestra carpeta <strong>C:\Cocos</strong>. A continuación instalamos el sdk de Android en el mismo directorio.
+                <br/>Comenzamos con la instalación de las herramientas y configuración de las mismas. Para comenzar, instalamos el JDK (siguiente, siguiente, sin mayor complicación). Crearemos una carpeta llamada Cocos en <strong>C:\Cocos</strong> para meter ahí todos los paquetes necesarios.
+                <br/>Comenzaremos descomprimiendo el Zip que contiene el código de Cocos2d-x, luego el de ant, también haremos doble click sobre el paquete de android-ndk y comenzará a auto extraerse. Cuando haya terminado movemos los paquetes recién extraídos a nuestra carpeta <strong>C:\Cocos</strong>. A continuación instalamos el sdk de Android en el mismo directorio.
                 <br/><br/>
                 <img class="img-rounded mobile" src="../img/capitulo1/windows/pathAndroidSdk.PNG" alt="configuración de la instalción del sdk" style="width:400px;" />
                 <br/><br/>Tras esta última instalación, iniciamos el Android sdk y descargamos lo que veremos a continuación: (SDK tools + API 10)
@@ -111,7 +111,7 @@
                 Llegados a este punto nuestra carpeta <strong>C:\Cocos</strong>> debe tener un aspecto similar a este, si hemos seguido todos los pasos.
                 <br/><br/>
                 <img class="img-rounded mobile" src="../img/capitulo1/windows/carpetaFinal.png" style="width:600px;" alt="aspecto carpeta final" />
-                <br/><br/>Ahora toca configurar cocos2d-x, para ello vamos a la carpeta <strong>C:\Cocos\cocos2d-x-3.3</strong> y ejecutamos el script setup.py usando Python. El script nos pedirá el path al SDK, ndk y ant. Por fortuna ya lo tenemos todo. Un pequeño apunte, a la hora de darle la ruta de ant, debemos indicarle la ruta de <strong>C:\Cocos\apache-ant-1.9.4\bin</strong> como vemos en la imagen del terminal.
+                <br/><br/>Ahora toca configurar Cocos2d-x, para ello vamos a la carpeta <strong>C:\Cocos\cocos2d-x-3.3</strong> y ejecutamos el script setup.py usando Python. El script nos pedirá el path al SDK, ndk y ant. Por fortuna ya lo tenemos todo. Un pequeño apunte, a la hora de darle la ruta de ant, debemos indicarle la ruta de <strong>C:\Cocos\apache-ant-1.9.4\bin</strong> como vemos en la imagen del terminal.
                 <br/><br/>
                 <img class="img-rounded mobile" style="width:600px;" src="../img/capitulo1/windows/setup.PNG" alt="setup.py" />
                 <br/><br/>
@@ -119,14 +119,14 @@
             </p>
             <h2>Creando el proyecto</h2>
             <p>
-                Una vez instalado y configurado correctamente todo lo anterior solo tenemos que abrir una línea de comandos, yo por ejemplo la abrí desde el escritorio y escribí el siguiente comando <strong>cocos new &lt;NombreProyecto&gt; -p &lt;NombrePaqueteAndroid&gt; -l cpp </strong> el -l cpp indica que usaremos C++ no lua o JavaScript.
+                Una vez instalado y configurado correctamente todo lo anterior solo tenemos que abrir una línea de comandos, por ejemplo lo abrimos desde el escritorio y escribimos el siguiente comando <strong>cocos new &lt;NombreProyecto&gt; -p &lt;NombrePaqueteAndroid&gt; -l cpp </strong> el &ldquo;-l cpp&rdquo; indica que usaremos C++, no lua o JavaScript.
                 <br/><br/>
                 
                 <img class="img-rounded mobile" src="../img/capitulo1/windows/createProject.PNG" style="width:600px;" alt="creando un proyecto" />
                 <br/><br/>
             </p>
             <p>
-                Ya tenemos el proyecto creado, basta con entrar al directorio "Test" en mi caso pues así llamé al proyecto y ver que se han creado dentro de él varias carpetas que describiré a continuación:
+                Ya tenemos el proyecto creado, basta con entrar al directorio "Test" en nuestro caso pues así llamamos al proyecto y ver que se han creado dentro de él varias carpetas que describiré a continuación:
             </p>
             <ul>
                 <li>Classes: es donde irán nuestras clases y código en C++</li>

@@ -46,9 +46,9 @@
 
 
         <div class="container afternav">
-            <h1>Capítulo 3 - Conceptos básicos cocos2d-x v3</h1>
+            <h1>Capítulo 3 - Conceptos básicos de cocos2d-x v3</h1>
             <p>
-                En esta sección veremos la estructura básica de una aplicación en cocos2d-x además de algunos elementos esenciales como el tratamiento de los ejes de coordenadas y los elementos principales como Sprite, Layer y Scene. El resto de componentes los dejamos para capítulos posteriores.
+                En esta sección veremos los conceptos básicos de una aplicación en Cocos2d-x, el uso de algunos elementos esenciales como los Sprites y el tratamiento de los ejes de coordenadas.
             </p>
             <h2>3.2 Conceptos básicos</h2>
             <h3>Cocos2d-x y C++</h3>
@@ -57,7 +57,7 @@
             </p>
             <h3>Macros</h3>
             <p>
-                Cocos cuenta con una gran cantidad de macros para el preprocesador, algunas de ellas son simples como <strong>USING_NS_CC</strong> que equivale a <strong>using namespace cocos2d</strong>, pero también tenemos algunas un poco más complejas como <strong>CC_SYNTHESIZE</strong> para generar automáticamente getters y setters. Iremos viendo algunas de ellas durante los próximos capítulos</p>
+                Cocos cuenta con una gran cantidad de macros para el preprocesador, algunas de ellos son simples como <strong>USING_NS_CC</strong> que equivale a <strong>using namespace cocos2d</strong>, pero también tenemos algunas un poco más complejas como <strong>CC_SYNTHESIZE</strong> para generar automáticamente getters y setters. Iremos viendo algunas de ellos durante los próximos capítulos</p>
             <h3>Eje de coordenadas</h3>
             <p>
                 Cocos tiene un eje de coordenadas como el siguiente:
@@ -69,7 +69,7 @@
                 </center>
                 <br/>
                 Está abstraído de tal forma que independientemente de la orientación de nuestro juego, ya sea portrait o landscape, el  {0,0} siempre estará en la parte inferior izquierda de la pantalla. El eje Z se usa para saber qué imagen debe ser dibujada más adelante o más atrás, de tal forma que se verá siempre la imagen cuyo valor para Z sea mayor.
-                Este valor de Z se puede cambiar directamente en el nodo en el momento de añadirlo a un nodo padre.
+                Este valor de Z se puede cambiar directamente en el nodo o en el momento de añadirlo a un nodo padre.
             </p>
             <h3>Anchor point</h3>
             <p>
@@ -83,29 +83,33 @@
             </p>
             <h2>3.3 Usando estos tutoriales</h2>
             <p>
-                En cada capítulo se aporta un link de descarga del código relativo a cada capítulo. Tan solo crea un proyecto con cocos y reemplaza el contenido de las carpetas <strong>Classes</strong> y <strong>Resources</strong> del proyecto creado por ti con el contenido provisto en los capítulos.
+                En cada capítulo se aporta un link de descarga del código relativo a cada capítulo. Tan sólo crea un proyecto con cocos y reemplaza el contenido de las carpetas <strong>Classes</strong> y <strong>Resources</strong> del proyecto creado por ti con el contenido provisto en los capítulos.
             </p>
             <div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
-                <h4 id="may-require-additional-positioning">Al compilar en Visual Stududio ...<a class="anchorjs-link" href="#may-require-additional-positioning"><span class="anchorjs-icon"></span></a></h4>
-                <p>Recuerda arrastrar los ficheros desde la carpeta Classes a la carpeta src de la solución de Visual Studio para compilarlos. Si ya has compilado algo antes en modo debug, recuerda además eliminar la carpeta *.tlog. Por ejemplo, nuestro poryecto se llama Test, elimina la carpeta Test\proj.win32\Debug.win32\Test.tlog.</p>
+                <h4 id="may-require-additional-positioning">Al compilar en Visual Studio ...<a class="anchorjs-link" href="#may-require-additional-positioning"><span class="anchorjs-icon"></span></a></h4>
+                <p>
+                    Recuerda arrastrar los ficheros desde la carpeta Classes a la carpeta src de la solución de Visual Studio para compilarlos. Si ya has compilado algo antes en modo debug, recuerda además eliminar la carpeta *.tlog. Por ejemplo, nuestro poryecto se llama Test, elimina la carpeta Test\proj.win32\Debug.win32\Test.tlog.
+                </p>
             </div>
             <h2>3.4 Usando Sprites</h2>
             <p>
-                Lo primero que debemos hacer es copiar las imágenes cuyo link de descarga está arriba, a la carpeta <strong>Resources</strong> y borrar todo su contenido anterior a excepción de la carpeta fonts.
+                Lo primero que debemos hacer es copiar las imágenes cuyo link de descarga está <a href="../img/capitulo3/recursos.zip">aquí</a>, a la carpeta <strong>Resources</strong> y borrar todo su contenido anterior a excepción de la carpeta fonts.
             </p>
 
             <p>
-                Recordar que esta carpeta se encuentra en SkyHunter -> Resources al mismo nivel que la carpeta Classes.
-                <br/><br/>
-                <img class="img-rounded mobile" src="../img/capitulo3/recursos.png" alt="solucion visual studio" style="width:600px;"/><br/>
+                Recordar que esta carpeta se encuentra en SkyHunter -> Resources, al mismo nivel que la carpeta Classes
             </p>
+            <center>
+                <img class="img-rounded mobile" src="../img/capitulo3/recursos.png" alt="solucion visual studio" style="width:600px;"/><br/>
+            </center>
             <p>
                 Ahora que ya tenemos las imagenes incluidas en nuestro proyecto, las podemos utilizar. Para ello usaremos la clase <strong>cocos2d::Sprite</strong> y crearemos a modo de ejemplo el fondo de nuestro juego con <strong>Sprite::create("nombre-imagen")</strong>.
-                <br/>
-                <img class="img-rounded mobile" src="../img/capitulo3/fondo.png" alt="Añadido fondo al juego" style="width:100%;"/><br/>
             </p>
+            <center>
+                <img class="img-rounded mobile" src="../img/capitulo3/fondo.png" alt="Añadido fondo al juego" style="width:70%;"/><br/><br/>
+            </center>
             <p>
-                 Para posicionar el fondo de nuestro juego usamos <strong>fondo->setPosition(visibleSize.width / 2, visibleSize.height / 2)</strong> porque como vimos en el <a href="capitulo12.html">capítulo 2</a> por defecto los sprites tienen su anchor point en el centro entonces como queremos que ocupe toda la pantalla, lo colocamos en el centro de la misma. Cocos automáticamente escalará el sprite gracias a la configuración que pusimos en nuestro AppDelegate.cpp.
+                 Para posicionar el fondo de nuestro juego usamos <strong>fondo->setPosition(visibleSize.width / 2, visibleSize.height / 2)</strong> porque como vimos en el <a href="capitulo2.html">capítulo 2</a> por defecto los sprites tienen su anchor point en el centro, entonces como queremos que ocupe toda la pantalla, lo colocamos en el centro de la misma. Cocos automáticamente escalará el sprite gracias a la configuración que pusimos en nuestro AppDelegate.cpp.
             </p>    
             <p>
                 Ahora que ya sabemos como funciona la clase Sprite, crearemos las clases para nuestro juego que heredaran de <strong>cocos2d::Sprite</strong> y de <strong>cocos2d::Node</strong>.
@@ -116,14 +120,16 @@
                 <h3>Background.cpp</h3>
                 <iframe  src="../img/capitulo3/Background.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe><br/><br/>
                 <p>
-                    Esta clase hereda de Node para poder ser añadida a la escena de cocos, básicamente es un nodo al que se le añaden dos hijos que son dos Sprite simples.<br/>
+                    Esta clase hereda de Node para poder ser añadida a la escena de cocos. Básicamente es un nodo al que se le añaden dos hijos que son dos Sprite simples.
+                </p>
+                <p>
                     Uno es añadido por encima de la altura de la pantalla por lo que no será visible y otro justo dentro de la pantalla por lo que sí será visible.
                 </p>
                 <p>
-                    En su update se mueven ambos sprites hacia abajo para dar una sensación de movimiento. Una vez que el Sprite que en principio no era visible está situado justo en el centro de la pantalla, se reposiciona a su posición original, de la misma forma el Sprite que al principio estaba situado en el centro de la pantalla es reseteado a su posición inicial cuando ya no es visible al salirse por debajo de la pantalla.<br/> Mejor veámoslo ilustrado.<br/><br/>
-                    <center><img class="img-rounded " src="../img/capitulo3/backgroundExpliation.png" alt="expliacion del funcionamiento del background" style="width:300px;"/><br/></center>
+                    En el update se mueven ambos sprites hacia abajo para dar una sensación de movimiento. Una vez que el Sprite que en principio no era visible está situado justo en el centro de la pantalla, se recoloca en su posición original, de la misma forma el Sprite que al principio estaba situado en el centro de la pantalla es reseteado a su posición inicial cuando ya no es visible al salirse por debajo de la pantalla.<br/> Mejor veámoslo ilustrado.<br/><br/>
+                    <center><img class="img-rounded " src="../img/capitulo3/backgroundExpliation.png" alt="expliacion del funcionamiento del background" style="height:550px;"/><br/></center>
                     <br/><br/>
-                    También usamos dos macros <strong>CC_SYNTHESIZE</strong> ya nombrada en el capítulo anterior, que nos permite generar rápidamente getters y setters y el segundo macro <strong>CREATE_FUNC</strong> que genera automáticamente el método estático <strong>create()</strong> para esta clase.
+                    También usamos dos macros <strong>CC_SYNTHESIZE</strong> ya nombrado en el capítulo anterior, que nos permite generar rápidamente getters y setters y el segundo macro <strong>CREATE_FUNC</strong> que genera automáticamente el método estático <strong>create()</strong> para esta clase.
                 </p>
                 <p>
                     Excelente, ahora sólo falta decirle a nuestro juego que añada el nuevo background en lugar del que teníamos inicialmente y hacer que este background se mueva.
@@ -134,9 +140,15 @@
                 <iframe  src="../img/capitulo3/GameLayer2.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
                 <br/><br/>
                 <p>
-                    Como podemos ver, hemos creado un método update y le decimos al framework que incluya en el ciclo del juego ese método update mediante <strong>this->schedule(schedule_selector(GameLayer::update))</strong> (no es necesario que el método se llame update pero sí que reciba un float como parámetro y sea void), 
-                    <strong>schedule_selector</strong> es uno de esos macros especiales que cocos2d-x incluye para facilitar el desarrollo de nuestro juego.
-                    En el <strong>update</strong> recibiremos como parámetro la cantidad de tiempo que transcurrió desde la última vez que se ejecutó. Para garantizar que el juego trabaja siempre a la misma velocidad, multiplicaremos la velocidad a la que se mueven todos los elementos por <strong>dt</strong> tal y como hicimos en el método update de la clase <strong>Background</strong> que es llamado desde aquí al igual que todos los métodos update de los diferentes componentes que iremos creando.
+                    Como podemos ver, hemos creado un método update y le decimos al framework que incluya en el ciclo del juego ese método update mediante <strong>this->schedule(schedule_selector(GameLayer::update))</strong>. El macro <strong>schedule_selector</strong> es uno de esos macros especiales que Cocos2d-x incluye para facilitar el desarrollo de nuestro juego.
+                </p>
+                <div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
+                    <p>
+                        No es necesario que el método se llame update pero sí que reciba un float como parámetro y retorne void
+                    </p>
+                </div> 
+                <p>
+                    En el <strong>update</strong> recibiremos como parámetro la cantidad de tiempo que transcurrió desde la última vez que se ejecutó dicho metodo. Para garantizar que el juego trabaja siempre a la misma velocidad, multiplicaremos la velocidad a la que se mueven todos los elementos por <strong>dt</strong> tal y como hicimos en el método update de la clase <strong>Background</strong> que es llamado desde aquí al igual que todos los métodos update de los diferentes componentes que iremos creando.
                 </p>
                 <p>
                     Puedes descargar las carpetas Classes y Resources del proyecto hasta el momento <a href="../img/capitulo3/SkyHunter3.2.zip">aquí</a>. 
