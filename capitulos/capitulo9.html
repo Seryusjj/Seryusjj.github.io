@@ -50,14 +50,14 @@
         <div class="container afternav">
             <h1>Capítulo 9 - UI en el juego</h1>
             <p>
-                Ya sabemos manejar <strong>ui/CocosGUI.h</strong>. Ahora veremos cómo crear componentes de interfaz de usuario dentro de nuestro juego como la barra de salud o los indicadores de puntuación.
+                Ya sabemos manejar <strong>ui/CocosGUI.h</strong>. Ahora veremos cómo crear componentes de interfaz de usuario dentro de nuestro juego como la barra de salud o los indicadores de puntuación que no tienen por qué ser únicamente componentes de ui/CocosGUI.h.
             </p>
             <p>
                 Recuerda que en este capítulo usaremos las clases y recursos del capítulo anterior.
             </p> 
-            <h2>Capítulo 9.1 - Score, Salud, botón de pausa ...</h2>
+            <h2>9.1 - Score, Salud, botón de pausa ...</h2>
             <p>
-                Si recordáis nuestra GameLayer de capítulos anteriores, ahora se llama Level1 y hereda de BaseGameLayer, en esta clase BaseGameLayer, se encuentra la interfaz de nuestro juego y la lógica para manejarla así como aquellos componentes comunes a todos los niveles (el player, la UI, alguna lógica...etc.). Así que para explicar la interfaz, comenzaremos explicando la clase BaseGameLayer
+                Si recordáis nuestra GameLayer de capítulos anteriores, ahora se llama Level1 y hereda de BaseGameLayer, en esta clase BaseGameLayer, se encuentra la interfaz de nuestro juego y la lógica para manejarla así como aquellos componentes comunes a todos los niveles (el player, la UI, alguna lógica...etc.). Así que para explicar la interfaz, comenzaremos explicando la clase BaseGameLayer.
             </p>
             <h3>BaseGameLayer.h</h3>
             <iframe  src="../img/capitulo9/BaseGameLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
@@ -70,7 +70,7 @@
                 Como vemos todos los elementos comunes a todos los niveles, entre ellos las UI están encapsulados en esta clase, también su lógica, no es una clase compleja, ya que casi todos los métodos son de creación y posicionamiento de elementos. Prestaremos especial atención a como se ha creado la barra de salud y al método update de esta clase. Pare ello mira el método <strong>createHealthIndicator</strong> donde componemos y añadimos a la escena la barra de salud, esta barra tiene 3 componentes: healthContainerIndicator una imagen de una nave pequeña que indica que esa es la salud del jugador, healthContainer, una imagen de fondo para la barra de salud y por último la barra roja de salud healthBar para que esta barra se comporte como es debido se debe posicionar su anchorPoint en 0, 0.5 ya que no solo el posicionamiento de los Sprites va en función del anchor point sino también su rotación y escalado y esta barra será escalada en función de la salud del jugador.
             </p>
             <p>
-                Ahora que ya posicionamos la barra de salud echemos un ojo al <strong>update</strong> en concreto a la línea que pone <strong>_healthBar->setScaleX(static_cast(_player->getHealth()) / static_cast(MAX_HEALTH));</strong> como vemos se modifica el tamaño de la barra en función de la cantidad de vida que tiene el jugador escalando la barra, el factor de escalado lo obtenemos dividiendo el número de vidas del jugador entre la vida total del mismo.
+                Ahora que ya posicionamos la barra de salud echemos un ojo al <strong>update</strong> en concreto a la línea que pone <strong>_healthBar->setScaleX(static_cast(_player->getHealth()) / static_cast(MAX_HEALTH))</strong> como vemos se modifica el tamaño de la barra en función de la cantidad de vida que tiene el jugador escalando la barra, el factor de escalado lo obtenemos dividiendo el número de vidas del jugador entre la vida total del mismo.
             </p>
             <p>
                 En este método update también se gestiona qué debe aparecer en el Label de puntuación y porcentaje de completado del nivel. Si el jugador completa el nivel, se llama a la función <strong>levelCompleteActions</strong> que muestra un texto en pantalla para indicar que se completó el nivel y tras un par de segundos lanza al jugador a la pantalla de selección de nivel para que elija si quiere jugar el siguiente nivel o jugar uno que ya haya superado. Además guarda mediante el GameManager el nivel superado por el jugador.
@@ -89,7 +89,7 @@
                 En su método init() se llama antes al init de la superclase BaseGameLayer no al de Layer::init() además en su update antes llama al update de la superclase BaseGameLayer::update(dt) de esta forma la interfaz de usuario también se actualizará en cada frame. El resto ya lo conocemos de capítulos anteriores como la forma de lanzar enemigos en el juego.
             </p>
             <p>
-                Además se implemente el método pauseButtonAction y resumeButtonAction sobreescribiendo los de la superclase para indicar cómo pausar el juego. Para más detalles acerca de esto echaremos un ojo más adelante al método pause de la clase Player. Este es el aspecto que presenta hasta este punto nuestro primer nivel.
+                Además se implementa el método pauseButtonAction y resumeButtonAction sobreescribiendo los de la superclase para indicar cómo pausar el nivel en que nos encontramos. Para más detalles acerca de esto echaremos un ojo más adelante al método pause de la clase Player. Este es el aspecto que presenta hasta este punto nuestro primer nivel.
             </p>
             <h2>
                 Botones de pausa

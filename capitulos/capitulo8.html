@@ -54,7 +54,7 @@
             <p>
                 Explicaremos el uso de nuevos componentes y la nueva estructura de la aplicación, para ello descarga la carpeta Classes y Resources del proyecto <a href="../img/capitulo8/SkyHunter8.zip">aquí</a>. Estas clases y recursos también serán usadas en el capítulo siguiente.
             </p> 
-            <h2>Capítulo 8.1 - GameManager, manteniendo los avances del jugador</h2>
+            <h2>8.1 - GameManager, manteniendo los avances del jugador</h2>
             <p>
                 Queremos que el usuario pueda cambiar el volumen del sonido de fondo y de los efectos como los disparos o explosiones, además queremos guardar cuantos niveles ha superado y así saber cuál es el siguiente a desbloquear, todo esto lo gestionaremos mediante un singleton llamado GameManager que nos facilitará el trabajo. Echemos un vistazo a su implementación.
             </p>
@@ -68,7 +68,7 @@
             <p>
                 Nuestro GameManager además de permitir guardar estos datos, también lleva la cuenta de la puntuación de la partida, aunque no la guarda en persistencia. Hace persistente el volumen especificado por el usuario, el siguiente nivel que el usuario puede jugar y la máxima puntuación obtenida por el jugador, este último valor se usará en el modo de juego árcade cuya implementación queda opcional para el lector.
             </p>
-            <h2>Capítulo 8.2 - Menús</h2>
+            <h2>8.2 - Menús</h2>
             <p>
                 Todos nuestros menús heredan de una clase común pues todos tendrán el mismo fondo con un comportamiento idéntico, heredarán de <strong>BaseMenuLayer.cpp</strong> y crearemos varios menús: MainMenuLayer, OptionsLayer, SelectMenuLayer mostrados consecutivamente abajo.
             </p>
