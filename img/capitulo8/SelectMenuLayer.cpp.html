@@ -34,7 +34,7 @@ bool SelectMenuLayer::init(){
 	cocos2d::Vector<Button*> buttons;
 
 	initFunctions(functions);
-	//insertamos los botones a la esena
+	//insertamos los botones a la escena
 	initButtons(buttons, functions);
 
 	//habilitamos todos los niveles que el jugador puede realizar actualmente
@@ -62,7 +62,7 @@ void SelectMenuLayer::initButtons(cocos2d::Vector<Button*>& buttons, std::vector
 	int sizeX = 0;
 	int marginX = 42.5* getScaleX();
 	int marginY = _visibleSize.height - 100 * getScaleY();
-	//qureemos un aspecto de matriz, usamos para ello dos bucles
+	//queremos un aspecto de matriz, usamos para ello dos bucles
 	for (int i = 0; i < NUM_LEVELS / 3; i++){
 		for (int j = 0; j < NUM_LEVELS / 3; j++){
 			auto bt = Button::create("level_unlock0", "level_unlock1", "level_lock", Widget::TextureResType::PLIST);
@@ -73,7 +73,7 @@ void SelectMenuLayer::initButtons(cocos2d::Vector<Button*>& buttons, std::vector
 			bt->addClickEventListener(functions.at(tag - 1));
 			bt->setTag(tag); _ostr << tag; tag++;
 			bt->setTitleText(_ostr.str()); _ostr.str("");
-			//customizamos el tamaño de fuente
+			//indicamos como de grande sera la fuente
 			bt->setTitleFontSize(18);
 			bt->setAnchorPoint(Point(0, 0.5));
 			bt->setPosition(Point(marginX, marginY));

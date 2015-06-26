@@ -79,14 +79,14 @@
             </center>
             <br/>
             <p>
-                Veremos las clases que implementas estos menús: la clase BaseMenuLayer de la cuál heredan todas las demás, la clase MainMenuLayer, la clase SelectMenuLayer que hereda de MainMenuLayer y por último la clase OptionsLayer.
+                Veremos las clases que implementan estos menús: la clase BaseMenuLayer de la cuál heredan todas las demás, la clase MainMenuLayer, la clase SelectMenuLayer que hereda de MainMenuLayer y por último la clase OptionsLayer.
             </p>
             <h3>BaseMenuLayer.h</h3>
             <iframe  src="../img/capitulo8/BaseMenuLayer.h.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <h3>BaseMenuLayer.cpp</h3>
             <iframe  src="../img/capitulo8/BaseMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Nada que explicar realmente acerca de esta clase más que usa una clase Background, en su init() llamamos al scheduler para lanzar el update. Como ya lo hacemos en la clase padre, es muy importante no volver a hacerlo en la clase hija, lo que si podemos hacer es un override del método update, sin embargo no nos interesa ya que este update tan solo moverá el fondo del menú, a continuación veremos por qué no necesitamos hacer override del update
+                Nada que explicar realmente acerca de esta clase más que usa una clase Background, en su init() llamamos al scheduler para lanzar el update. Como ya lo hacemos en la clase padre que es esta, es muy importante no volver a hacerlo en la clase hija, lo que si podemos hacer es un override del método update, sin embargo no nos interesa ya que este update tan solo moverá el fondo del menú, a continuación veremos por qué no necesitamos hacer override del update
             </p>
 
             <h3>MainMenuLayer.h</h3>
@@ -94,13 +94,13 @@
             <h3>MainMenuLayer.cpp</h3>
             <iframe  src="../img/capitulo8/MainMenuLayer.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                MainMenuLayer hereda de la clase anterior y añade a la escena una serie de botones, estos botones pertenecen a <strong>ui/CocosGUI.h</strong>.Para crearlos, se le indica la imagen de su estado normal, la imagen de su estado al pulsar y la imagen a mostrar cuando inhabilitamos el botón. Como vemos las acciones de los botones se indican mediante call backs con lo que no necesitamos sobrescribir el método update de la clase padre.
+                MainMenuLayer hereda de la clase anterior y añade a la escena una serie de botones, estos botones pertenecen a <strong>ui/CocosGUI.h</strong>. Para crearlos, se le indica la imagen de su estado normal, la imagen de su estado al pulsar y la imagen a mostrar cuando inhabilitamos el botón. Como vemos las acciones de los botones se indican mediante call backs con lo que no necesitamos sobrescribir el método update de la clase padre.
             </p>
             <p>
-                 Prestemos especial atención al botón Start y al vector de punteros a función, <strong>initFunctions</strong> es una función que nos permite inicializar un vector con una serie de punteros a funciones, esto nos sirve para saber qué nivel debe lanzar el botón <strong>Start</strong> pues basta con obtener el número del nivel a lanzar del GameManager y cargarlo en el botón a través del vector _functions <strong>_functions.at(GameManager::getInstance()->getNextLevel())</strong>.
+                 Prestemos especial atención al botón Start y al vector de punteros a función, <strong>initFunctions</strong> es un método que nos permite inicializar un vector con una serie de punteros a funciones, esto nos sirve para saber qué nivel debe lanzar el botón <strong>Start</strong> pues basta con obtener el número del nivel a lanzar del GameManager y cargarlo en el botón a través del vector _functions <strong>_functions.at(GameManager::getInstance()->getNextLevel())</strong>.
             </p>
             <p>
-                Los niveles que se deben lanzar en función de la elección del GameManager están sin implementar, por el momento solo tenemos el nivel 1, el resto los crearemos en el capítulo 11.
+                Los niveles que se deben lanzar en función de la elección del GameManager están sin implementar.Por el momento sólo tenemos el nivel 1, el resto los crearemos más adelante.
             </p>
 
             <h3>SelectMenuLayer.h</h3>
@@ -111,7 +111,7 @@
                 Este menú muestra en forma de matriz una serie de botones, que nos dicen qué niveles hemos superado y cuál es el siguiente nivel a jugar. Si superamos el nivel 1, se desbloqueara el 2 y así sucesivamente
             </p>
             <p>
-                En el método <strong>initButtons</strong> se crean los botones, algo muy importante a tener en cuenta es que cualquier valor absoluto que demos para posicionar objetos debe multiplicarse por el factor de escalado en el eje X ó Y según corresponda para que de esta forma siempre se vea igual al cambiar el tamaño de la pantalla. Sabiendo esto, vemos que este método tan solo itera y coloca botones dándoles su posición además de configurarlos, es decir los coloca y según el número de botón, este ha de hacer una coso u otra, para cargarle la funcionalidad usamos un vector inicializado con las acciones que su clase padre MainMenuLayer provee.
+                En el método <strong>initButtons</strong> se crean los botones, algo muy importante a tener en cuenta es que cualquier valor absoluto que demos para posicionar objetos debe multiplicarse por el factor de escalado en el eje X ó Y según corresponda para que de esta forma siempre se vea igual al cambiar el tamaño de la pantalla. Sabiendo esto, vemos que este método tan solo itera y coloca botones dándoles su posición además de configurarlos, es decir los coloca y según el número de botón, este ha de hacer una cosa u otra, para cargarle la funcionalidad usamos un vector inicializado con las acciones que su clase padre MainMenuLayer provee.
             </p>
             <p>
                 Por defecto todos los botones creados estarán deshabilitados y mostraran la imagen con el candado cerrado, así que tras añadirlos a la escena, iteramos hasta donde GameManager indique y desbloqueamos todos los niveles que el usuario haya desbloqueado jugando.
