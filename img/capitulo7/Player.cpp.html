@@ -77,7 +77,7 @@ void Player::setParent(Node* parent){
 	//impide que las balas se incorporen mas de una vez a la escena
 	if (!_initialiced){
 		for (int i = 0; i < _numBullets; i++){
-			//incopra las balas al la escena
+			//incopra las balas la escena
 			getParent()->addChild(_bulletPool.at(i));
 		}
 		_initialiced = true;
@@ -96,10 +96,11 @@ void Player::scheduleShoot(){
 	//creamos una secuencia que primero espera y luego dispara
 	auto shootSequence = Sequence::create(delayAction, callSelectorAction, NULL);
 
+	// envolvemos la secuencia un una accion RepeatForever
 	_shoot = RepeatForever::create(shootSequence);
 	_shoot->setTag(SHOOT_TAG);
 
-	// envolvemos la secuencia un una accion RepeatForever
+	
 	runAction(_shoot);
 }
 

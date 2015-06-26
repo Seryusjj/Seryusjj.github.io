@@ -59,7 +59,7 @@
                 Después de cargar este descriptor, creamos el SpriteBatchNode a partir de la spritesheet con las texturas que especifica el descriptor y a partir de aquí cualquier sprite que creemos con el SpriteFrameCache lo añadimos al SpriteBatchNode con addChild y automáticamente le asignará la textura correspondiente. Además de minimizar el número de accesos a disco, añade otra ventaja muy importante. Cuando creamos sprites con su método create, se genera un batch para rendirizar dicho sprite, de esta nueva forma solo se genera un batch para el SpriteBatchNode que permite renderizar todos sus nodos hijos, esto es una ventaja muy importante pues crear dicho batch es muy costoso.
             </p>
             <p>
-                ¿Cómo puedo empaquetar mis texturas? hay varias herramientas en el mercado como TexturePacker pero son de pago, yo recomiendo usar <a href="https://code.google.com/p/libgdx-texturepacker-gui/">libgdx-texturepacker-gui</a> que es una herramienta de empaquetado de otro framework llamado libgdx. Sin embargo el formato del descriptor no es compatible con cocos por eso he realizado un pequeño script en java para transformar el formato del empaquetador a .plist <a href="https://github.com/Seryusjj/Atlas2Plist">Aquí está el código del parser</a> y de este otro <a href="../img/capitulo7/SkyHunterResources.zip">link</a> puedes bajar las texturas empaquetadas y el script para generar el .plist
+                ¿Cómo puedo empaquetar mis texturas? hay varias herramientas en el mercado como TexturePacker pero son de pago, nosotros usaremos <a href="https://code.google.com/p/libgdx-texturepacker-gui/">libgdx-texturepacker-gui</a> que es una herramienta de empaquetado de otro framework llamado libgdx. Sin embargo el formato del descriptor no es compatible con cocos por eso he realizado un pequeño script en java para transformar el formato del empaquetador a .plist <a href="https://github.com/Seryusjj/Atlas2Plist">Aquí está el código del parser</a> y de este otro <a href="../img/capitulo7/SkyHunterResources.zip">link</a> puedes bajar las texturas empaquetadas y el script para generar el .plist
             </p>
             <p>
                 El resultado final de empaquetar nuestras texturas será algo así:
@@ -75,7 +75,7 @@
                 Tan solo hace falta fijarse en el init(), la lógica se mantiene igual que en los capítulos anteriores. Como vemos tal y como dijimos previamente, primero cargaremos el descriptor en la caché con <strong>SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Hunter.plist")</strong> y luego creamos el batchNode <strong>SpriteBatchNode* gameBatchNode = SpriteBatchNode::create("Hunter.png")</strong> y para finalizar añadimos a la escena dicho nodo.
              </p>
              <p>
-                El resto de clases las añadimos como hijas de este nodo, este nodo solo puede tener como nodos hijo, nodos Sprite o clases derivadas. Es por esto que nuestro TouchController pasará a heredar de Sprite en lugar de Node ya que para funcionar debe ser hijo de Player y ahora player será hijo del SpriteBachNode.
+                El resto de clases las añadimos como hijas de este nodo, este nodo solo puede tener como nodos hijo, nodos Sprite o clases derivadas de cocos2d::Sprite. Es por esto que nuestro TouchController pasará a heredar de Sprite en lugar de Node ya que para funcionar debe ser hijo de Player y ahora player será hijo del SpriteBachNode.
              </p>
              <p>
                 Veamos cómo crear Sprites a partir de la caché.
@@ -85,7 +85,7 @@
              <iframe  src="../img/capitulo7/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
 
             <p>
-                Aquí tenemos nuestra ya conocida clase Player, veamos en que ha cambiado. Si echamos un ojo al método <strong>createIdleAnimation()</strong> podremos apreciar que los frames de las animaciones ya no se crean igual, ahora usamos <strong>priteFrameCache::getInstance()->getSpriteFrameByName(name)</strong>. La clase Sprite también permite crear sprites a partir de un spriteFrameName sin necesidad de usar la caché de la siguiente forma <strong>Sprite::createWithSpriteFrameName(name)</strong> es importante añadir cualquier nodo creado de esta forma a un nodo padre <strong>SpriteBatchNode</strong> que contenga la información necesaria para completar al nodo hijo creado a partir del descriptor. De no ser así obtendremos un error al ejecutar el juego.
+                Aquí tenemos nuestra ya conocida clase Player, veamos en que ha cambiado. Si echamos un ojo al método <strong>createIdleAnimation()</strong> podremos apreciar que los frames de las animaciones ya no se crean igual, ahora usamos <strong>SpriteFrameCache::getInstance()->getSpriteFrameByName(name)</strong>. La clase Sprite también permite crear sprites a partir de un spriteFrameName sin necesidad de usar la caché de la siguiente forma <strong>Sprite::createWithSpriteFrameName(name)</strong> es importante añadir cualquier nodo creado de esta forma a un nodo padre <strong>SpriteBatchNode</strong> que contenga la información necesaria para completar al nodo hijo creado a partir del descriptor. De no ser así obtendremos un error al ejecutar el juego.
             </p>
             <p>
                 Descarga las carpetas Classes y Resources del proyecto hasta el momento <a href="../img/capitulo7/SkyHunter7.1.zip">aquí</a>
@@ -117,7 +117,7 @@
             <h3>AppDelegate.cpp</h3>
             <iframe  src="../img/capitulo7/AppDelegate.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Como vemos ahora junto con la configuración de pantalla, tenemos la precarga del audio. Fíjate también que llamamos al pauseAll() y resumeAll() para parar y recomenzar la reproducción de audio cuando se sale y entra en el juego.
+                Como vemos ahora junto con la configuración de pantalla, tenemos la precarga del audio. Fíjate también que llamamos al pauseAll() y resumeAll() para pausar y recomenzar la reproducción de audio cuando se sale y entra en el juego o se pausa el juego por ejemplo.
             </p>
             <p>
                 Como vemos ahora junto con la configuración de pantalla, tenemos la precarga del audio. Fíjate también que llamamos al pauseAll() y resumeAll() para parar y recomenzar la reproducción de audio cuando se sale y entra en el juego.

@@ -33,7 +33,6 @@ CustomAudioManager* CustomAudioManager::getInstance(){
 
 void CustomAudioManager::playEffect(const std::string& filename, bool loop){
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-	//just for debug use this in win32
 	std::string name = filename.substr(0, filename.find(".")); 
 	experimental::AudioEngine::play2d(name+".mp3", loop, 0.4f); 
 
@@ -45,7 +44,6 @@ void CustomAudioManager::playEffect(const std::string& filename, bool loop){
 
 void CustomAudioManager::playBackgroundSound(const std::string& filename, bool loop){
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-	//just for debug use this in win32
 	std::string name = filename.substr(0, filename.find(".")); 
 	experimental::AudioEngine::play2d(name+".mp3", loop, 0.3f); 
 	
@@ -65,7 +63,6 @@ void CustomAudioManager::preloadEffect(const std::string& filename){
 void CustomAudioManager::preloadBackground(const std::string& filename){
 #if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(filename.c_str());
-
 #endif
 }
 
@@ -96,7 +93,6 @@ void CustomAudioManager::stopAll(){
 	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 #endif
 }
-
 	<script type="text/javascript" src="../../google-code-prettify/prettify.js"></script>
 		</pre>
 	</body>
