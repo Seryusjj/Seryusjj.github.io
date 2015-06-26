@@ -65,7 +65,7 @@
             <h3>Bullet.cpp</h3>
             <iframe  src="../img/capitulo6/Bullet.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Si la bala es del jugador almacenará un pool de enemigos (todos los posibles en la escena) y en cada frame, verificará si está colisionando con un enemigo. En caso de ser así lo destruirá y la bala pasara a estar deshabilitada. Lo mismo sucede si la bala pertenece a un enemigo, sin embargo sólo almacenará referencia al Player.
+                Si la bala es del jugador almacenará un pool de enemigos (todos los posibles en la escena) y en cada frame, verificará si está colisionando con un enemigo. En caso de ser así lo destruirá y la bala pasará a estar deshabilitada. Lo mismo sucede si la bala pertenece a un enemigo, sin embargo sólo almacenará referencia al Player.
             </p>
             <p>
                 Echemos también un ojo al método <strong>setCurrentAnimation</strong> de la clase Player por ejemplo. El resto de los cambios los veremos más adelante.
@@ -84,7 +84,7 @@
             <h3>Player.cpp</h3>
             <iframe  src="../img/capitulo6/Player.cpp.html" width="100%" height="300px">Your Browser doesn't support Frames.</iframe>
             <p>
-                Como vemos ahora llamamos al método <strong>retain()</strong> al crear las animaciones. También hemos añadido unas líneas al método update justo al inicio del mismo donde miramos sí la nave está explotando, de ser así, hacemos que la nave no se pueda controlar y que deje de disparar, una vez termine de explotar, hacemos que deje de ser visible.
+                Como vemos ahora llamamos al método <strong>retain()</strong> al crear las animaciones. También hemos añadido unas líneas al método update justo al inicio del mismo donde miramos sí la nave está explotando, de ser así, hacemos que la nave no se pueda controlar y que deje de disparar. Una vez termine de explotar, hacemos que deje de ser visible.
             </p>
             <p>
                 Otro método importante es <strong>setTargets</strong> donde actualizamos con el listado de enemigos todas las balas del jugador.
