@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bb66872e-8ffe-4eb3-ba7f-346ae9c0f945" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo1linux.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo1windows.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulos/capitulo9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulosTiledmap/capitulo1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulosTiledmap/capitulo2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulosTiledmap/capitulo3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulosTiledmap/capitulo4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulosTiledmap/capitulo5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capitulosTiledmap/capitulo6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/capitulosCSS/capitulo1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/tutoriales.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-apollo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-basic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-clj.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-css.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-dart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-erlang.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-go.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-hs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-lisp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-llvm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-lua.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-matlab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-ml.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-mumps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-n.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-pascal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-proto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-r.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-rd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-scala.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-sql.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-tcl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-tex.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-vb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-vhdl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-wiki.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-xq.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/lang-yaml.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/prettify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/prettify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/run_prettify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-code-prettify/vsLike.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/linux/api10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/linux/devDirectory.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/linux/installDeps.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/linux/javaVersion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/linux/newProject.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/linux/sdkPlatformTools.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/linux/setupPy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/carpetaFinal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/createProject.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/descargas.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/pathAndroidSdk.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/projectStrucure.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/pythonInstall.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/sdkDescargas.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo1/windows/setup.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo10/Classes10.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo10/EnemyBulletSmart.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo10/EnemyBulletSmart.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo10/PlayerUpgradeParticle.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo10/PlayerUpgradeParticle.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo10/runHitEffect.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo10/updateBullets.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo11/Level3.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo11/Level3.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo11/Level4.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo11/Level4.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo11/SkyHunter11.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo12/adnroidMK2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo12/afterImport.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo12/androidMK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo12/idexer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo12/imporitng.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo2/AppDelegate.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo2/AppDelegate.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo2/Classes3.1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo2/GameLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo2/GameLayer.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo2/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/AppDelegate.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/Background.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/Background.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/GameLayer2.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/GameLayer2.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/HelloWorldScene.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/SkyHunter3.2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/anchor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/backgroundExpliation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/landscape.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/portrait.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/recursos.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/recursos.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo3/solucionVS.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo4/Player.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo4/Player.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo4/Resources4.1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo4/SkyHunter4.1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo4/enemy_player_positionated.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Bullet.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Bullet.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Classes5.1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Classes5.2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Player.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Player.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Player2.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/Player2.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/TouchController.Update.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/TouchController.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/TouchController.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/scheduleShoot.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo5/setParent.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/Bullet.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/Bullet.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/Classes6.1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/GameLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/GameLayer.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/Player.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/Player.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo6/setCurrentAnimation.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/AppDelegate.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/CustomAudioManager.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/CustomAudioManager.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/GameLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/Hunter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/Player.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/SkyHunter7.1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/SkyHunter7.2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/SkyHunterResources.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo7/music.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/BaseMenuLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/BaseMenuLayer.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/GameManager.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/GameManager.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/MainMenuLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/MainMenuLayer.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/OptionsLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/OptionsLayer.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/SelectMenuLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/SelectMenuLayer.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/SkyHunter8.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/level_selector.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/main_menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo8/options.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo9/BaseGameLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo9/BaseGameLayer.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo9/Level1.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo9/Level1.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo9/dead.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo9/pause.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/capitulo9/playing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/contact/github-logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/SuperAlienWorldLvl1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/SuperAlienWorldLvl2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/SuperAlienWorldLvl3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/alienIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/game1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/game2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/game3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/index1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/index2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/index3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/play-store.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/skyIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/index/windows-store.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo1/SuperAlienWorld.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo1/configmap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo1/dialog.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo1/nivel1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo1/patrones.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo1/tiledmap-open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo1/tiles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo2/EnemyFactory.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo2/EnemyFactory.h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo2/createEnemies.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo2/tileLayer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo3/createPhysicsFromLayer.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo3/init.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo3/objLayer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo4/createPhysicsBodyFromPoints.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo4/createScene.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo5/onContactBegin.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo5/onContactEnemy.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo5/onContactTerrain.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo5/physicsSetUp.cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tiledmap/capitulo5/player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/AndroidEclipse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/basics.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/colisiones.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/input.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/inputgif.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/niveles-extra.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/optimizando.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/particula.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/player.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/player.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/select.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/setUp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelBasico/ui-ingame.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelMedio/colisionEnemigo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelMedio/colisionTerreno.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelMedio/object-layers.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelMedio/physics.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelMedio/tile-layers.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/tutoriales/nivelMedio/tiled-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/jquery-1.11.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutorialesBasico.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutorialesTiledmap.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1hkKqvEnAzvxqDYJw6LxVdkJZau" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/seryus-github-io" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bb66872e-8ffe-4eb3-ba7f-346ae9c0f945" name="Default Changelist" comment="" />
+      <created>1600549844127</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600549844127</updated>
+      <workItem from="1600549846275" duration="546000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2660" y="274" key="FileChooserDialogImpl" timestamp="1600550391801">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2660" y="274" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1600550391801" />
+  </component>
+</project>
